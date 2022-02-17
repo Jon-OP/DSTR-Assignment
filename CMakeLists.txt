@@ -3,4 +3,4 @@ project(G8_TP060491_TP061069_TP055727)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(G8_TP060491_TP061069_TP055727 main.cpp)
+add_executable(G8_TP060491_TP061069_TP055727 main.cpp Inventory.cpp Inventory.h Transaction.cpp Transaction.h)
