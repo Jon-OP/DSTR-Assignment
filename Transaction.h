@@ -14,12 +14,15 @@ class Transaction {
     std::string movieName;
     float totalPrice;
     int quantity;
-    int seats[]; //Store Seat by Index
+    //int seats[2]; //Store Seat by Index... DECLARING ARRAY WITHOUT INITIALIZING SIZE REQUIRES VECTOR LIBRARY
 
     // Date and Time, do we include here ? - Jonathan
 
 
 public:
+    // Constructor Method
+    Transaction();
+    Transaction(std::string movieName);
 
     // Functional Methods
     void greetings();

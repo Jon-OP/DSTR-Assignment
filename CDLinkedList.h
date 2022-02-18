@@ -10,14 +10,16 @@
 // Transactional Nodes
 struct TransactionNode{
     Transaction data;
-    TransactionNode* nextNode;
-    TransactionNode* previousNode;
+    TransactionNode* nextNode = NULL;
+    TransactionNode* previousNode = NULL;
 };
 
 // The Link List
 class CDLinkedList {
     TransactionNode* head;
+    TransactionNode* tail;
 
+public:
     // Initialization of Linked List
     CDLinkedList();
 
