@@ -12,7 +12,7 @@ CDLinkedList::CDLinkedList() {
 }
 
 // When user placed a new order which adds a new element to the Linked List
-void CDLinkedList::insertTransaction(Transaction userData) {
+void CDLinkedList::insertTransaction(Transaction userTransaction) {
 
 }
 
