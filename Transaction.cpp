@@ -101,7 +101,7 @@ void Transaction::transactionMenu(){
 }
 void Transaction::newPurchaseMenu()
 {
-//hi
+
     std::cout << "\tCreating new purchase" << std::endl;
     std::cout << "\t---------------------" << std::endl;
     std::cout << "\t1. View All Product" << std::endl;
