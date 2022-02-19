@@ -22,17 +22,24 @@ class Transaction {
 public:
     // Constructor Method
     Transaction();
-    Transaction(std::string movieName);
+    Transaction(int movieName, float totalPrice);
 
     // Functional Methods
     void greetings();
 
     // Getters and Setters
+        // movieID
     int getMovieID();
     void setMovieID();
-
+        // movieName
     std::string getMovieName();
     void setMovieName(std::string movieName);
+        // transactionID
+    int getTransactionID();
+    void setTransactionID(int ID);
+        //totalPrice
+    float getTotalPrice();
+    void setTotalPrice(float totalPrice);
 };
 
 

@@ -8,8 +8,9 @@
 // Constructor Methods
 Transaction::Transaction() {};
 
-Transaction::Transaction(std::string movieName) {
-    this->movieName = movieName;
+Transaction::Transaction(int movieName, float x) {
+    this->transactionID = movieName;
+    this->totalPrice = x;
 }
 
 
@@ -22,3 +23,14 @@ void Transaction::greetings(){
 std::string Transaction::getMovieName(){
     return movieName;
 }
+
+int Transaction::getTransactionID() {
+    return transactionID;
+}
+
+float Transaction::getTotalPrice(){
+    return totalPrice;
+}
+void Transaction::setTotalPrice(float totalPrice){
+    this->totalPrice = totalPrice;
+};

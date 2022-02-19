@@ -19,7 +19,9 @@ class CDLinkedList {
     TransactionNode* head;
     TransactionNode* tail;
 
+
 public:
+    int linkListSize;
     // Initialization of Linked List
     CDLinkedList();
 
@@ -31,8 +33,19 @@ public:
     // Searching transaction -> Returns one Transaction
     Transaction searchTransaction(int index);
 
-    // Sorting the List of Transaction: MergeSort
-    void sortTransaction();
+    //### This will be called in the Transaction CLASS ###
+    // ### SUPPORTIVE FUNCTION TO MERGE SORT TRANSACTION LIST ### //
+    // Sorting the List of Transaction[TotalPrice]: MergeSort
+    TransactionNode* sortTransaction(std::string sortParameter);
+
+    TransactionNode* mergeSort_Transaction(TransactionNode* headNode, std::string sortParameter);
+
+    // Splitting the Linked List
+    TransactionNode* splittingProcess(TransactionNode* headNode);//TransactionNode* head
+    // firstNode = LEFT CDLL || secondNode = RIGHT CDLL
+    TransactionNode* mergingProcess(TransactionNode* firstCDLL, TransactionNode* secondCDLL, std::string sortParameter);
+    // ### END SUPPORTIVE FUNCTION TO MERGE SORT TRANSACTION LIST ### //
+
 
     // Print all Transaction
     void displayAllTransaction();

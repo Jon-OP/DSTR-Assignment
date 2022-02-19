@@ -19,13 +19,14 @@ int main() {
 
     //TEST SITE BELOW ONWARDS
     CDLinkedList cd = CDLinkedList();
-    Transaction testTransaction1 = Transaction("Name 1");
-    Transaction testTransaction2 = Transaction("Name 2");
-    Transaction testTransaction3 = Transaction("Name 3");
-    Transaction testTransaction4 = Transaction("Name 4");
-    Transaction testTransaction5 = Transaction("Name 5");
-    Transaction testTransaction6 = Transaction("Name 6");
-    Transaction testTransaction7 = Transaction("Name 7");
+    Transaction testTransaction1 = Transaction(2,12.5);
+    Transaction testTransaction2 = Transaction(5, 13.2);
+    Transaction testTransaction3 = Transaction(3, 10.0);
+    Transaction testTransaction4 = Transaction(4, 11);
+    Transaction testTransaction5 = Transaction(2, 17);
+    Transaction testTransaction6 = Transaction(7, 21.2);
+    Transaction testTransaction7 = Transaction(2, 82.1);
+    Transaction testTransaction8 = Transaction(3, 9.2);
     //std::cout << testTransaction1.getMovieName();
     cd.insertTransaction(testTransaction1);
     cd.insertTransaction(testTransaction2);
@@ -35,8 +36,11 @@ int main() {
     cd.insertTransaction(testTransaction6);
     cd.insertTransaction(testTransaction7);
     cd.displayAllTransaction();
+    std::cout << '\n';
+    cd.sortTransaction("ID");
+    cd.insertTransaction(testTransaction8);
+    cd.sortTransaction("totalPrice");
+    cd.displayAllTransaction();
 
-
-    
     return 0;
 }
