@@ -3,7 +3,87 @@
 #include "Transaction.h"    // Allow the calling of Transaction Attributes & Methods
 #include "CDLinkedList.h"   // Allow the calling of CDLinkedList Attributes & Methods
 
+int validateInteger(std::string message){
+    bool inputFlag;
+    std::string userInput;
+    int sanitizedInput;
+    while(true){
+        // Display message <- I want to change. IDW USE STD::COUT
+        std::cout << std::string(3, '\n') << message;
+
+        // Get User Input as String
+        std::getline(std::cin, userInput);
+
+        // User entered newLine which is consumed by getLine(). Hence, length = 0
+        if( ! (userInput.length() == 0)){
+            // Flag to check if non-digit exists
+            bool isDigit = true;
+
+            for(int i = 0; i < userInput.length(); i++){
+                if( !(isdigit(userInput[i])) ){
+                    isDigit = false;
+                }
+            }
+
+            // True = all char in string is digit.
+            if(isDigit){
+                return std::stoi(userInput);
+            }
+        }
+
+        // Print error message and prompt user to enter any key to continue
+        std::cout << "\n\t>> Invalid Input\n\t>> Please Enter only numbers\n\t>> Enter any key to continue:";
+
+        // Wait for user Input and ignore up to 10,00 characters
+        std::cin.ignore( 10000, '\n');
+
+    }
+}
+
 // Main Implementation - Jonathan
+void mainMenu(){
+
+    Inventory adminInventory;
+    Transaction adminTransaction;
+
+    std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"
+                              "\t--------------------------------\n"
+                              "\t1. Inventory Management System\n"
+                              "\t2. Transaction Management System\n"
+                              "\t3. Exit Program\n"
+                              "\n\t>> Enter your choice:";
+
+    int userChoice;
+    do{
+        userChoice = validateInteger(mainMenuMsg);
+
+        switch (userChoice) {
+            case 1:
+                adminInventory.inventoryConsoleMenu();
+                break;
+            case 2:
+                std::cout << "You entered 2\n";
+                break;
+            case 3:
+                std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+
+                break;
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 3\n\t>> Enter any Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }while(userChoice != 3);
+}
+
+
+
 
 int main() {
     std::cout << "This is a Test from MAIN!" << std::endl;
@@ -16,6 +96,7 @@ int main() {
     Transaction testTransaction;
     testTransaction.greetings();
 
+    mainMenu();
 
     //TEST SITE BELOW ONWARDS
     CDLinkedList cd = CDLinkedList();
@@ -35,12 +116,6 @@ int main() {
     cd.insertTransaction(testTransaction5);
     cd.insertTransaction(testTransaction6);
     cd.insertTransaction(testTransaction7);
-    cd.displayAllTransaction();
-    std::cout << '\n';
-    cd.sortTransaction("ID");
-    cd.insertTransaction(testTransaction8);
-    cd.sortTransaction("totalPrice");
-    cd.displayAllTransaction();
 
     return 0;
 }

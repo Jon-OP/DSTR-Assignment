@@ -14,7 +14,7 @@ class Transaction {
     std::string movieName;
     float totalPrice;
     int quantity;
-    int seats[];
+    //int seats[];
     // Date and Time, do we include here ? - Jonathan
 
 
