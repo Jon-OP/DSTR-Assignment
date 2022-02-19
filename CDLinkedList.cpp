@@ -136,8 +136,6 @@ TransactionNode* CDLinkedList::mergeSort_Transaction(TransactionNode *headNode, 
     headNode = mergeSort_Transaction(headNode, sortParameter);
     rightCDLL = mergeSort_Transaction(rightCDLL, sortParameter);
 
-
-
     // Return the Linked List sorted using mergingProcess
     return mergingProcess(headNode, rightCDLL, sortParameter);
 
@@ -163,7 +161,6 @@ TransactionNode* CDLinkedList::splittingProcess(TransactionNode *headNode) {
     slowPointer->nextNode = NULL;
 
     return rightCDLL;
-
 
 }
 
@@ -259,131 +256,4 @@ TransactionNode* CDLinkedList::mergingProcess(TransactionNode *firstCDLL, Transa
             }
         }
     }
-
-
-
 }
-
-/*
-TransactionNode* CDLinkedList::sortTransaction(std::string sortParameter) {
-    head->previousNode = NULL;
-    tail->nextNode = NULL;
-    head = mergeSort_Transaction(head, "aaa");
-
-    if(head == NULL){
-        std::cout << "WHY";
-    }
-
-    /*
-    TransactionNode* current = head;
-    do{
-        std::cout << current->data.getTransactionID();
-        current = current->nextNode;
-    }while(current != NULL);
-
-}
-
-TransactionNode* CDLinkedList::mergeSort_Transaction(TransactionNode* headNode, std::string sortParameter){
-    // IF the HEAD is not NULL OR next HEAD is not NULL, continue
-    if(headNode == NULL || headNode->nextNode == NULL){
-        std::cout << "A";
-        return headNode;
-    }
-
-    // Split the Linked List
-    TransactionNode* rightCDLL = splittingProcess(headNode);
-
-    // Recursion to further decompose the CDLL
-    // headNode = mergeSort_Transaction(headNode, sortParameter);
-    rightCDLL = mergeSort_Transaction(rightCDLL, sortParameter);
-
-    //std::cout << head->data.getTransactionID();
-
-
-    //return NULL;
-    return mergingProcess(headNode, rightCDLL, sortParameter);
-
-}
-
-TransactionNode* CDLinkedList::mergingProcess(TransactionNode* firstCDLL, TransactionNode* secondCDLL, std::string sortParameter){
-    // First CDLL is empty
-    if(firstCDLL == NULL){
-        return secondCDLL;
-    }
-
-    // Second CDLL is empty
-    if(secondCDLL == NULL){
-        return firstCDLL;
-    }
-
-    // Both CDLL are not empty
-    // Sorting Parameter = ID
-    if(sortParameter == "ID"){
-        // First CDLL is smaller
-        if(firstCDLL->data.getTransactionID() < secondCDLL->data.getTransactionID()){
-            // Recursive mergingProcess until 1:1 comparison / Individual Comparison
-            firstCDLL->nextNode = mergingProcess(firstCDLL->nextNode, secondCDLL, sortParameter);
-
-            // Set the 2nd Node previousNode value to firstCDLL
-            firstCDLL->nextNode->previousNode = firstCDLL;
-
-            // firstCDLL is the first element. Set the previous to NULL first
-            firstCDLL->previousNode = NULL;
-
-            return firstCDLL;
-        }
-        else{ // Second CDLL is smaller
-            // Recursive mergingProcess until 1:1 comparison / Individual Comparison
-            secondCDLL->nextNode = mergingProcess(firstCDLL, secondCDLL->nextNode, sortParameter);
-
-            // Set the 2nd Node previousNode value to second CDLL
-            secondCDLL->nextNode->previousNode = secondCDLL;
-
-            // secondCDLL is the first element. Set the previous to NULL first
-            secondCDLL->previousNode = NULL;
-
-            return secondCDLL;
-        }
-    }
-
-
-}
-
-// Process of Splitting the Doubly Linked List to two Lists
-TransactionNode* CDLinkedList::splittingProcess(TransactionNode* headNode) {
-    // Splitting the Node using Fast-Slow pointer strategy
-    TransactionNode* slowPointer = headNode;
-    TransactionNode* fastPointer = headNode; //ERROR HERE
-
-    // Continue Iteration until fastPointer -> nextNode AND fastPointer -> nextNode -> nextNode is NOT NULL
-    while(fastPointer->nextNode && fastPointer->nextNode->nextNode){
-        slowPointer = slowPointer->nextNode;
-        fastPointer = fastPointer->nextNode->nextNode;
-    }
-
-    // Return the pointer for the second half which is the right side
-    TransactionNode* rightCDLL = slowPointer->nextNode;
-
-    // Disconnect the leftCDLL from the rightCDLL
-    slowPointer->nextNode = NULL;
-    //rightCDLL->previousNode = NULL;
-
-    /*
-    std::cout << "RIGHT CDLL: ";
-    TransactionNode* cx = rightCDLL;
-    do{
-        std::cout << cx->data.getTransactionID();
-        cx = cx->nextNode;
-    }while(cx != NULL);
-    std::cout << '\n';
-
-    std::cout << "LEFT CDLL OR HEAD: ";
-    cx = headNode;
-    do{
-        std::cout << cx->data.getTransactionID();
-        cx = cx->nextNode;
-    }while(cx != NULL);
-    std::cout << '\n';
-    return rightCDLL;
-}
-*/

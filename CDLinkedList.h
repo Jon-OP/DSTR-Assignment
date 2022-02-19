@@ -39,7 +39,6 @@ public:
     TransactionNode* sortTransaction(std::string sortParameter);
 
     TransactionNode* mergeSort_Transaction(TransactionNode* headNode, std::string sortParameter);
-
     // Splitting the Linked List
     TransactionNode* splittingProcess(TransactionNode* headNode);//TransactionNode* head
     // firstNode = LEFT CDLL || secondNode = RIGHT CDLL
