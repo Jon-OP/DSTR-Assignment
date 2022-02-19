@@ -20,6 +20,7 @@ class Transaction {
 
     void newTransaction();
     void newPurchaseMenu();
+    void viewPurchase();
 
 
 public:
@@ -28,23 +29,24 @@ public:
     Transaction();
     Transaction(int movieName, float totalPrice);
 
-
     // Functional Methods
     void transactionMenu();
 
-    // Getters and Setters
-        // movieID
-    int getMovieID();
-    void setMovieID();
-        // movieName
-    std::string getMovieName();
-    void setMovieName(std::string movieName);
-        // transactionID
-    int getTransactionID();
-    void setTransactionID(int ID);
-        //totalPrice
-    float getTotalPrice();
-    void setTotalPrice(float totalPrice);
+
+
+//    // Getters and Setters (Possibly obsolete)
+//        // movieID
+//    int getMovieID();
+//    void setMovieID();
+//        // movieName
+//    std::string getMovieName();
+//    void setMovieName(std::string movieName);
+//        // transactionID
+//    int getTransactionID();
+//    void setTransactionID(int ID);
+//        //totalPrice
+//    float getTotalPrice();
+//    void setTotalPrice(float totalPrice);
 };
 
 

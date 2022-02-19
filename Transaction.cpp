@@ -67,11 +67,11 @@ void Transaction::transactionMenu(){
 
     switch (userChoice) {
         case 1:
-            newTransaction(); //call function for creation of new purchase
+            newPurchaseMenu(); //call function for creation of new purchase
             break;
         case 2:
-            // placeholder for view purchase
-            std::cout << "You entered 2\n";
+            viewPurchase();
+
             break;
         case 3:
             //placeholder for sort purchase
@@ -111,14 +111,45 @@ void Transaction::newPurchaseMenu()
     std::cout << "\t5. View Cart" << std::endl;
     std::cout << "\t6. Checkout cart" << std::endl;
     std::cout << "\t7. Cancel Purchase" << std::endl;
-    std::cout << "\t Enter your choice:   " << std::endl;
+    std::cout << "\t Enter your choice [Any irrelevant key to return]:   " << std::endl;
     std::cin >> userChoice;
+    switch (userChoice) {
+        case 1:
+            //placeholder View All Product
+            break;
+        case 2:
+            // placeholder Search Product by Category
+            break;
+        case 3:
+            //placeholder for Remove product
+            break;
+        case 4:
+            //placeholder for Update cart
+            break;
+        case 5:
+            //placeholder for view cart
+            break;
+        case 6:
+            //placeholder for checkout cart
+            break;
+        case 7:
+            //placeholder for cancel purchase
+            break;
+        default:
+            // Print error message and prompt user to enter any key to continue
+            std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 7\n\t>> Enter any Key to continue:";
 
-    CDLinkedList cd = CDLinkedList();
-
+            // Wait for user Input and ignore up to 10,00 characters
+            std::cin.ignore( 10000, '\n');
+            break;
+    }
 
 }
 
+void ViewPurchase()
+{
+
+}
 //functions to add
     //
 

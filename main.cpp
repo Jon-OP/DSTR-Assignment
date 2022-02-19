@@ -62,6 +62,7 @@ void mainMenu(){
                 adminInventory.inventoryConsoleMenu();
                 break;
             case 2:
+                adminTransaction.transactionMenu();
                 std::cout << "You entered 2\n";
                 break;
             case 3:
