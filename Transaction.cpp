@@ -3,7 +3,9 @@
 
 #include "Transaction.h"
 #include <iostream>
+#include "CDLinkedList.h"
 
+int userChoice;
 
 // Constructor Methods
 Transaction::Transaction() {};
@@ -13,34 +15,114 @@ Transaction::Transaction(int movieName, float x) {
     this->totalPrice = x;
 }
 
+// Getter and Setter Methods (most likely obsolete)
+//std::string Transaction::getMovieName(){
+//    return movieName;
+//}
+//
+//int Transaction::getTransactionID() {
+//    return transactionID;
+//}
+//
+//float Transaction::getTotalPrice(){
+//    return totalPrice;
+//}
+//void Transaction::setTotalPrice(float totalPrice){
+//    this->totalPrice = totalPrice;
+//};
 
-// Functional Methods
-void Transaction::greetings(){
-    stdlib::system ("CLS");
-    std::cout << "This is a Test from Transaction." << std::endl;
-    std::cout << "\t Transaction Management System." << std::endl;
-    
+
+// Transaction menu landing page implementation - Philip
+void Transaction::transactionMenu(){
+
+    //stdlib::system ("CLS"); was testing with clearing screen
+
+//Code section with reused input validation component
+    //std::string transactionMenuMsg = "\tTransaction Management Menu\n"
+                                   "\t---------------------------\n"
+                                   "\t1. Place a new purchase\n"
+                                   "\t2. View All Purchases\n"
+                                   "\t3. Sort Purchases\n"
+                                   "\t4. View Purchase Details\n"
+                                   "\t5. Return to Main Menu\n"
+                                   "\t6. Exit Program\n"
+                                   "\n\t>> Enter your choice:";
+    //int userChoice;
+    //do{
+        //insert validation
+
+    //}
+//Code section with reused input validation component
+
+    std::cout << "\tTransaction Management Menu" << std::endl;
+    std::cout << "\t---------------------------" << std::endl;
+    std::cout << "\t1. Place a new purchase" << std::endl;
+    std::cout << "\t2. View All Purchases" << std::endl;
+    std::cout << "\t3. Sort Purchases" << std::endl;
+    std::cout << "\t4. View Purchase Details" << std::endl;
+    std::cout << "\t5. Return to Main Menu" << std::endl;
+    std::cout << "\t6. Exit Program" << std::endl;
+    std::cout << "\t Enter your choice:   " << std::endl;
+    std::cin >> userChoice;
+
+    switch (userChoice) {
+        case 1:
+            newTransaction(); //call function for creation of new purchase
+            break;
+        case 2:
+            // placeholder for view purchase
+            std::cout << "You entered 2\n";
+            break;
+        case 3:
+            //placeholder for sort purchase
+            break;
+        case 4:
+            //placeholder for view purchase details
+            break;
+        case 5:
+            //returns to main menu
+            return;
+        case 6:
+            std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";
+
+            // Wait for user Input and ignore up to 10,00 characters
+            std::cin.ignore( 10000, '\n');
+
+            break;
+        default:
+            // Print error message and prompt user to enter any key to continue
+            std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 6\n\t>> Enter any Key to continue:";
+
+            // Wait for user Input and ignore up to 10,00 characters
+            std::cin.ignore( 10000, '\n');
+            break;
+    }
+
+}
+void Transaction::newPurchaseMenu()
+{
+
+    std::cout << "\tCreating new purchase" << std::endl;
+    std::cout << "\t---------------------" << std::endl;
+    std::cout << "\t1. View All Product" << std::endl;
+    std::cout << "\t2. Search Product by Category" << std::endl;
+    std::cout << "\t3. Remove product from cart" << std::endl;
+    std::cout << "\t4. Update cart" << std::endl;
+    std::cout << "\t5. View Cart" << std::endl;
+    std::cout << "\t6. Checkout cart" << std::endl;
+    std::cout << "\t7. Cancel Purchase" << std::endl;
+    std::cout << "\t Enter your choice:   " << std::endl;
+    std::cin >> userChoice;
+
+    CDLinkedList cd = CDLinkedList();
 
 
 }
 
+//functions to add
+    //
 
 
 
 
 
-// Getter and Setter Methods
-std::string Transaction::getMovieName(){
-    return movieName;
-}
-
-int Transaction::getTransactionID() {
-    return transactionID;
-}
-
-float Transaction::getTotalPrice(){
-    return totalPrice;
-}
-void Transaction::setTotalPrice(float totalPrice){
-    this->totalPrice = totalPrice;
-};

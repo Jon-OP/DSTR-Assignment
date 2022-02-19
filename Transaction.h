@@ -6,6 +6,7 @@
 
 #include <string>
 
+
 class Transaction {
     // Transaction Class Variables
     int transactionID;
@@ -17,6 +18,9 @@ class Transaction {
     //int seats[];
     // Date and Time, do we include here ? - Jonathan
 
+    void newTransaction();
+    void newPurchaseMenu();
+
 
 public:
 
@@ -24,8 +28,9 @@ public:
     Transaction();
     Transaction(int movieName, float totalPrice);
 
+
     // Functional Methods
-    void greetings();
+    void transactionMenu();
 
     // Getters and Setters
         // movieID

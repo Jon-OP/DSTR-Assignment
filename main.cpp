@@ -93,8 +93,8 @@ int main() {
     testInventory.greetings();
 
     // Declaration of Transaction Object
-    Transaction testTransaction;
-    testTransaction.greetings();
+    //Transaction testTransaction;
+   // testTransaction.transactionMenu();
 
     mainMenu();
 
