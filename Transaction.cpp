@@ -16,7 +16,12 @@ Transaction::Transaction(int movieName, float x) {
 
 // Functional Methods
 void Transaction::greetings(){
+    stdlib::system ("CLS");
     std::cout << "This is a Test from Transaction." << std::endl;
+    std::cout << "\t Transaction Management System." << std::endl;
+    
+
+
 }
 
 
