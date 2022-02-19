@@ -13,6 +13,7 @@ Transaction::Transaction() {};
 Transaction::Transaction(int movieName, float x) {
     this->transactionID = movieName;
     this->totalPrice = x;
+    //this -> seats = y;
 }
 
 // Getter and Setter Methods (most likely obsolete)
@@ -115,10 +116,10 @@ void Transaction::newPurchaseMenu()
     std::cin >> userChoice;
     switch (userChoice) {
         case 1:
-            //placeholder View All Product
+            //placeholder for View All Product
             break;
         case 2:
-            // placeholder Search Product by Category
+            // placeholder for Search Product by Category
             break;
         case 3:
             //placeholder for Remove product
@@ -145,12 +146,24 @@ void Transaction::newPurchaseMenu()
     }
 
 }
-
-void ViewPurchase()
+void newTransaction()
 {
-
+    CDLinkedList cd = CDLinkedList();
+    Transaction userTransaction = Transaction(); //include user input details on purchase as parameters
+    cd.insertTransaction(userTransaction);
 }
+
+void viewPurchases()
+{
+    CDLinkedList cd = CDLinkedList();
+    cd.displayAllTransaction();
+}
+//getters for displayTransaction method in CDLinkedlist
+
+
+
 //functions to add
+    //function to check last transaction ID -> so we can add it into the userTransaction object
     //
 
 
