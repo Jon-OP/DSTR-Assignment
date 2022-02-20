@@ -22,7 +22,6 @@ class CDLinkedList {
 
 public:
     int linkListSize;
-    // Initialization of Linked List
     CDLinkedList();
 
     // New Transaction

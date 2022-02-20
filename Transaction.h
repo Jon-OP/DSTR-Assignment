@@ -7,49 +7,83 @@
 #include <string>
 #include "CDLinkedList.h"
 
-class Transaction {
-    // Transaction Class Variables
+class Transaction{
+    // Transaction Attributes
     int transactionID;
     std::string movieName;
     float totalPrice;
     int quantity;
     int seats;
-    //int seats[];
     // Date and Time, do we include here ? - Jonathan
 
-    void newTransaction();
-    void newPurchaseMenu();
-    void viewPurchase();
-    std::string getDetails();
+public:
+    // Linked List implementation
+    Transaction* nextNode = NULL;
+    Transaction* previousNode = NULL;
+
+    int getTransactionID();
+    int getTransactionTotalPrice();
+
+    void printSummaryDetails();
+    void printAllDetails();
+
+    Transaction();
+    // Transaction Constructor with Param
+};
+
+// Transaction: will be the linked list
+class TransactionList {
+/* --- Linked List Attribute Implementation ------------------------------------------------------------------------- */
+    Transaction* head;
+    Transaction* tail; // Think about it
+
+/* --- Private Linked List Implementation Methods ------------------------------------------------------------------- */
+
+    // Link List Manipulation
+        // Inserting new transaction at the end
+    void insertTransactionToList(Transaction* transactionNode);
+
+        // Return a transaction at the selected index
+    Transaction* getTransaction(int index);
+
+        // Display the high-level details of all transaction
+    void displayAllTransaction();
+
+        // Sort the List of Transaction[TotalPrice]: MergeSort
+    void sortTransaction(std::string sortParameter);
+
+        Transaction* mergeSort(Transaction* headNode, std::string sortParameter);
+
+            // Split the List into Half
+        Transaction* splitList(Transaction* headNode);
+
+            // Merging two list
+        Transaction* mergeList(Transaction* firstList, Transaction* secondList, std::string sortParameter);
+
+/* --- Transaction Functions ---------------------------------------------------------------------------------------- */
+
+    // Placing a new order
+    void newPurchaseMenu(); // Prompt user to choose movie, ETC
+
+        // Multiple Sub functions pertaining to newPurchase
+        // HERE
+
+    // Display high-level details of each transaction
+    void listAllTransaction();
+
+    // Sort all transaction
+    void sortTransaction_prompt();
+
+
+    // Error validation
     int validateInteger(std::string msg);
 
-
 public:
+    // Constructor
+    TransactionList();
 
-    // Constructor Method
-    Transaction();
-    Transaction(CDLinkList list); // THIS IS THE ADMIN TRANSACTION
-    Transaction(int movieName, float totalPrice);
+    void transactionMenu();
 
-
-    // Functional Methods
-    [[noreturn]] void transactionMenu();
-
-
-
-//    // Getters and Setters (Possibly obsolete)
-//        // movieID
-//    int getMovieID();
-//    void setMovieID();
-//        // movieName
-//    std::string getMovieName();
-//    void setMovieName(std::string movieName);
-//        // transactionID
-//    int getTransactionID();
-//    void setTransactionID(int ID);
-//        //totalPrice
-//    float getTotalPrice();
-//    void setTotalPrice(float totalPrice);
 };
 
 
