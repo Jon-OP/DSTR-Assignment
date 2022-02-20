@@ -38,14 +38,12 @@ int validateInteger(std::string message){
 
     }
 }
-/*
+
 // Main Implementation - Jonathan
 void mainMenu(){
 
-    CDLinkedList list = CDLinkedList();
-
     Movie adminInventory;
-    Transaction adminTransaction = Transaction(list);
+    TransactionList adminTransaction = TransactionList();
 
     std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"
                               "\t--------------------------------\n"
@@ -83,12 +81,11 @@ void mainMenu(){
         }
     }while(userChoice != 3);
 }
-*/
+
 
 
 
 int main() {
-    std::cout << "This is a Test from MAIN!" << std::endl;
     // Initialize Movie Array
     Movie* movieArray = new Movie[0];
 
@@ -98,7 +95,7 @@ int main() {
     // Declaration of Transaction Object
     // Transaction testTransaction;
     // testTransaction.transactionMenu();
-     TransactionList adminTransaction;
+    TransactionList adminTransaction;
 
     //TEST SITE BELOW ONWARDS
     Transaction testTransaction1 = Transaction(2,12.5);
@@ -109,7 +106,7 @@ int main() {
     Transaction testTransaction6 = Transaction(7, 21.2);
     Transaction testTransaction7 = Transaction(2, 82.1);
     Transaction testTransaction8 = Transaction(3, 9.2);
-    //std::cout << testTransaction1.getMovieName();
+
     adminTransaction.insertTransactionToList(&testTransaction1);
     adminTransaction.insertTransactionToList(&testTransaction2);
     adminTransaction.insertTransactionToList(&testTransaction3);
@@ -119,8 +116,9 @@ int main() {
     adminTransaction.insertTransactionToList(&testTransaction7);
     adminTransaction.insertTransactionToList(&testTransaction8);
 
-    adminTransaction.sortTransaction("TOTALPRICE");
-    adminTransaction.displayAllTransaction();
+    adminTransaction.transactionMenu();
+
+    //adminTransaction.sortTransaction("TOTALPRICE");
 
     return 0;
 }

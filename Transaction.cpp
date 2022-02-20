@@ -13,15 +13,16 @@ int userChoice;
 Transaction::Transaction() {};
 
     // Primary Constructor
-Transaction::Transaction(int ID, int TOTALPRICE) {
-
+Transaction::Transaction(int ID, float totalPrice) {
+    this->transactionID = ID;
+    this->totalPrice = totalPrice;
 };
 
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
-void Transaction::printSummaryDetails(int index) {
-    std::cout << index << "\t|  ID:" << transactionID << "\t|  Price:" << totalPrice << std::endl;
-}// PRINT MOVIE NAME ALSO !! @PHILIP
+void Transaction::printAllDetails(int index) {
+    std::cout << "\t" <<index << ".\t" << transactionID << "\t" << totalPrice << "\n"; // @PHILIP REFER BEFORE.
+}// PRINT MOVIE NAME ALSO !! @PHILIP // INCLUDE EVERYTHING IN THE ACTUAL IMPLEMENTATION
 
 // Methods: GETTERS
     // Get the Transaction ID
@@ -106,6 +107,7 @@ Transaction* TransactionList::getTransaction(int index) {
     // Display the high-level details of all transaction
 void TransactionList::displayAllTransaction() {
     // IF LinkedList is empty
+    int index = 1;
     if(head == NULL){
         std::cout << "List is empty" << std::endl;
         return;
@@ -113,20 +115,26 @@ void TransactionList::displayAllTransaction() {
 
     // There is only one Item in LinkedList
     if(tail == NULL){
-        head->printSummaryDetails(1);
+        head->printAllDetails(1);
+        index++;
         return;
     }
 
+    // Print Banner
+    std::cout << "\n\t\t\t\tList of Transactions\n"
+                 "\t---------------------------------------------------------------------------------\n"
+                 "\tIndex\tID\tMovie Name\tTotal Price\tSeat Count\tTime\tDate\n";
+
     Transaction* current = head;
-    int index = 1;
     do{
         // Print the details
-        current->printSummaryDetails(index);
+        current->printAllDetails(index);
 
         // Move to the next node
         current = current->nextNode;
-        index++;
+        index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
+    return;
 }
 
     // Sort the List of Transaction[TotalPrice]: MergeSort
@@ -294,13 +302,13 @@ void TransactionList::transactionMenu(){
 
 //Code section with reused input validation component
     std::string transactionMenuMsg = "\tTransaction Management Menu\n"
-                                   "\t---------------------------\n"
-                                   "\t1. Place a new purchase\n"
-                                   "\t2. View All Purchases\n"
-                                   "\t3. Sort Purchases\n"
-                                   "\t4. View Purchase Details\n" // remove
-                                   "\t5. Return to Main Menu\n"
-                                   "\n\t>> Enter your choice:";
+                                     "\t---------------------------\n"
+                                     "\t1. Place a new purchase\n"
+                                     "\t2. View All Purchases\n"
+                                     "\t3. Sort Purchases\n"
+                                     "\t4. View Purchase Details\n" // remove
+                                     "\t5. Return to Main Menu\n"
+                                     "\n\t>> Enter your choice:";
     int userChoice;
     while (true){
         userChoice = validateInteger(transactionMenuMsg);
@@ -310,9 +318,19 @@ void TransactionList::transactionMenu(){
                 break;
             case 2:
                 //viewPurchase();
+                //displayAllTransaction();
+                displayAllTransaction();
+
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Enter any key to return to Transaction Menu";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+
                 break;
             case 3:
                 //placeholder for sort purchase
+                sortTransaction_prompt();
                 break;
             case 4:
                 //placeholder for view purchase details
@@ -330,12 +348,6 @@ void TransactionList::transactionMenu(){
         }
     }
 }
-//
-//void viewPurchases()
-//{
-//    CDLinkedList cd = CDLinkedList();
-//    cd.displayAllTransaction();
-//}
 
 void TransactionList::newPurchaseMenu()
 {
@@ -425,6 +437,34 @@ int TransactionList::validateInteger(std::string message){
     }
 }
 
+void TransactionList::sortTransaction_prompt() {
+    std::string promptMsg = "\tSort By:\n"
+                            "\t--------------\n"
+                            "\t1. ID\n"
+                            "\t2. Total Price\n"
+                            "\t3. Cancel Sort\n\n"
+                            "\t>> Enter your choice:";
+    while(true){
+        int userChoice = validateInteger(promptMsg);
+        switch(userChoice){
+            case 1:
+                sortTransaction("ID");
+                return;
+            case 2:
+                sortTransaction("TOTALPRICE");
+                return;
+            case 3:
+                return;
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 3\n\t>> Enter any Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }
+}
 
 
 //getter to display all transactions

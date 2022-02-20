@@ -23,11 +23,10 @@ public:
     int getTransactionID();
     float getTransactionTotalPrice();
 
-    void printSummaryDetails(int index);
-    void printAllDetails();
+    void printAllDetails(int index);
 
     Transaction();
-    Transaction(int ID, int TOTALPRICE); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
+    Transaction(int ID, float totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
     // Transaction Constructor with Param
 };
 
@@ -46,7 +45,7 @@ class TransactionList {
     Transaction* getTransaction(int index);
 
     // Display the high-level details of all transaction
-    //void displayAllTransaction();
+    void displayAllTransaction();
 
     // Sort the List of Transaction[TotalPrice]: MergeSort
     //void sortTransaction(std::string sortParameter); // COMPLETED !!!
@@ -73,6 +72,9 @@ class TransactionList {
     // Sort all transaction
     void sortTransaction_prompt();
 
+    // Prompt user to chose a transaction to view in detail
+    void promptTransactionDetails();
+
 
     // Error validation
     int validateInteger(std::string msg);
@@ -86,7 +88,7 @@ public:
 
 
     void insertTransactionToList(Transaction* transactionNode);
-    void displayAllTransaction();
+    //void displayAllTransaction();
     void sortTransaction(std::string sortParameter);
 };
 
