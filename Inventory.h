@@ -9,6 +9,9 @@
 
 class Movie {
 
+    // Counter for movieID
+    static int inventoryCount;
+
     // Attributes of Inventory Class which will be kept Private
     int movieID;
     std::string movieName;
@@ -41,15 +44,6 @@ public:
     // CONSOLE DISPLAY Methods
     void inventoryConsoleMenu();
 
-
-
-
-    void greetings();
-
-    // Add movie to Movie Array
-    Movie * addMovie(Movie *movieList, Movie newMovie);
-
-    void createMovie(std::string name, float price, std::string category, std::string time, std::string date);
 };
 
 

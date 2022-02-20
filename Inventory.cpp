@@ -4,6 +4,9 @@
 #include "Inventory.h"
 #include <iostream>
 
+// Counter to keep track of number of Movies -> For movieID
+int Movie::inventoryCount = 0;
+
 // Constructor Methods
 Movie::Movie() {}
 
@@ -24,13 +27,6 @@ Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
 
 }
 
-
-//Array initialization
-void InitializeMovieArray(){
-    Movie* movies = new Movie[0];
-}
-
-
 //ADD movie to Movie Array
 Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
 
@@ -50,6 +46,7 @@ Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
     newMovieList[counter] = newMovie;
     return newMovieList;
 }
+
 
 
 // CONSOLE DISPLAY Methods
@@ -116,11 +113,6 @@ void Movie::inventoryConsoleMenu() {
 
 };
 
-
-
-void Movie::greetings(){
-    std::cout << "This is a Test from Inventory" << std::endl;
-}
 
 // Error Validation Method
 int Movie::validateInteger(std::string message){

@@ -89,16 +89,16 @@ void mainMenu(){
 
 int main() {
     std::cout << "This is a Test from MAIN!" << std::endl;
+    // Initialize Movie Array
+    Movie* movieArray = new Movie[0];
 
     // Declaration of Inventory Object
     Movie testInventory;
-    testInventory.greetings();
 
     // Declaration of Transaction Object
-    //Transaction testTransaction;
-   // testTransaction.transactionMenu();
-
-   TransactionList adminTransaction;
+    // Transaction testTransaction;
+    // testTransaction.transactionMenu();
+    // TransactionList adminTransaction;
 
     //TEST SITE BELOW ONWARDS
     Transaction testTransaction1 = Transaction(2,12.5);
