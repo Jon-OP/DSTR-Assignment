@@ -27,6 +27,7 @@ Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
 
 }
 
+//----------------------------------{ Functional Methods }--------------------------------------//
 //ADD movie to Movie Array
 Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
 
@@ -44,6 +45,10 @@ Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
 
     //Append new movie to new array
     newMovieList[counter] = newMovie;
+
+    //Delete old array
+    delete[] movieList;
+
     return newMovieList;
 }
 
@@ -60,6 +65,32 @@ Movie Movie::searchMovie(Movie movieList[], std::string criteria){
             std::cout << "Movie not found, please search for another movie." << '\n';
         }
     }
+}
+
+//DELETE a movie from Movie Array
+Movie * Movie::deleteMovie(Movie movieList[], Movie movieToDelete){
+
+    // Counter for new array
+    int counter = 0;
+
+    // Declare size of new array (-1 from original)
+    int size = (sizeof(movieList)/sizeof(movieList[0]) - 1);
+
+    // Define new array with size - 1
+    Movie* newMovieList = new Movie[size];
+
+    // For each element in movieList
+    for (int i = 0; i < sizeof(movieList)/sizeof(movieList[0]); i++){
+        if (movieList[i].movieID != movieToDelete.movieID) {
+            newMovieList[counter] = movieList[i];
+            counter++;
+        }
+    }
+
+    //Delete old array
+    delete[] movieList;
+
+    return newMovieList;
 }
 
 
