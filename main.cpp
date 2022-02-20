@@ -44,7 +44,7 @@ void mainMenu(){
 
     CDLinkedList list = CDLinkedList();
 
-    Inventory adminInventory;
+    Movie adminInventory;
     Transaction adminTransaction = Transaction(list);
 
     std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"

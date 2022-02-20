@@ -4,9 +4,6 @@
 #include "Inventory.h"
 #include <iostream>
 
-// Counter to keep track of number of Movies -> For movieID
-int Movie::inventoryCount = 0;
-
 // Constructor Methods
 Movie::Movie() {}
 
@@ -27,10 +24,31 @@ Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
 
 }
 
-// ADD Inventory Product
-void Movie::addMovie(std::string name, float price, std::string category, std::string time, std::string date) {
-    Movie product1 = Movie(name, price, category, time, date);
 
+//Array initialization
+void InitializeMovieArray(){
+    Movie* movies = new Movie[0];
+}
+
+
+//ADD movie to Movie Array
+Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
+
+    //Element counter
+    int counter = 0;
+
+    //Define new array with size +1
+    Movie* newMovieList = new Movie[(sizeof(movieList)/sizeof(movieList[0])) + 1];
+
+    //Copy elements to new array
+    for (int i=0; i < sizeof(newMovieList)/sizeof(newMovieList[0]) ; i++){
+        newMovieList[i] = movieList[i];
+        counter++;
+    }
+
+    //Append new movie to new array
+    newMovieList[counter] = newMovie;
+    return newMovieList;
 }
 
 

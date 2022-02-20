@@ -9,24 +9,21 @@
 
 class Movie {
 
-    static int inventoryCount;
     // Attributes of Inventory Class which will be kept Private
     int movieID;
     std::string movieName;
     float moviePrice;
 
-    // Default Quantity = 25
+    // Ticket Quantity = 25
     int ticketQuantity = 25;
     bool seatAllocation[25];
 
     std::string movieCategory;
-
     std::string movieTime; // HOUR, MINUTE, AM/PM
     std::string movieDate; // DAY, MONTH, YEAR
 
     // Functional Methods
-    void addMovie(std::string name, float price, std::string category, std::string time, std::string date);
-
+    Movie* addMovie(Movie movieList[], Movie newMovie);
 
 
 
@@ -49,6 +46,10 @@ public:
 
     void greetings();
 
+    // Add movie to Movie Array
+    Movie * addMovie(Movie *movieList, Movie newMovie);
+
+    void createMovie(std::string name, float price, std::string category, std::string time, std::string date);
 };
 
 
