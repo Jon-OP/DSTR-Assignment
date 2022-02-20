@@ -5,13 +5,12 @@
 #include <iostream>
 
 // Counter to keep track of number of Movies -> For movieID
-int Inventory::inventoryCount = 0;
-
+int Movie::inventoryCount = 0;
 
 // Constructor Methods
-Inventory::Inventory() {}
+Movie::Movie() {}
 
-Inventory::Inventory(std::string movieName, float moviePrice, std::string movieCategory,
+Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
                      std::string movieTime, std::string movieDate) {
     this->movieID = inventoryCount+1;
     this->movieName = movieName;
@@ -29,12 +28,14 @@ Inventory::Inventory(std::string movieName, float moviePrice, std::string movieC
 }
 
 // ADD Inventory Product
-void Inventory::addProduct(std::string name, float price, std::string category, std::string time, std::string date) {
-    Inventory *product = new Inventory();
+void Movie::addMovie(std::string name, float price, std::string category, std::string time, std::string date) {
+    Movie product1 = Movie(name, price, category, time, date);
+
 }
 
+
 // CONSOLE DISPLAY Methods
-void Inventory::inventoryConsoleMenu() {
+void Movie::inventoryConsoleMenu() {
     std::string inventoryMenuMsg = "\tMovie Management System\n"
                                    "\t-----------------------\n"
                                    "\t1. Add New Movie\n"
@@ -99,12 +100,12 @@ void Inventory::inventoryConsoleMenu() {
 
 
 
-void Inventory::greetings(){
+void Movie::greetings(){
     std::cout << "This is a Test from Inventory" << std::endl;
 }
 
 // Error Validation Method
-int Inventory::validateInteger(std::string message){
+int Movie::validateInteger(std::string message){
     bool inputFlag;
     std::string userInput;
     int sanitizedInput;

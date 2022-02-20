@@ -7,7 +7,7 @@
 #include <string>
 #include <algorithm>
 
-class Inventory {
+class Movie {
 
     static int inventoryCount;
     // Attributes of Inventory Class which will be kept Private
@@ -25,7 +25,7 @@ class Inventory {
     std::string movieDate; // DAY, MONTH, YEAR
 
     // Functional Methods
-    void addProduct(std::string name, float price, std::string category, std::string time, std::string date);
+    void addMovie(std::string name, float price, std::string category, std::string time, std::string date);
 
 
 
@@ -37,8 +37,8 @@ class Inventory {
 public:
 
     // Constructor Methods
-    Inventory();
-    Inventory(std::string movieName, float moviePrice, std::string movieCategory,
+    Movie();
+    Movie(std::string movieName, float moviePrice, std::string movieCategory,
               std::string movieTime, std::string movieDate);
 
     // CONSOLE DISPLAY Methods
