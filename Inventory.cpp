@@ -47,6 +47,20 @@ Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
     return newMovieList;
 }
 
+//SEARCH for a movie in Movie Array
+Movie Movie::searchMovie(Movie movieList[], std::string criteria){
+
+    // Loop for each item in movie list
+    for (int i=0; i < sizeof(movieList)/sizeof(movieList[0]); i++){
+
+        // If criteria is part of movie name, return movie. Else, return error.
+        if (movieList[i].movieName.find(criteria) != std::string::npos){
+            return movieList[i];
+        } else {
+            std::cout << "Movie not found, please search for another movie." << '\n';
+        }
+    }
+}
 
 
 // CONSOLE DISPLAY Methods

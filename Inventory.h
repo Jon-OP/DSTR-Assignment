@@ -27,6 +27,7 @@ class Movie {
 
     // Functional Methods
     Movie* addMovie(Movie movieList[], Movie newMovie);
+    Movie searchMovie(Movie *movieList, std::string criteria);
 
 
 
