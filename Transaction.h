@@ -21,6 +21,7 @@ class Transaction {
     void newPurchaseMenu();
     void viewPurchase();
     std::string getDetails();
+    int validateInteger(std::string msg);
 
 
 public:
@@ -32,7 +33,7 @@ public:
 
 
     // Functional Methods
-    void transactionMenu();
+    [[noreturn]] void transactionMenu();
 
 
 

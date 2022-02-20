@@ -42,72 +42,54 @@ Transaction::Transaction(int transID, int movID, std::string movName) {
 
 
 // Transaction menu landing page implementation - Philip
-void Transaction::transactionMenu(){
+[[noreturn]] void Transaction::transactionMenu(){
 
     //stdlib::system ("CLS"); was testing with clearing screen
 
 //Code section with reused input validation component
-    //std::string transactionMenuMsg = "\tTransaction Management Menu\n"
+    std::string transactionMenuMsg = "\tTransaction Management Menu\n"
                                    "\t---------------------------\n"
                                    "\t1. Place a new purchase\n"
                                    "\t2. View All Purchases\n"
                                    "\t3. Sort Purchases\n"
                                    "\t4. View Purchase Details\n"
                                    "\t5. Return to Main Menu\n"
-                                   "\t6. Exit Program\n"
                                    "\n\t>> Enter your choice:";
-    //int userChoice;
-    //do{
-        //insert validation
+    int userChoice;
+    while (true){
+        userChoice = validateInteger(transactionMenuMsg);
+        switch (userChoice) {
+            case 1:
+                newPurchaseMenu(); //call function for creation of new purchase
+                break;
+            case 2:
+                viewPurchase();
+                break;
+            case 3:
+                //placeholder for sort purchase
+                break;
+            case 4:
+                //placeholder for view purchase details
+                break;
+            case 5:
+                return;
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 5\n\t>> Enter any Key to continue:";
 
-    //}
-//Code section with reused input validation component
-
-    std::cout << "\tTransaction Management Menu" << std::endl;
-    std::cout << "\t---------------------------" << std::endl;
-    std::cout << "\t1. Place a new purchase" << std::endl;
-    std::cout << "\t2. View All Purchases" << std::endl;
-    std::cout << "\t3. Sort Purchases" << std::endl;
-    std::cout << "\t4. View Purchase Details" << std::endl;
-    std::cout << "\t5. Return to Main Menu" << std::endl;
-    std::cout << "\t6. Exit Program" << std::endl;
-    std::cout << "\t Enter your choice:   " << std::endl;
-    std::cin >> userChoice;
-
-    switch (userChoice) {
-        case 1:
-            newPurchaseMenu(); //call function for creation of new purchase
-            break;
-        case 2:
-            viewPurchase();
-
-            break;
-        case 3:
-            //placeholder for sort purchase
-            break;
-        case 4:
-            //placeholder for view purchase details
-            break;
-        case 5:
-            //returns to main menu
-            return;
-        case 6:
-            std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";
-
-            // Wait for user Input and ignore up to 10,00 characters
-            std::cin.ignore( 10000, '\n');
-
-            break;
-        default:
-            // Print error message and prompt user to enter any key to continue
-            std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 6\n\t>> Enter any Key to continue:";
-
-            // Wait for user Input and ignore up to 10,00 characters
-            std::cin.ignore( 10000, '\n');
-            break;
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore(10000, '\n');
+                break;
+        }
     }
-
 }
+
+void viewPurchases()
+{
+    CDLinkedList cd = CDLinkedList();
+    cd.displayAllTransaction();
+}
+
 void Transaction::newPurchaseMenu()
 {
 
@@ -161,11 +143,6 @@ void newTransaction()
     cd.insertTransaction(userTransaction);
 }
 
-void viewPurchases()
-{
-    CDLinkedList cd = CDLinkedList();
-    cd.displayAllTransaction();
-}
 
 
 // Error Validation Method
@@ -205,14 +182,15 @@ int Transaction::validateInteger(std::string message){
     }
 }
 
-//getters for displayTransaction method in CDLinkedlist
+
+
+//getter to display all transactions
 std::string Transaction::getDetails()
 {
     std::string transID = std::to_string(this->transactionID);
     std::string totalPrice = std::to_string(this->totalPrice);
     std::string quantity = std::to_string(this->quantity);
     std::string seats = std::to_string(this->seats);
-
 
     return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
 }
