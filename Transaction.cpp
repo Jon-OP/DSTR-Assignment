@@ -21,7 +21,7 @@ Transaction::Transaction(int ID, float totalPrice) {
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
 void Transaction::printAllDetails(int index) {
-    std::cout << "\t" <<index << ".\t" << transactionID << "\t" << totalPrice << "\n"; // @PHILIP REFER BEFORE.
+    std::cout << "\t" <<index << ".\t" << movieName << transactionID << "\t" << totalPrice << seats<< "\n"; // @PHILIP REFER BEFORE.
 }// PRINT MOVIE NAME ALSO !! @PHILIP // INCLUDE EVERYTHING IN THE ACTUAL IMPLEMENTATION
 
 // Methods: GETTERS
