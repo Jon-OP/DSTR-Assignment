@@ -3,14 +3,20 @@
 
 #include "Transaction.h"
 #include <iostream>
-#include "CDLinkedList.h"
 
 int userChoice;
 
 // Constructor Methods
 Transaction::Transaction() {};
+Transaction::Transaction(int ID, int TOTALPRICE) {
+    this->transactionID = ID;
+    this->totalPrice = TOTALPRICE;
+}
 
-TransactionList::TransactionList() {};
+TransactionList::TransactionList() {
+    head = NULL;
+    tail = NULL;
+};
 
 /* --- Linked List Functions ---------------------------------------------------------------------------------------- */
 
@@ -75,17 +81,19 @@ void TransactionList::displayAllTransaction() {
 
     // There is only one Item in LinkedList
     if(tail == NULL){
-        head->printSummaryDetails();
+        head->printSummaryDetails(1);
         return;
     }
 
     Transaction* current = head;
+    int index = 1;
     do{
         // Print the details
-        current->printSummaryDetails();
+        current->printSummaryDetails(index);
 
         // Move to the next node
         current = current->nextNode;
+        index++;
     }while(current != head);
 }
 
@@ -106,6 +114,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
     head->previousNode = tail;
     tail->nextNode = head;
 }
+
 
 Transaction* TransactionList::mergeSort(Transaction *headNode, std::string sortParameter) {
     // IF headNode == NULL OR headNode->nextNode == NULL, then END the recursion
@@ -204,6 +213,7 @@ Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *sec
         if(sortParameter == "TOTALPRICE"){
             // Total Price of firstList is lesser than secondList
 
+            //if(firstList->getTransactionTotalPrice() < secondList->getTransactionTotalPrice()){
             if(firstList->getTransactionTotalPrice() < secondList->getTransactionTotalPrice()){
 
                 // RECURSIVELY call mergeList to find the next value (ASCENDING ORDER)
@@ -213,10 +223,10 @@ Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *sec
                 firstList->nextNode->previousNode = firstList;
 
                 // firstList[currentNode] is the current HEAD in this sub-linked list. Set firstList[previousNode] to NULL
-                firstList->nextNode = NULL;
+                firstList->previousNode = NULL;
 
                 // Update the value of TAIL
-                while(tail->previousNode != NULL){
+                while(tail->nextNode != NULL){
                     tail = tail->nextNode;
                 }
                 return firstList;
@@ -241,6 +251,23 @@ Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *sec
             }
         }
     }
+}
+
+
+// FUNCTIONAL METHODS .... ----
+void Transaction::printSummaryDetails(int index) {
+    std::cout << index << "\t|  ID:" << transactionID << "\t|  Price:" << totalPrice << std::endl;
+}// PRINT MOVIE NAME ALSO !! @PHILIP
+
+
+// GETTERS AND SETTERS HYBRID
+
+float Transaction::getTransactionTotalPrice() {
+    return this->totalPrice;
+}
+
+int Transaction::getTransactionID() {
+    return  this->transactionID;
 }
 
 /*

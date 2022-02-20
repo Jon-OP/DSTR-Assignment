@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Inventory.h"      // Allow the calling of Inventory Attributes & Methods
 #include "Transaction.h"    // Allow the calling of Transaction Attributes & Methods
-#include "CDLinkedList.h"   // Allow the calling of CDLinkedList Attributes & Methods
 
 int validateInteger(std::string message){
     bool inputFlag;
@@ -39,7 +38,7 @@ int validateInteger(std::string message){
 
     }
 }
-
+/*
 // Main Implementation - Jonathan
 void mainMenu(){
 
@@ -84,27 +83,24 @@ void mainMenu(){
         }
     }while(userChoice != 3);
 }
-
+*/
 
 
 
 int main() {
     std::cout << "This is a Test from MAIN!" << std::endl;
 
-    mainMenu();
-
     // Declaration of Inventory Object
-    Inventory testInventory;
+    Movie testInventory;
     testInventory.greetings();
 
     // Declaration of Transaction Object
     //Transaction testTransaction;
    // testTransaction.transactionMenu();
 
-    mainMenu();
+   TransactionList adminTransaction;
 
     //TEST SITE BELOW ONWARDS
-    CDLinkedList cd = CDLinkedList();
     Transaction testTransaction1 = Transaction(2,12.5);
     Transaction testTransaction2 = Transaction(5, 13.2);
     Transaction testTransaction3 = Transaction(3, 10.0);
@@ -114,13 +110,17 @@ int main() {
     Transaction testTransaction7 = Transaction(2, 82.1);
     Transaction testTransaction8 = Transaction(3, 9.2);
     //std::cout << testTransaction1.getMovieName();
-    cd.insertTransaction(testTransaction1);
-    cd.insertTransaction(testTransaction2);
-    cd.insertTransaction(testTransaction3);
-    cd.insertTransaction(testTransaction4);
-    cd.insertTransaction(testTransaction5);
-    cd.insertTransaction(testTransaction6);
-    cd.insertTransaction(testTransaction7);
+    adminTransaction.insertTransactionToList(&testTransaction1);
+    adminTransaction.insertTransactionToList(&testTransaction2);
+    adminTransaction.insertTransactionToList(&testTransaction3);
+    adminTransaction.insertTransactionToList(&testTransaction4);
+    adminTransaction.insertTransactionToList(&testTransaction5);
+    adminTransaction.insertTransactionToList(&testTransaction6);
+    adminTransaction.insertTransactionToList(&testTransaction7);
+    adminTransaction.insertTransactionToList(&testTransaction8);
+
+    adminTransaction.sortTransaction("TOTALPRICE");
+    adminTransaction.displayAllTransaction();
 
     return 0;
 }

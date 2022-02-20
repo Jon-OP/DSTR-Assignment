@@ -5,7 +5,6 @@
 #define G8_TP060491_TP061069_TP055727_TRANSACTION_H
 
 #include <string>
-#include "CDLinkedList.h"
 
 class Transaction{
     // Transaction Attributes
@@ -22,12 +21,13 @@ public:
     Transaction* previousNode = NULL;
 
     int getTransactionID();
-    int getTransactionTotalPrice();
+    float getTransactionTotalPrice();
 
-    void printSummaryDetails();
+    void printSummaryDetails(int index);
     void printAllDetails();
 
     Transaction();
+    Transaction(int ID, int TOTALPRICE); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
     // Transaction Constructor with Param
 };
 
@@ -41,16 +41,16 @@ class TransactionList {
 
     // Link List Manipulation
         // Inserting new transaction at the end
-    void insertTransactionToList(Transaction* transactionNode);
+    //void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
         // Return a transaction at the selected index
     Transaction* getTransaction(int index);
 
         // Display the high-level details of all transaction
-    void displayAllTransaction();
+    //void displayAllTransaction();
 
         // Sort the List of Transaction[TotalPrice]: MergeSort
-    void sortTransaction(std::string sortParameter);
+    //void sortTransaction(std::string sortParameter); // COMPLETED !!!
 
         Transaction* mergeSort(Transaction* headNode, std::string sortParameter);
 
@@ -82,8 +82,13 @@ public:
     // Constructor
     TransactionList();
 
+
     void transactionMenu();
 
+
+    void insertTransactionToList(Transaction* transactionNode);
+    void displayAllTransaction();
+    void sortTransaction(std::string sortParameter);
 };
 
 
