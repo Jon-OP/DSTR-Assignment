@@ -98,7 +98,7 @@ int main() {
     // Declaration of Transaction Object
     // Transaction testTransaction;
     // testTransaction.transactionMenu();
-    // TransactionList adminTransaction;
+     TransactionList adminTransaction;
 
     //TEST SITE BELOW ONWARDS
     Transaction testTransaction1 = Transaction(2,12.5);

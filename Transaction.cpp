@@ -285,8 +285,8 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 
 // METHODS: FUNCTIONAL
 
+// -----------------------------------------------// Menus starts here// --------------------------------------//
 
-/*
 // Transaction menu landing page implementation - Philip
 void TransactionList::transactionMenu(){
 
@@ -309,13 +309,14 @@ void TransactionList::transactionMenu(){
                 newPurchaseMenu(); //call function for creation of new purchase
                 break;
             case 2:
-                viewPurchase();
+                //viewPurchase();
                 break;
             case 3:
                 //placeholder for sort purchase
                 break;
             case 4:
                 //placeholder for view purchase details
+
                 break;
             case 5:
                 return;
@@ -329,14 +330,14 @@ void TransactionList::transactionMenu(){
         }
     }
 }
+//
+//void viewPurchases()
+//{
+//    CDLinkedList cd = CDLinkedList();
+//    cd.displayAllTransaction();
+//}
 
-void viewPurchases()
-{
-    CDLinkedList cd = CDLinkedList();
-    cd.displayAllTransaction();
-}
-
-void Transaction::newPurchaseMenu()
+void TransactionList::newPurchaseMenu()
 {
     std::string newPurchaseMenuMsg = "\tCreating new purchase\n"
                                      "\t---------------------\n"
@@ -372,12 +373,18 @@ void Transaction::newPurchaseMenu()
     }
 
 }
-void newTransaction()
-{
-    CDLinkedList cd = CDLinkedList();
-    Transaction userTransaction = Transaction(); //include user input details on purchase as parameters
-    cd.insertTransaction(userTransaction);
-}
+// -----------------------------------------------// Menus ends here// ------------------------------------------//
+
+
+//----------------------------------------// Helper function starts here //--------------------------------------//
+
+
+//void newTransaction()
+//{
+//    CDLinkedList cd = CDLinkedList();
+//    Transaction userTransaction = Transaction(); //include user input details on purchase as parameters
+//    cd.insertTransaction(userTransaction);
+//}
 
 
 
@@ -421,19 +428,18 @@ int TransactionList::validateInteger(std::string message){
 
 
 //getter to display all transactions
-std::string Transaction::getDetails()
-{
-    std::string transID = std::to_string(this->transactionID);
-    std::string totalPrice = std::to_string(this->totalPrice);
-    std::string quantity = std::to_string(this->quantity);
-    std::string seats = std::to_string(this->seats);
-
-    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
-}
+//std::string Transaction::getDetails()
+//{
+//    std::string transID = std::to_string(this->transactionID);
+//    std::string totalPrice = std::to_string(this->totalPrice);
+//    std::string quantity = std::to_string(this->quantity);
+//    std::string seats = std::to_string(this->seats);
+//
+//    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
+//}
 
 
 //functions to add
     //function to check last transaction ID -> so we can add it into the userTransaction object
     //
 
-*/
