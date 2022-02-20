@@ -28,6 +28,11 @@ Inventory::Inventory(std::string movieName, float moviePrice, std::string movieC
 
 }
 
+// ADD Inventory Product
+void Inventory::addProduct(std::string name, float price, std::string category, std::string time, std::string date) {
+    Inventory *product = new Inventory();
+}
+
 // CONSOLE DISPLAY Methods
 void Inventory::inventoryConsoleMenu() {
     std::string inventoryMenuMsg = "\tMovie Management System\n"
