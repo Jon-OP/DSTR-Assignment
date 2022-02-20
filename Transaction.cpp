@@ -16,6 +16,14 @@ Transaction::Transaction(int movieName, float x) {
     //this -> seats = y;
 }
 
+Transaction::Transaction(int transID, int movID, std::string movName) {
+    this->transactionID = transID;
+    this->movieName = movName;
+    this->totalPrice = x;
+    //this -> seats = y;
+}
+
+
 // Getter and Setter Methods (most likely obsolete)
 //std::string Transaction::getMovieName(){
 //    return movieName;
@@ -158,8 +166,56 @@ void viewPurchases()
     CDLinkedList cd = CDLinkedList();
     cd.displayAllTransaction();
 }
-//getters for displayTransaction method in CDLinkedlist
 
+
+// Error Validation Method
+int Transaction::validateInteger(std::string message){
+    bool inputFlag;
+    std::string userInput;
+    int sanitizedInput;
+    while(true){
+        // Display message <- I want to change. IDW USE STD::COUT
+        std::cout << std::string(3, '\n') << message;
+
+        // Get User Input as String
+        std::getline(std::cin, userInput);
+
+        // User entered newLine which is consumed by getLine(). Hence, length = 0
+        if(!(userInput.length() == 0)){
+            // Flag to check if non-digit exists
+            bool isDigit = true;
+
+            for(int i = 0; i < userInput.length(); i++){
+                if( !(isdigit(userInput[i])) ){
+                    isDigit = false;
+                }
+            }
+
+            // True = all char in string is digit.
+            if(isDigit){
+                return std::stoi(userInput);
+            }
+        }
+
+        // Print error message and prompt user to enter any key to continue
+        std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter numbers.\n\t>> Enter a Key to continue:";
+
+        // Wait for user Input and ignore up to 10,00 characters
+        std::cin.ignore( 10000, '\n');
+    }
+}
+
+//getters for displayTransaction method in CDLinkedlist
+std::string Transaction::getDetails()
+{
+    std::string transID = std::to_string(this->transactionID);
+    std::string totalPrice = std::to_string(this->totalPrice);
+    std::string quantity = std::to_string(this->quantity);
+    std::string seats = std::to_string(this->seats);
+
+
+    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
+}
 
 
 //functions to add
