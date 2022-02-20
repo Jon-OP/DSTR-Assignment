@@ -10,8 +10,6 @@
 class Transaction {
     // Transaction Class Variables
     int transactionID;
-
-    int movieID;
     std::string movieName;
     float totalPrice;
     int quantity;
@@ -22,6 +20,7 @@ class Transaction {
     void newTransaction();
     void newPurchaseMenu();
     void viewPurchase();
+    std::string getDetails();
 
 
 public:
@@ -30,6 +29,7 @@ public:
     Transaction();
     Transaction(CDLinkList list); // THIS IS THE ADMIN TRANSACTION
     Transaction(int movieName, float totalPrice);
+
 
     // Functional Methods
     void transactionMenu();

@@ -25,7 +25,7 @@ class Inventory {
     std::string movieDate; // DAY, MONTH, YEAR
 
     // Functional Methods
-
+    void addProduct(std::string name, float price, std::string category, std::string time, std::string date);
 
 
 
