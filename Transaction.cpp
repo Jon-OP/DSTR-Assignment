@@ -42,7 +42,7 @@ Transaction::Transaction(int transID, int movID, std::string movName) {
 
 
 // Transaction menu landing page implementation - Philip
-[[noreturn]] void Transaction::transactionMenu(){
+void Transaction::transactionMenu(){
 
     //stdlib::system ("CLS"); was testing with clearing screen
 
@@ -92,47 +92,37 @@ void viewPurchases()
 
 void Transaction::newPurchaseMenu()
 {
+    std::string newPurchaseMenuMsg = "\tCreating new purchase\n"
+                                     "\t---------------------\n"
+                                     "\t1. View All Product\n"
+                                     "\t2. Search Product by Category\n"
+                                     "\t3. Checkout cart\n"
+                                     "\t4. Return to previous menu\n"
+                                     "\n\t>> Enter your choice:";
 
-    std::cout << "\tCreating new purchase" << std::endl;
-    std::cout << "\t---------------------" << std::endl;
-    std::cout << "\t1. View All Product" << std::endl;
-    std::cout << "\t2. Search Product by Category" << std::endl;
-    std::cout << "\t3. Remove product from cart" << std::endl;
-    std::cout << "\t4. Update cart" << std::endl;
-    std::cout << "\t5. View Cart" << std::endl;
-    std::cout << "\t6. Checkout cart" << std::endl;
-    std::cout << "\t7. Cancel Purchase" << std::endl;
-    std::cout << "\t Enter your choice [Any irrelevant key to return]:   " << std::endl;
-    std::cin >> userChoice;
-    switch (userChoice) {
-        case 1:
-            //placeholder for View All Product
-            break;
-        case 2:
-            // placeholder for Search Product by Category
-            break;
-        case 3:
-            //placeholder for Remove product
-            break;
-        case 4:
-            //placeholder for Update cart
-            break;
-        case 5:
-            //placeholder for view cart
-            break;
-        case 6:
-            //placeholder for checkout cart
-            break;
-        case 7:
-            //placeholder for cancel purchase
-            break;
-        default:
-            // Print error message and prompt user to enter any key to continue
-            std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 7\n\t>> Enter any Key to continue:";
+    int userChoice;
+    while (true){
+        userChoice = validateInteger(newPurchaseMenuMsg);
+        switch (userChoice) {
+            case 1:
+                //placeholder for View All Product
+                break;
+            case 2:
+                // placeholder for Search Product by Category
+                break;
+            case 3:
+                //placeholder for Checkout cart
+                break;
+            case 4:
+                return;
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 7\n\t>> Enter any Key to continue:";
 
-            // Wait for user Input and ignore up to 10,00 characters
-            std::cin.ignore( 10000, '\n');
-            break;
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
     }
 
 }
