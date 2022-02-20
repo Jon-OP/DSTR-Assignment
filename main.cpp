@@ -43,8 +43,10 @@ int validateInteger(std::string message){
 // Main Implementation - Jonathan
 void mainMenu(){
 
+    CDLinkedList list = CDLinkedList();
+
     Inventory adminInventory;
-    Transaction adminTransaction;
+    Transaction adminTransaction = Transaction(list);
 
     std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"
                               "\t--------------------------------\n"
@@ -88,6 +90,8 @@ void mainMenu(){
 
 int main() {
     std::cout << "This is a Test from MAIN!" << std::endl;
+
+    mainMenu();
 
     // Declaration of Inventory Object
     Inventory testInventory;

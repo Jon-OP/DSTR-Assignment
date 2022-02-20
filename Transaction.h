@@ -5,7 +5,7 @@
 #define G8_TP060491_TP061069_TP055727_TRANSACTION_H
 
 #include <string>
-
+#include "CDLinkedList.h"
 
 class Transaction {
     // Transaction Class Variables
@@ -28,6 +28,7 @@ public:
 
     // Constructor Method
     Transaction();
+    Transaction(CDLinkList list); // THIS IS THE ADMIN TRANSACTION
     Transaction(int movieName, float totalPrice);
 
     // Functional Methods
