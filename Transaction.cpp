@@ -6,21 +6,53 @@
 
 int userChoice;
 
-// Constructor Methods
+/* --- Transaction: METHODS ------------------------------------------------------------------------------------------*/
+
+// Methods: CONSTRUCTOR
+    // Default Constructor
 Transaction::Transaction() {};
+
+    // Primary Constructor
 Transaction::Transaction(int ID, int TOTALPRICE) {
-    this->transactionID = ID;
-    this->totalPrice = TOTALPRICE;
+
+};
+
+// Methods: FUNCTIONAL
+    // Print some basic details regarding one Transaction
+void Transaction::printSummaryDetails(int index) {
+    std::cout << index << "\t|  ID:" << transactionID << "\t|  Price:" << totalPrice << std::endl;
+}// PRINT MOVIE NAME ALSO !! @PHILIP
+
+// Methods: GETTERS
+    // Get the Transaction ID
+int Transaction::getTransactionID() {
+    return  this->transactionID;
 }
 
+    // Get the Total Price
+float Transaction::getTransactionTotalPrice() {
+    return this->totalPrice;
+}
+
+/* --- TransactionList: METHODS --------------------------------------------------------------------------------------*/
+
+
+
+
+
+/* --- Linked List Functions ---------------------------------------------------------------------------------------- */
+
+// Methods: CONSTRUCTOR
+    // Default Constructor
 TransactionList::TransactionList() {
     head = NULL;
     tail = NULL;
 };
 
-/* --- Linked List Functions ---------------------------------------------------------------------------------------- */
 
-// Inserting new transaction at the end
+// Methods: LINK LIST MANIPULATION
+
+    // Inserting new transaction at the end
 void TransactionList::insertTransactionToList(Transaction* newTransaction){
     // HEAD Node is EMPTY . . .
     if(head == NULL){
@@ -55,9 +87,9 @@ void TransactionList::insertTransactionToList(Transaction* newTransaction){
     tail = newTransaction;
 }
 
-// When user choose to see the intricate details of a transaction
-// No error validation here as everything is accessed by Index
-// Return a transaction at the selected index
+    // When user choose to see the intricate details of a transaction
+    // No error validation here as everything is accessed by Index
+    // Return a transaction at the selected index
 Transaction* TransactionList::getTransaction(int index) {
     Transaction* current = head;
 
@@ -71,7 +103,7 @@ Transaction* TransactionList::getTransaction(int index) {
     return current;
 }
 
-// Display the high-level details of all transaction
+    // Display the high-level details of all transaction
 void TransactionList::displayAllTransaction() {
     // IF LinkedList is empty
     if(head == NULL){
@@ -97,10 +129,8 @@ void TransactionList::displayAllTransaction() {
     }while(current != head);
 }
 
-
-
-// Sort the List of Transaction[TotalPrice]: MergeSort
-// sortParameter = { "ID", "TOTALPRICE" }
+    // Sort the List of Transaction[TotalPrice]: MergeSort
+    // sortParameter = { "ID", "TOTALPRICE" }
 void TransactionList::sortTransaction(std::string sortParameter) {
     // Convert Circular Doubly Linked List to Doubly Linked List
     head->previousNode = NULL;
@@ -115,48 +145,48 @@ void TransactionList::sortTransaction(std::string sortParameter) {
     tail->nextNode = head;
 }
 
+    // Implementation of Merge Sort
+    Transaction* TransactionList::mergeSort(Transaction *headNode, std::string sortParameter) {
+        // IF headNode == NULL OR headNode->nextNode == NULL, then END the recursion
+        if(!headNode || !headNode->nextNode){
+            return headNode;
+        }
 
-Transaction* TransactionList::mergeSort(Transaction *headNode, std::string sortParameter) {
-    // IF headNode == NULL OR headNode->nextNode == NULL, then END the recursion
-    if(!headNode || !headNode->nextNode){
-        return headNode;
+        // Split the Link List into two halves, and assign the right half to rightCDLL
+        Transaction* rightCDLL = splitList(headNode);
+
+        // Recursion Calling of mergeSort to further split CDLL into smaller list
+        headNode = mergeSort(headNode, sortParameter);
+        rightCDLL = mergeSort(rightCDLL, sortParameter);
+
+        // Return the Linked List sorted using mergeList
+        return mergeList(headNode, rightCDLL, sortParameter);
     }
 
-    // Split the Link List into two halves, and assign the right half to rightCDLL
-    Transaction* rightCDLL = splitList(headNode);
+    // Split the List into Half
+    Transaction* TransactionList::splitList(Transaction *headNode) {
+        // Follow the Fast-Slow Pointer Strategy and find the Midpoint of the List
+        Transaction* slowPointer = headNode;
+        Transaction* fastPointer = headNode;
 
-    // Recursion Calling of mergeSort to further split CDLL into smaller list
-    headNode = mergeSort(headNode, sortParameter);
-    rightCDLL = mergeSort(rightCDLL, sortParameter);
+        while(fastPointer->nextNode && fastPointer->nextNode->nextNode){
+            // slowPointer Traverse 1 Node at a time
+            // fastPointer Traverse 2 Nodes at a time
+            slowPointer = slowPointer->nextNode;
+            fastPointer = fastPointer->nextNode->nextNode;
+        }
 
-    // Return the Linked List sorted using mergeList
-    return mergeList(headNode, rightCDLL, sortParameter);
-}
+        // The Second Linked-List starts after the slowPointer
+        Transaction* rightCDLL = slowPointer->nextNode;
 
-// Split the List into Half
-Transaction* TransactionList::splitList(Transaction *headNode) {
-    // Follow the Fast-Slow Pointer Strategy and find the Midpoint of the List
-    Transaction* slowPointer = headNode;
-    Transaction* fastPointer = headNode;
+        // Disconnect the Second Link List from the head
+        slowPointer->nextNode = NULL;
 
-    while(fastPointer->nextNode && fastPointer->nextNode->nextNode){
-        // slowPointer Traverse 1 Node at a time
-        // fastPointer Traverse 2 Nodes at a time
-        slowPointer = slowPointer->nextNode;
-        fastPointer = fastPointer->nextNode->nextNode;
+        return rightCDLL;
     }
 
-    // The Second Linked-List starts after the slowPointer
-    Transaction* rightCDLL = slowPointer->nextNode;
-
-    // Disconnect the Second Link List from the head
-    slowPointer->nextNode = NULL;
-
-    return rightCDLL;
-}
-
-// Merging two list
-Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *secondList, std::string sortParameter) {
+    // Merging two list
+    Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *secondList, std::string sortParameter) {
     // IF firstList is empty, then return secondList
     if(!firstList){
         return secondList;
@@ -253,22 +283,8 @@ Transaction* TransactionList::mergeList(Transaction *firstList, Transaction *sec
     }
 }
 
+// METHODS: FUNCTIONAL
 
-// FUNCTIONAL METHODS .... ----
-void Transaction::printSummaryDetails(int index) {
-    std::cout << index << "\t|  ID:" << transactionID << "\t|  Price:" << totalPrice << std::endl;
-}// PRINT MOVIE NAME ALSO !! @PHILIP
-
-
-// GETTERS AND SETTERS HYBRID
-
-float Transaction::getTransactionTotalPrice() {
-    return this->totalPrice;
-}
-
-int Transaction::getTransactionID() {
-    return  this->transactionID;
-}
 
 /*
 // Transaction menu landing page implementation - Philip

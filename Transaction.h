@@ -39,25 +39,24 @@ class TransactionList {
 
 /* --- Private Linked List Implementation Methods ------------------------------------------------------------------- */
 
-    // Link List Manipulation
-        // Inserting new transaction at the end
+    // Inserting new transaction at the end
     //void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
-        // Return a transaction at the selected index
+    // Return a transaction at the selected index
     Transaction* getTransaction(int index);
 
-        // Display the high-level details of all transaction
+    // Display the high-level details of all transaction
     //void displayAllTransaction();
 
-        // Sort the List of Transaction[TotalPrice]: MergeSort
+    // Sort the List of Transaction[TotalPrice]: MergeSort
     //void sortTransaction(std::string sortParameter); // COMPLETED !!!
 
         Transaction* mergeSort(Transaction* headNode, std::string sortParameter);
 
-            // Split the List into Half
+        // Split the List into Half
         Transaction* splitList(Transaction* headNode);
 
-            // Merging two list
+        // Merging two list
         Transaction* mergeList(Transaction* firstList, Transaction* secondList, std::string sortParameter);
 
 /* --- Transaction Functions ---------------------------------------------------------------------------------------- */
