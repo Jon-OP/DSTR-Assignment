@@ -4,11 +4,13 @@
 #ifndef G8_TP060491_TP061069_TP055727_TRANSACTION_H
 #define G8_TP060491_TP061069_TP055727_TRANSACTION_H
 
+#include <iostream>
 #include <string>
 #include "CDLinkedList.h"
 
 class Transaction {
     // Transaction Class Variables
+
     int transactionID;
     std::string movieName;
     float totalPrice;
@@ -26,30 +28,34 @@ class Transaction {
 
 public:
 
-    // Constructor Method
+
+/* ------------------------------------------------------ CONSTRUCTOR METHODS ------------------------------------------------------ */
+    // Default Constructor
     Transaction();
-    Transaction(CDLinkList list); // THIS IS THE ADMIN TRANSACTION
-    Transaction(int movieName, float totalPrice);
+
+    // Constructor to add new Transaction
+    //Transaction(int movieName, float totalPrice);
+
+    // Constructor for Admin
+    //Transaction(CDLinkedList cx);
+
+/* -------------------------------------------------------------- END -------------------------------------------------------------- */
+
+/* ------------------------------------------------------- FUNCTIONAL METHODS ------------------------------------------------------ */
+
+    // Display Transaction Menu
+    void transactionMenu();
+
+    // Printing High-Level details of the selected transaction
+    void printBasicTransactionDetails(int index);
 
 
-    // Functional Methods
-    [[noreturn]] void transactionMenu();
 
+    int getTotalPrice();
+    int getTransactionID();
 
+/* -------------------------------------------------------------- END -------------------------------------------------------------- */
 
-//    // Getters and Setters (Possibly obsolete)
-//        // movieID
-//    int getMovieID();
-//    void setMovieID();
-//        // movieName
-//    std::string getMovieName();
-//    void setMovieName(std::string movieName);
-//        // transactionID
-//    int getTransactionID();
-//    void setTransactionID(int ID);
-//        //totalPrice
-//    float getTotalPrice();
-//    void setTotalPrice(float totalPrice);
 };
 
 

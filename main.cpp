@@ -45,8 +45,8 @@ void mainMenu(){
 
     CDLinkedList list = CDLinkedList();
 
-    Inventory adminInventory;
-    Transaction adminTransaction = Transaction(list);
+    Movie adminInventory;
+    Transaction adminTransaction;
 
     std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"
                               "\t--------------------------------\n"
@@ -89,20 +89,8 @@ void mainMenu(){
 
 
 int main() {
-    std::cout << "This is a Test from MAIN!" << std::endl;
 
-    mainMenu();
-
-    // Declaration of Inventory Object
-    Inventory testInventory;
-    testInventory.greetings();
-
-    // Declaration of Transaction Object
-    //Transaction testTransaction;
-   // testTransaction.transactionMenu();
-
-    mainMenu();
-
+    /*
     //TEST SITE BELOW ONWARDS
     CDLinkedList cd = CDLinkedList();
     Transaction testTransaction1 = Transaction(2,12.5);
@@ -120,7 +108,7 @@ int main() {
     cd.insertTransaction(testTransaction4);
     cd.insertTransaction(testTransaction5);
     cd.insertTransaction(testTransaction6);
-    cd.insertTransaction(testTransaction7);
+    cd.insertTransaction(testTransaction7);*/
 
     return 0;
 }

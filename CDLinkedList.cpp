@@ -2,9 +2,7 @@
 // To enter the implementation, remember to add "CDLinkedList::<methodName>"
 
 #include <iostream>
-
 #include "CDLinkedList.h"
-#include "Transaction.h"
 
 // Class Instantiation
 CDLinkedList::CDLinkedList() {
@@ -82,6 +80,7 @@ Transaction CDLinkedList::searchTransaction(int index) {
 // System displays high-level details of each transaction which is indexed according
 //  to the arrangement in the LinkedList
 void CDLinkedList::displayAllTransaction() {
+    /*
     // IF LinkedList is empty
     if(head == NULL){
         std::cout << "List is empty" << std::endl;
@@ -89,19 +88,24 @@ void CDLinkedList::displayAllTransaction() {
     }
 
     if(tail == NULL){
-        std::cout << head->data.getTransactionID() << std::endl;
+        //std::cout << head->data.getTransactionID() << std::endl;
+        head->data.printBasicTransactionDetails(1);
         return;
     }
 
     TransactionNode* current = head;
+    int nodeIndex = 1;
     do{
         /*JONATHAN OWEN: WE CAN IMPLEMENT THE FORMATTED PRINTING FOR EACH
          * TRANSACTION DETAILS OVER HERE. MAKE SURE THE LAST LINE OF THIS BLOCK
-         * IS CURRENT = CURRENT -> NEXT NODE;. THAT WILL BE ALL */
-        std::cout << current->data.getTotalPrice() << " -> "; //REPLACEABLE STRING
+         * IS CURRENT = CURRENT -> NEXT NODE;. THAT WILL BE ALL //*
+        //std::cout << current->data.getTotalPrice() << " -> "; //REPLACEABLE STRING
+        current->data.printBasicTransactionDetails(nodeIndex);
 
+        // nodeIndex is used to print indices. Example: 1. Movie, 2. Movie
+        nodeIndex++;
         current = current->nextNode;
-    }while(current != head);
+    }while(current != head);*/
 }
 
 // User wants to sort according to Total Price OR by ID

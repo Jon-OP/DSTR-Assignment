@@ -2,47 +2,33 @@
 // To enter the implementation, remember to add "Transaction::<methodName>"
 
 #include "Transaction.h"
-#include <iostream>
-#include "CDLinkedList.h"
 
 int userChoice;
 
-// Constructor Methods
+/* ------------------------------------------------------ CONSTRUCTOR METHODS ------------------------------------------------------ */
+// Default Constructor
 Transaction::Transaction() {};
 
+// Constructor to add new Transaction
+/*
 Transaction::Transaction(int movieName, float x) {
     this->transactionID = movieName;
     this->totalPrice = x;
     //this -> seats = y;
-}
+}*/
 
-Transaction::Transaction(int transID, int movID, std::string movName) {
-    this->transactionID = transID;
-    this->movieName = movName;
-    this->totalPrice = x;
-    //this -> seats = y;
-}
+// Constructor for Admin
+//Transaction::Transaction(CDLinkedList list) {
+//    this->transactionList = list;
+//}
+/* -------------------------------------------------------------- END -------------------------------------------------------------- */
 
 
-// Getter and Setter Methods (most likely obsolete)
-//std::string Transaction::getMovieName(){
-//    return movieName;
-//}
-//
-//int Transaction::getTransactionID() {
-//    return transactionID;
-//}
-//
-//float Transaction::getTotalPrice(){
-//    return totalPrice;
-//}
-//void Transaction::setTotalPrice(float totalPrice){
-//    this->totalPrice = totalPrice;
-//};
+
 
 
 // Transaction menu landing page implementation - Philip
-[[noreturn]] void Transaction::transactionMenu(){
+void Transaction::transactionMenu(){
 
     //stdlib::system ("CLS"); was testing with clearing screen
 
@@ -84,10 +70,8 @@ Transaction::Transaction(int transID, int movID, std::string movName) {
     }
 }
 
-void viewPurchases()
-{
-    CDLinkedList cd = CDLinkedList();
-    cd.displayAllTransaction();
+void Transaction::printBasicTransactionDetails(int index){
+    std::cout << index << "\t|\t"<< transactionID << "\t|\t" << movieName << "\t|\tRM" << totalPrice << "\t|\t" << quantity;
 }
 
 void Transaction::newPurchaseMenu()
@@ -136,12 +120,19 @@ void Transaction::newPurchaseMenu()
     }
 
 }
-void newTransaction()
-{
-    CDLinkedList cd = CDLinkedList();
-    Transaction userTransaction = Transaction(); //include user input details on purchase as parameters
-    cd.insertTransaction(userTransaction);
+
+
+// Get Transaction ID
+int Transaction::getTransactionID() {
+    return this->totalPrice;
 }
+
+// Get Total Price
+int Transaction::getTotalPrice() {
+    return this->totalPrice;
+}
+
+
 
 
 
@@ -181,26 +172,3 @@ int Transaction::validateInteger(std::string message){
         std::cin.ignore( 10000, '\n');
     }
 }
-
-
-
-//getter to display all transactions
-std::string Transaction::getDetails()
-{
-    std::string transID = std::to_string(this->transactionID);
-    std::string totalPrice = std::to_string(this->totalPrice);
-    std::string quantity = std::to_string(this->quantity);
-    std::string seats = std::to_string(this->seats);
-
-    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
-}
-
-
-//functions to add
-    //function to check last transaction ID -> so we can add it into the userTransaction object
-    //
-
-
-
-
-
