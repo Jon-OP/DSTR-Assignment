@@ -301,13 +301,14 @@ void TransactionList::transactionMenu(){
     //stdlib::system ("CLS"); was testing with clearing screen
 
 //Code section with reused input validation component
-    std::string transactionMenuMsg = "\tTransaction Management Menu\n"
-                                     "\t---------------------------\n"
-                                     "\t1. Place a new purchase\n"
-                                     "\t2. View All Purchases\n"
-                                     "\t3. Sort Purchases\n"
-                                     "\t4. View Purchase Details\n" // remove
-                                     "\t5. Return to Main Menu\n"
+    std::string transactionMenuMsg = "\t---------------------------------------------------------\n"
+                                     "\t                Transaction Management Menu              \n"
+                                     "\t-*--------------------------*----------------------------\n"
+                                     "\t-|1. Place a new purchase   |----------------------------\n"
+                                     "\t-|2. View All Purchases     |----------------------------\n"
+                                     "\t-|3. Sort Purchases         |----------------------------\n"
+                                     "\t-|4. Return to Main Menu    |----------------------------\n"
+                                     "\t-*--------------------------*----------------------------\n"
                                      "\n\t>> Enter your choice:";
     int userChoice;
     while (true){
@@ -333,10 +334,6 @@ void TransactionList::transactionMenu(){
                 sortTransaction_prompt();
                 break;
             case 4:
-                //placeholder for view purchase details
-
-                break;
-            case 5:
                 return;
             default:
                 // Print error message and prompt user to enter any key to continue
@@ -351,12 +348,14 @@ void TransactionList::transactionMenu(){
 
 void TransactionList::newPurchaseMenu()
 {
-    std::string newPurchaseMenuMsg = "\tCreating new purchase\n"
-                                     "\t---------------------\n"
-                                     "\t1. View All Product\n"
-                                     "\t2. Search Product by Category\n"
-                                     "\t3. Checkout cart\n"
-                                     "\t4. Return to previous menu\n"
+    std::string newPurchaseMenuMsg = "\t---------------------------------------------------------\n"
+                                     "\t                   Creating new purchase                 \n"
+                                     "\t-*-------------------------------*-----------------------\n"
+                                     "\t-|1. View All Product            |-----------------------\n"
+                                     "\t-|2. Search Product by Category  |-----------------------\n"
+                                     "\t-|3. Checkout cart               |-----------------------\n"
+                                     "\t-|4. Return to previous menu     |-----------------------\n"
+                                     "\t-*-------------------------------*-----------------------\n"
                                      "\n\t>> Enter your choice:";
 
     int userChoice;
