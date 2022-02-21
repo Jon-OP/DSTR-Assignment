@@ -31,7 +31,7 @@ class Movie {
     Movie* deleteMovie(Movie *movieList, Movie movieToDelete);
     Movie* sortMovie(Movie *movieList);
     void updateMovie(Movie toUpdate);
-    void viewMovie(Movie selectedMovie);
+    //void viewMovie(Movie selectedMovie);
 
 
 
@@ -50,6 +50,7 @@ public:
 
     //test method - PHILIP
     void inventoryShowDetails();
+    void viewMovie(Movie selectedMovie);
 
 
 };

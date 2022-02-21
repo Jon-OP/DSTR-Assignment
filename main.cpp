@@ -92,13 +92,6 @@ int main() {
 
 
 
-
-
-
-
-
-
-
     //TEST SITE BELOW ONWARDS
     Transaction testTransaction1 = Transaction(1,12.5);
     Transaction testTransaction2 = Transaction(2, 13.2);
@@ -118,7 +111,7 @@ int main() {
     adminTransaction.insertTransactionToList(&testTransaction7);
     adminTransaction.insertTransactionToList(&testTransaction8);
 
-    //mainMenu();
+    adminTransaction.transactionMenu();
 
     return 0;
 }

@@ -266,7 +266,10 @@ void Movie::inventoryConsoleMenu() {
 };
 
 //Philip testting, paiseh
-void Movie::inventoryShowDetails(){}
+void Movie::inventoryShowDetails()
+{
+    std::cout<< movieName + std::to_string(moviePrice) +movieCategory;
+}
 
 
 // Error Validation Method

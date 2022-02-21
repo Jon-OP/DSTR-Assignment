@@ -442,13 +442,15 @@ void TransactionList::newTransaction()
     for (int i=0;i< sizeof(movieArray)/sizeof(movieArray[0]);i++)
     {
         //was trying to replicate the array and print the array
-        //cout << movieArray[i]->
+        movieArray[i].inventoryShowDetails();
     }
 
     std::cin >> inputMovieName;
     std::cout << "\n\twhat seats you want boii:";
     //might need to print the seats that area available
     std::cin >> inputSeats;
+
+    //can even consider accepting movie as a parameter couz might as well
     Transaction newTrans = Transaction ();
 
 }
@@ -572,8 +574,6 @@ void TransactionList::deleteTransaction_prompt(){
                 }
             }
         }
-
-
     }
 }
 
