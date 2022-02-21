@@ -67,7 +67,7 @@ class TransactionList {
     void newPurchaseMenu(); // Prompt user to choose movie, ETC
 
         // Multiple Sub functions pertaining to newPurchase
-        void newPurchase();
+        void newTransaction();
 
     // Display high-level details of each transaction
     void listAllTransaction();

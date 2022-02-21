@@ -412,7 +412,7 @@ void TransactionList::newPurchaseMenu()
 //----------------------------------------// Helper function starts here //--------------------------------------//
 
 
-void newTransaction()
+void TransactionList::newTransaction()
 {
     std::string inputMovieName;
     std::string inputSeats;
