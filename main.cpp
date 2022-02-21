@@ -29,11 +29,50 @@ int validateInt() {
 // Main Implementation - Jonathan
 void mainMenu(){
 
-    Movie adminInventory;
-    TransactionList adminTransaction = TransactionList();
 
-    int userChoice;
-    while (true){
+}
+
+int main() {
+    // Initialize Movie Array
+    Movie* adminMovie = new Movie[0];
+
+    // Declaration of Transaction Object
+    TransactionList adminTransaction;
+
+    // TEST SITE FOR MOVIE
+
+    Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
+
+    //adminMovie->addMovie(adminMovie, newMovie);
+
+//place holder code to test update and viewmovie
+    //newMovie.updateMovie(&newMovie);
+   // newMovie.viewMovie(newMovie);
+
+
+    //TEST SITE BELOW ONWARDS
+    Transaction testTransaction1 = Transaction(1,12.5);
+    Transaction testTransaction2 = Transaction(2, 13.2);
+    Transaction testTransaction3 = Transaction(3, 10.0);
+    Transaction testTransaction4 = Transaction(4, 11);
+    Transaction testTransaction5 = Transaction(8, 17);
+    Transaction testTransaction6 = Transaction(7, 21.2);
+    Transaction testTransaction7 = Transaction(6, 82.1);
+    Transaction testTransaction8 = Transaction(5, 9.2);
+
+    adminTransaction.insertTransactionToList(&testTransaction1);
+    adminTransaction.insertTransactionToList(&testTransaction2);
+    adminTransaction.insertTransactionToList(&testTransaction3);
+    adminTransaction.insertTransactionToList(&testTransaction4);
+    adminTransaction.insertTransactionToList(&testTransaction5);
+    adminTransaction.insertTransactionToList(&testTransaction6);
+    adminTransaction.insertTransactionToList(&testTransaction7);
+    adminTransaction.insertTransactionToList(&testTransaction8);
+
+    Movie adminInventory;
+
+    bool flag = true;
+    while (flag == true){
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t              Grandplex Movie Ticketing System           \n"
                      "\t-*-------------------------------------*-----------------\n"
@@ -58,8 +97,8 @@ void mainMenu(){
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
-
-                return;
+                flag = false;
+                break;
             case -999:
                 std::cout << "\n\t>> ERROR: Please enter an index."
                              "\n\t>> Enter any key to continue:";
@@ -77,45 +116,4 @@ void mainMenu(){
                 break;
         }
     }
-}
-
-int main() {
-    // Initialize Movie Array
-    Movie* adminMovie = new Movie[0];
-
-    // Declaration of Transaction Object
-    TransactionList adminTransaction;
-
-    // TEST SITE FOR MOVIE
-
-    Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
-
-    //adminMovie->addMovie(adminMovie, newMovie);
-    newMovie.updateMovie(&newMovie);
-    newMovie.viewMovie(newMovie);
-
-
-
-    //TEST SITE BELOW ONWARDS
-    Transaction testTransaction1 = Transaction(1,12.5);
-    Transaction testTransaction2 = Transaction(2, 13.2);
-    Transaction testTransaction3 = Transaction(3, 10.0);
-    Transaction testTransaction4 = Transaction(4, 11);
-    Transaction testTransaction5 = Transaction(8, 17);
-    Transaction testTransaction6 = Transaction(7, 21.2);
-    Transaction testTransaction7 = Transaction(6, 82.1);
-    Transaction testTransaction8 = Transaction(5, 9.2);
-
-    adminTransaction.insertTransactionToList(&testTransaction1);
-    adminTransaction.insertTransactionToList(&testTransaction2);
-    adminTransaction.insertTransactionToList(&testTransaction3);
-    adminTransaction.insertTransactionToList(&testTransaction4);
-    adminTransaction.insertTransactionToList(&testTransaction5);
-    adminTransaction.insertTransactionToList(&testTransaction6);
-    adminTransaction.insertTransactionToList(&testTransaction7);
-    adminTransaction.insertTransactionToList(&testTransaction8);
-
-    adminTransaction.transactionMenu();
-
-    return 0;
 }
