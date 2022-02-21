@@ -27,7 +27,7 @@ Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
 
 }
 
-//----------------------------------{ Input Validation }--------------------------------------//
+//----------------------------------{ Support Methods }--------------------------------------//
 
 // Checks if string is float
 bool isFloat(std::string str) {
@@ -49,6 +49,13 @@ bool isInt(std::string str) {
     catch (...) {
         return false;
     }
+}
+
+// Swaps two movie elements in an array
+void swap(Movie* elem1, Movie* elem2 ){
+    Movie temp = *elem1;
+    *elem1 = *elem2;
+    *elem2 = temp;
 }
 
 //----------------------------------{ Functional Methods }--------------------------------------//
