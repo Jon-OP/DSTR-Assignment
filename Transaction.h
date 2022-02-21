@@ -44,6 +44,9 @@ class TransactionList {
     // Return a transaction at the selected index
     Transaction* getTransaction(int index);
 
+    // Delete a Transaction Detail
+    Transaction* deleteTransaction();
+
     // Display the high-level details of all transaction
     void displayAllTransaction();
 
@@ -78,6 +81,9 @@ class TransactionList {
 
     // Error validation
     int validateInteger(std::string msg);
+
+    // TEST FUNCTION JONATHAN
+    int validateInt();
 
 public:
     // Constructor

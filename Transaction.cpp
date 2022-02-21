@@ -444,7 +444,15 @@ void TransactionList::sortTransaction_prompt() {
                             "\t3. Cancel Sort\n\n"
                             "\t>> Enter your choice:";
     while(true){
-        int userChoice = validateInteger(promptMsg);
+        std::cout << "\n\tSort By:\n"
+                     "\t--------------\n"
+                     "\t1. ID\n"
+                     "\t2. Total Price\n"
+                     "\t3. Cancel Sort\n\n"
+                     "\t>> Enter your choice:";
+        int userChoice = validateInt();
+
+        //int userChoice = validateInteger(promptMsg);
         switch(userChoice){
             case 1:
                 sortTransaction("ID");
@@ -454,9 +462,17 @@ void TransactionList::sortTransaction_prompt() {
                 return;
             case 3:
                 return;
+            case -999:
+                std::cout << "\n\tERROR: Please enter an Index to continue.\n"
+                             "\tPress any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+
             default:
                 // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 3\n\t>> Enter any Key to continue:";
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter index from 1 to 3\n\t>> Enter any Key to continue:";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
@@ -464,6 +480,37 @@ void TransactionList::sortTransaction_prompt() {
         }
     }
 }
+
+
+// TEST
+int TransactionList::validateInt() {
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
+
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stoi(userInput);
+        }
+    }else{
+        return -999;
+    }
+
+}
+
+
+
 
 
 //getter to display all transactions
