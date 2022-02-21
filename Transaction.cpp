@@ -128,7 +128,8 @@ void TransactionList::displayAllTransaction() {
     }
 
     // Print Banner
-    std::cout << "\n\t\t\t\tList of Transactions\n"
+    std::cout << "\n\t---------------------------------------------------------------------------------\n"
+                 "\t\t\t\t\tList of Transactions\n"
                  "\t---------------------------------------------------------------------------------\n"
                  "\tIndex\tID\tMovie Name\tTotal Price\tSeat Count\tTime\tDate\n";
 
@@ -141,6 +142,7 @@ void TransactionList::displayAllTransaction() {
         current = current->nextNode;
         index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
+    std::cout << "\t---------------------------------------------------------------------------------\n";
     return;
 }
 
@@ -338,7 +340,7 @@ void TransactionList::transactionMenu(){
                 break;
             case 4:
                 // Display all transaction. Prompt user which to delete. Call delete function
-                deleteTransaction()
+                //deleteTransaction();
             case 5:
                 return;
             case -999:
@@ -376,6 +378,7 @@ void TransactionList::newPurchaseMenu()
         switch (userChoice) {
             case 1:
                 //placeholder for View All Product(CALL FROM - I) > WHICH MOVIE DO YOU WANT() > WHICH SEAT YOU WANT > CONFIRM > CREATE PURCHASE(TRANS OBJ) > ADD TO LINKED LIST
+                newTransaction();
                 break;
             case 2:
                 // placeholder for Search Product by Category
@@ -409,12 +412,17 @@ void TransactionList::newPurchaseMenu()
 //----------------------------------------// Helper function starts here //--------------------------------------//
 
 
-//void newTransaction()
-//{
-//    CDLinkedList cd = CDLinkedList();
-//    Transaction userTransaction = Transaction(); //include user input details on purchase as parameters
-//    cd.insertTransaction(userTransaction);
-//}
+void newTransaction()
+{
+    std::string inputMovieName;
+    std::string inputSeats;
+    //std::string movie1[] ={"1","Spider","50","bop"} ;
+    std::cout << "\n\tWhat movie name you want boii:";
+    std::cin >> inputMovieName;
+    std::cout << "\n\twhat seats you want boii:";
+    //might need to print the seats that area available
+    std::cin >> inputSeats;
+}
 
 
 
