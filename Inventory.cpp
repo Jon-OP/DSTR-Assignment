@@ -287,6 +287,10 @@ void Movie::inventoryConsoleMenu() {
 
             case 2:
                 std::cout << "\n>> We should call listMovieDetails Method\n";
+                std::cout << "\n\t---------------------------------------------------------\n"
+                             "\t                 Select a movie to be updated             \n"
+                             "\t----------------------------------------------------------\n";
+
                 break;
 
             case 3:
