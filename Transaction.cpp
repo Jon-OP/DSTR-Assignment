@@ -88,10 +88,10 @@ void TransactionList::insertTransactionToList(Transaction* newTransaction){
     tail = newTransaction;
 }
 
-    // When user choose to see the intricate details of a transaction
+    // When user choose to delete a transaction **IMPRACTICAL but still**
     // No error validation here as everything is accessed by Index
     // Return a transaction at the selected index
-Transaction* TransactionList::getTransaction(int index) {
+void TransactionList::deleteTransaction(int index) {
     Transaction* current = head;
 
     // Iterate through the Link List until the desired Index is obtained
@@ -100,8 +100,15 @@ Transaction* TransactionList::getTransaction(int index) {
         index--;
     }
 
-    // Return the Transaction
-    return current;
+    // Deletion
+        // EX: A <--> Current <--> B
+        // A -> B: Set [nextNode]A to point at B
+    current->previousNode->nextNode = current->nextNode;
+        // A <- B: Set [previousNode]B to point at A
+    current->nextNode->previousNode = current->previousNode;
+
+        // Deallocate the current from memory
+    delete current;
 }
 
     // Display the high-level details of all transaction
@@ -297,22 +304,18 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 
 // Transaction menu landing page implementation - Philip
 void TransactionList::transactionMenu(){
-
-    //stdlib::system ("CLS"); was testing with clearing screen
-
-//Code section with reused input validation component
-    std::string transactionMenuMsg = "\t---------------------------------------------------------\n"
-                                     "\t                Transaction Management Menu              \n"
-                                     "\t-*--------------------------*----------------------------\n"
-                                     "\t-|1. Place a new purchase   |----------------------------\n"
-                                     "\t-|2. View All Purchases     |----------------------------\n"
-                                     "\t-|3. Sort Purchases         |----------------------------\n"
-                                     "\t-|4. Return to Main Menu    |----------------------------\n"
-                                     "\t-*--------------------------*----------------------------\n"
-                                     "\n\t>> Enter your choice:";
-    int userChoice;
     while (true){
-        userChoice = validateInteger(transactionMenuMsg);
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                Transaction Management Menu              \n"
+                     "\t-*---------------------------*---------------------------\n"
+                     "\t-|1. Place a new purchase    |---------------------------\n"
+                     "\t-|2. View All Purchases      |---------------------------\n"
+                     "\t-|3. Sort Purchases          |---------------------------\n"
+                     "\t-|4. Delete Purchase Record* |---------------------------\n"
+                     "\t-|5. Return to Main Menu     |---------------------------\n"
+                     "\t-*--------------------------*----------------------------\n"
+                     "\n\t>> Enter your choice:";
+        int userChoice = validateInt();
         switch (userChoice) {
             case 1:
                 newPurchaseMenu(); //call function for creation of new purchase
@@ -334,10 +337,20 @@ void TransactionList::transactionMenu(){
                 sortTransaction_prompt();
                 break;
             case 4:
+                // Display all transaction. Prompt user which to delete. Call delete function
+                deleteTransaction()
+            case 5:
                 return;
+            case -999:
+                std::cout << "\n\tERROR: Please enter an Index.\n"
+                             "\tPress any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
             default:
                 // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 5\n\t>> Enter any Key to continue:";
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 4\n\t>> Enter any Key to continue:";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore(10000, '\n');
@@ -348,19 +361,18 @@ void TransactionList::transactionMenu(){
 
 void TransactionList::newPurchaseMenu()
 {
-    std::string newPurchaseMenuMsg = "\t---------------------------------------------------------\n"
-                                     "\t                   Creating new purchase                 \n"
-                                     "\t-*-------------------------------*-----------------------\n"
-                                     "\t-|1. View All Product            |-----------------------\n"
-                                     "\t-|2. Search Product by Category  |-----------------------\n"
-                                     "\t-|3. Checkout cart               |-----------------------\n"
-                                     "\t-|4. Return to previous menu     |-----------------------\n"
-                                     "\t-*-------------------------------*-----------------------\n"
-                                     "\n\t>> Enter your choice:";
-
-    int userChoice;
     while (true){
-        userChoice = validateInteger(newPurchaseMenuMsg);
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                   Creating new purchase                 \n"
+                     "\t-*-------------------------------*-----------------------\n"
+                     "\t-|1. View All Product            |-----------------------\n"
+                     "\t-|2. Search Product by Category  |-----------------------\n"
+                     "\t-|3. Checkout cart               |-----------------------\n"
+                     "\t-|4. Return to previous menu     |-----------------------\n"
+                     "\t-*-------------------------------*-----------------------\n"
+                     "\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
         switch (userChoice) {
             case 1:
                 //placeholder for View All Product(CALL FROM - I) > WHICH MOVIE DO YOU WANT() > WHICH SEAT YOU WANT > CONFIRM > CREATE PURCHASE(TRANS OBJ) > ADD TO LINKED LIST
@@ -373,6 +385,13 @@ void TransactionList::newPurchaseMenu()
                 break;
             case 4:
                 return;
+            case -999:
+                std::cout << "\n\tERROR: Please enter an Index.\n"
+                             "\tPress any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
             default:
                 // Print error message and prompt user to enter any key to continue
                 std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 7\n\t>> Enter any Key to continue:";
@@ -399,90 +418,7 @@ void TransactionList::newPurchaseMenu()
 
 
 
-// Error Validation Method
-int TransactionList::validateInteger(std::string message){
-    bool inputFlag;
-    std::string userInput;
-    int sanitizedInput;
-    while(true){
-        // Display message <- I want to change. IDW USE STD::COUT
-        std::cout << std::string(3, '\n') << message;
-
-        // Get User Input as String
-        std::getline(std::cin, userInput);
-
-        // User entered newLine which is consumed by getLine(). Hence, length = 0
-        if(!(userInput.length() == 0)){
-            // Flag to check if non-digit exists
-            bool isDigit = true;
-
-            for(int i = 0; i < userInput.length(); i++){
-                if( !(isdigit(userInput[i])) ){
-                    isDigit = false;
-                }
-            }
-
-            // True = all char in string is digit.
-            if(isDigit){
-                return std::stoi(userInput);
-            }
-        }
-
-        // Print error message and prompt user to enter any key to continue
-        std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter numbers.\n\t>> Enter a Key to continue:";
-
-        // Wait for user Input and ignore up to 10,00 characters
-        std::cin.ignore( 10000, '\n');
-    }
-}
-
-void TransactionList::sortTransaction_prompt() {
-    std::string promptMsg = "\tSort By:\n"
-                            "\t--------------\n"
-                            "\t1. ID\n"
-                            "\t2. Total Price\n"
-                            "\t3. Cancel Sort\n\n"
-                            "\t>> Enter your choice:";
-    while(true){
-        std::cout << "\n\tSort By:\n"
-                     "\t--------------\n"
-                     "\t1. ID\n"
-                     "\t2. Total Price\n"
-                     "\t3. Cancel Sort\n\n"
-                     "\t>> Enter your choice:";
-        int userChoice = validateInt();
-
-        //int userChoice = validateInteger(promptMsg);
-        switch(userChoice){
-            case 1:
-                sortTransaction("ID");
-                return;
-            case 2:
-                sortTransaction("TOTALPRICE");
-                return;
-            case 3:
-                return;
-            case -999:
-                std::cout << "\n\tERROR: Please enter an Index to continue.\n"
-                             "\tPress any key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-
-            default:
-                // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Invalid Input\n\t>> Please enter index from 1 to 3\n\t>> Enter any Key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-        }
-    }
-}
-
-
-// TEST
+// Error Validation to ensure user accept Int
 int TransactionList::validateInt() {
     // Read userInput
     std::string userInput;
@@ -506,8 +442,49 @@ int TransactionList::validateInt() {
     }else{
         return -999;
     }
-
 }
+
+// Sort Transaction caller
+void TransactionList::sortTransaction_prompt() {
+    while(true){
+        std::cout << "\n\tSort By:\n"
+                     "\t--------------\n"
+                     "\t1. ID\n"
+                     "\t2. Total Price\n"
+                     "\t3. Cancel Sort\n\n"
+                     "\t>> Enter your choice:";
+        int userChoice = validateInt();
+
+        switch(userChoice){
+            case 1:
+                sortTransaction("ID");
+                return;
+            case 2:
+                sortTransaction("TOTALPRICE");
+                return;
+            case 3:
+                return;
+            case -999:
+                std::cout << "\n\tERROR: Please enter an Index.\n"
+                             "\tPress any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter index from 1 to 3\n\t>> Enter any Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }
+}
+
+
+
 
 
 

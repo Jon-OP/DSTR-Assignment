@@ -42,7 +42,7 @@ class TransactionList {
     //void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
     // Return a transaction at the selected index
-    Transaction* getTransaction(int index);
+    void deleteTransaction(int index);
 
     // Delete a Transaction Detail
     Transaction* deleteTransaction();
