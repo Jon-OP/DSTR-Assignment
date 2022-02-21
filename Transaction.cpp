@@ -96,9 +96,10 @@ void TransactionList::deleteTransaction(int index) {
     Transaction* current = head;
 
     // Iterate through the Link List until the desired Index is obtained
-    while(index - 1 < 0){
+    while(index - 1 > 0){
         current = current->nextNode;
         index--;
+        std::cout << "A";
     }
 
     // Deletion
@@ -108,24 +109,34 @@ void TransactionList::deleteTransaction(int index) {
         // A <- B: Set [previousNode]B to point at A
     current->nextNode->previousNode = current->previousNode;
 
+    // Check if HEAD or TAIL is deleted.
+    if(current == head){
+        head = current->nextNode;
+    }else{
+        if(current == tail){
+            tail = current->previousNode;
+        }
+    }
+
         // Deallocate the current from memory
     delete current;
+    return;
 }
 
     // Display the high-level details of all transaction
-void TransactionList::displayAllTransaction() {
+int TransactionList::displayAllTransaction() {
     // IF LinkedList is empty
     int index = 1;
     if(head == NULL){
         std::cout << "List is empty" << std::endl;
-        return;
+        return index;
     }
 
     // There is only one Item in LinkedList
     if(tail == NULL){
         head->printAllDetails(1);
         index++;
-        return;
+        return index;
     }
 
     // Print Banner
@@ -144,7 +155,7 @@ void TransactionList::displayAllTransaction() {
         index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
     std::cout << "\t---------------------------------------------------------------------------------\n";
-    return;
+    return index;
 }
 
     // Sort the List of Transaction[TotalPrice]: MergeSort
@@ -341,7 +352,8 @@ void TransactionList::transactionMenu(){
                 break;
             case 4:
                 // Display all transaction. Prompt user which to delete. Call delete function
-                //deleteTransaction();
+                deleteTransaction_prompt();
+                break;
             case 5:
                 return;
             case -999:
@@ -431,7 +443,7 @@ void TransactionList::newTransaction()
     std::cout << "\n\twhat seats you want boii:";
     //might need to print the seats that area available
     std::cin >> inputSeats;
-    Transaction newTrans = Transaction (1, "spider",10.0,);
+    //Transaction newTrans = Transaction (1, "spider",10.0,);
     //insertTransactionToList( newTrans);
 }
 
@@ -502,7 +514,62 @@ void TransactionList::sortTransaction_prompt() {
     }
 }
 
+// Delete Transaction caller
+void TransactionList::deleteTransaction_prompt(){
+    while(true){
+        int lastIndex = displayAllTransaction();
 
+        std::cout << "\t" << lastIndex << ". Return to Transaction Menu\n\n"
+                                          "\t>> Enter the index of transaction to delete.\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
+
+        // 1. Error validation where userChoice == -999
+        if(userChoice == -999){
+            std::cout << "\n\tERROR: Please enter an Index.\n"
+                         "\tPress any key to continue:";
+
+            // Wait for user Input and ignore up to 10,00 characters
+            std::cin.ignore( 10000, '\n');
+        }else{
+            // 2. User enters the exit index which is lastIndex
+            if(userChoice == lastIndex){
+                break;
+            }
+            else{
+                // User chose a transaction to delete
+                if(userChoice > 0 && userChoice < lastIndex){
+                    std::cout << "\n\t>> DISCLAIMER: Transaction Data and ID is irrecoverable once deleted.\n"
+                                 "\t>> Confirm your deletion by entering \"DELETE\"."
+                                 "\t>> Entering other value returns you to Transaction Menu\n"
+                                 "\t>> Enter your choice:";
+
+                    std::string userConfirmation;
+                    std::getline(std::cin, userConfirmation);
+                    // User entered "DELETE"
+                    if(userConfirmation == "DELETE"){
+                        deleteTransaction(userChoice);
+                        std::cout << "\n\tTransaction deleted. Returning to Transaction Menu.";
+                        break;
+                    }else{
+                        // User did not enter "DELETE" and deletion process halts
+                        std::cout << "\n\t>> Returning to Transaction Menu";
+                        break;
+                    }
+
+                }else{
+                    std::cout << "\n\tERROR: Please enter an Index between 1 and " << lastIndex << ".\n"
+                                 "\t>> Press any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore( 10000, '\n');
+                }
+            }
+        }
+
+
+    }
+}
 
 
 

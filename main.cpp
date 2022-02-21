@@ -101,14 +101,14 @@ int main() {
     TransactionList adminTransaction;
 
     //TEST SITE BELOW ONWARDS
-    Transaction testTransaction1 = Transaction(2,12.5);
-    Transaction testTransaction2 = Transaction(5, 13.2);
+    Transaction testTransaction1 = Transaction(1,12.5);
+    Transaction testTransaction2 = Transaction(2, 13.2);
     Transaction testTransaction3 = Transaction(3, 10.0);
     Transaction testTransaction4 = Transaction(4, 11);
-    Transaction testTransaction5 = Transaction(2, 17);
+    Transaction testTransaction5 = Transaction(8, 17);
     Transaction testTransaction6 = Transaction(7, 21.2);
-    Transaction testTransaction7 = Transaction(2, 82.1);
-    Transaction testTransaction8 = Transaction(3, 9.2);
+    Transaction testTransaction7 = Transaction(6, 82.1);
+    Transaction testTransaction8 = Transaction(5, 9.2);
 
     adminTransaction.insertTransactionToList(&testTransaction1);
     adminTransaction.insertTransactionToList(&testTransaction2);

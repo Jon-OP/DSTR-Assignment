@@ -47,8 +47,8 @@ class TransactionList {
     // Delete a Transaction Detail
     Transaction* deleteTransaction();
 
-    // Display the high-level details of all transaction
-    void displayAllTransaction();
+    // Display the details of all Transaction and return the final index + 1
+    int displayAllTransaction();
 
     // Sort the List of Transaction[TotalPrice]: MergeSort
     //void sortTransaction(std::string sortParameter); // COMPLETED !!!
@@ -69,11 +69,11 @@ class TransactionList {
         // Multiple Sub functions pertaining to newPurchase
         void newTransaction();
 
-    // Display high-level details of each transaction
-    void listAllTransaction();
-
     // Sort all transaction
     void sortTransaction_prompt();
+
+    // Prompt to Delete Transaction
+    void deleteTransaction_prompt();
 
     // Prompt user to choose a transaction to view in detail
     void promptTransactionDetails();
