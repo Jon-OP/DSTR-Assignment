@@ -11,7 +11,7 @@ int Movie::inventoryCount = 0;
 Movie::Movie() {}
 
 Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
-                     std::string movieTime, std::string movieDate) {
+             std::string movieTime, std::string movieDate) {
     this->movieID = inventoryCount+1;
     this->movieName = movieName;
     this->moviePrice = moviePrice;
@@ -136,58 +136,96 @@ void Movie::viewMovie(Movie selectedMovie){
 
 // UPDATE movie details
 void Movie::updateMovie(Movie toUpdate){
-    std::string userInput;
-    std::string success = "Successfully Updated. \n";
-    std::string updateMenu = "\t1. Change Movie Name\n"
-                             "\t2. Change Movie Price\n"
-                             "\t3. Change Movie Category\n";
 
-    // Select data to modify
-    int userChoice = validateInteger(updateMenu);
-    switch(userChoice){
-        case 1:
-            // Get user input
-            std::cout << "Enter new movie name: ";
-            std::getline(std::cin, userInput);
+    while(true){
+        std::cout << "\n\tUpdate Menu"
+                     "\n\t-----------------------"
+                     "\n\t1. Change Movie Name"
+                     "\n\t2. Change Movie Price"
+                     "\n\t3. Change Movie Category"
+                     "\n\t4. Return to Movie Menu\n"
+                     "\n\t>> Enter your choice:";
 
-            // Replace movie name with input
-            toUpdate.movieName = userInput;
+        int userChoice = validateInt();
+        std::string userInput;
 
-            // Print success message
-            std::cout << success;
-            break;
+        switch(userChoice){
+            case 1:
+                // Get user input
+                std::cout << "\n\t>> Enter new movie name: ";
+                std::getline(std::cin, userInput);
 
-        case 2:
-            // Get user input
-            std::cout << "Enter new movie price: ";
-            std::getline(std::cin, userInput);
-
-            // If user input is float
-            if (isFloat(userInput)){
-
-                // Set the new movie price
-                float newPrice = std::stof(userInput);
-                toUpdate.moviePrice = newPrice;
+                // Replace movie name with input
+                toUpdate.movieName = userInput;
 
                 // Print success message
-                std::cout << success;
+                std::cout << "\n\tMovie Name successfully updated.";
+                break;
 
-            } else {
-                std::cout << "Error, please input valid float.";
-            }
-            break;
+            case 2:
+                while(true){
+                    std::cout << "\n\t>> Enter the new movie price:";
 
-        case 3:
-            // Get user input
-            std::cout << "Enter new movie category: ";
-            std::getline(std::cin, userInput);
+                    float newPrice = validateFloat();
 
-            // Replace movie name with input
-            toUpdate.movieCategory = userInput;
+                    if(newPrice == -999){
+                        std::cout << "\n\t>> ERROR: Please enter a number."
+                                     "\n\t>> Enter any key to continue:";
 
-            // Print success message
-            std::cout << success;
-            break;
+                        // Wait for user Input and ignore up to 10,00 characters
+                        std::cin.ignore( 10000, '\n');
+
+                    }else{
+                        if(newPrice > 0){
+                            std::cout << "\n\tMovie Price successfully updated.";
+                            break;
+                        }else{
+                            std::cout << "\n\t>> ERROR: Please enter a positive number."
+                                         "\n\t>> Enter any key to continue:";
+
+                            // Wait for user Input and ignore up to 10,00 characters
+                            std::cin.ignore( 10000, '\n');
+
+                        }
+                    }
+                }
+                break;
+            case 3:
+                // Get user input
+                std::cout << "Enter new movie category: ";
+                std::getline(std::cin, userInput);
+
+                // Replace movie name with input
+                toUpdate.movieCategory = userInput;
+
+                // Print success message
+                std::cout << "\n\tMovie Category successfully updated.";
+                break;
+            case 4:
+                std::cout << "\n\tReturning to Inventory Menu."
+                             "\n\tEnter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+
+                return;
+            case -999:
+                std::cout << "\n\t>> ERROR: Please enter an index."
+                             "\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+
+                break;
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter from 1 to 4\n\t>> Enter any Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+
+        }
     }
 }
 
@@ -306,4 +344,52 @@ int Movie::validateInteger(std::string message){
     }
 }
 
+int Movie::validateInt() {
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
 
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stoi(userInput);
+        }
+    }else{
+        return -999;
+    }
+}
+
+float Movie::validateFloat(){
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
+
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stof(userInput);
+        }
+    }else{
+        return -999;
+    }
+}

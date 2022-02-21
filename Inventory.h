@@ -26,17 +26,20 @@ class Movie {
     std::string movieDate; // DAY, MONTH, YEAR
 
     // Functional Methods
-    Movie* addMovie(Movie movieList[], Movie newMovie);
+//    Movie* addMovie(Movie movieList[], Movie newMovie);
     Movie searchMovie(Movie *movieList, std::string criteria);
     Movie* deleteMovie(Movie *movieList, Movie movieToDelete);
     Movie* sortMovie(Movie *movieList);
-    void updateMovie(Movie toUpdate);
-    void viewMovie(Movie selectedMovie);
+//    void updateMovie(Movie toUpdate);
+//    void viewMovie(Movie selectedMovie);
 
 
 
     // Error Validation Method
     int validateInteger(std::string message);
+
+    int validateInt();
+    float validateFloat();
 
 public:
 
@@ -51,7 +54,9 @@ public:
     //test method - PHILIP
     void inventoryShowDetails();
 
-
+    Movie* addMovie(Movie movieList[], Movie newMovie);
+    void updateMovie(Movie toUpdate);
+    void viewMovie(Movie selectedMovie);
 };
 
 
