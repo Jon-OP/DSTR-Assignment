@@ -33,15 +33,18 @@ void mainMenu(){
 }
 
 int main() {
-    // Initialize Movie Array
+
+    // Initialize Movie Array which is our database
     Movie* adminMovie = new Movie[0];
 
-    // Declaration of Transaction Object
+    // Declaration of Transaction Object -> to access public Transaction methods
     TransactionList adminTransaction;
 
     // TEST SITE FOR MOVIE
-
+    //adding pre-defined data into Inventory of movie
     Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
+    Movie newMovie1 = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
+    Movie newMovie2 = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
 
     //adminMovie->addMovie(adminMovie, newMovie);
 
@@ -71,6 +74,8 @@ int main() {
 
     Movie adminInventory;
 
+
+    //main program starts here, for testing, call functions directly before this
     bool flag = true;
     while (flag == true){
         std::cout << "\n\t---------------------------------------------------------\n"

@@ -138,13 +138,16 @@ void Movie::viewMovie(Movie selectedMovie){
 void Movie::updateMovie(Movie* toUpdate){
 
     while(true){
-        std::cout << "\n\tUpdate Menu"
-                     "\n\t-----------------------"
-                     "\n\t1. Change Movie Name"
-                     "\n\t2. Change Movie Price"
-                     "\n\t3. Change Movie Category"
-                     "\n\t4. Return to Movie Menu\n"
-                     "\n\t>> Enter your choice:";
+        // include selected movie
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                      Updating movie                      \n"
+                     "\t-*----------------------------*---------------------------\n"
+                     "\t-|1. Change Movie Name        |---------------------------\n"
+                     "\t-|2. Change Movie Price       |---------------------------\n"
+                     "\t-|3. Change Movie Category    |---------------------------\n"
+                     "\t-|4. Return to Movie Menu     |---------------------------\n"
+                     "\t-*----------------------------*---------------------------\n"
+                     "\t>> Enter your choice:";
 
         int userChoice = validateInt();
         std::string userInput;
@@ -239,15 +242,17 @@ Movie * Movie::sortMovie(Movie movieList[]){
 
 // CONSOLE DISPLAY Methods
 void Movie::inventoryConsoleMenu() {
-    std::string inventoryMenuMsg = "\tMovie Management System\n"
-                                   "\t-----------------------\n"
-                                   "\t1. Add New Movie\n"
-                                   "\t2. View Movie Details\n"
-                                   "\t3. Search Movie by Name\n"
-                                   "\t4. Update Movie Details\n"
-                                   "\t5. Sort Movie\n"
-                                   "\t6. Delete Movie Details\n"
-                                   "\t7. Back to Main Menu\n"
+    std::string inventoryMenuMsg = "\n\t---------------------------------------------------------\n"
+                                   "\t                    Movie Management Menu                 \n"
+                                   "\t-*--------------------------*-----------------------------\n"
+                                   "\t-|1. Add New Movie          |-----------------------------\n"
+                                   "\t-|2. View Movie Details     |-----------------------------\n"
+                                   "\t-|3. Search Movie by Name   |-----------------------------\n"
+                                   "\t-|4. Update Movie Details   |-----------------------------\n"
+                                   "\t-|5. Sort Movie             |-----------------------------\n"
+                                   "\t-|6. Delete Movie Details   |-----------------------------\n"
+                                   "\t-|7. Back to Main Menu      |-----------------------------\n"
+                                   "\t-*--------------------------*-----------------------------\n"
                                    "\n\t>> Enter your choice:";
 
     int userChoice;
@@ -258,8 +263,7 @@ void Movie::inventoryConsoleMenu() {
             case 1:
                 // PROMPT MOVIE
 
-
-                std::cout << "\n>> We should CALL newMovie Method\n";
+                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
                 break;
 
             case 2:
@@ -271,6 +275,7 @@ void Movie::inventoryConsoleMenu() {
                 break;
 
             case 4:
+
                 std::cout << "\n>> We should call updateMovie Method\n";
                 break;
 

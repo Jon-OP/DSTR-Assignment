@@ -321,7 +321,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 
 // METHODS: FUNCTIONAL
 
-// -----------------------------------------------// Menus starts here// --------------------------------------//
+// --------------------------------------// Transaction Menus starts here// --------------------------------------//
 
 // Transaction menu landing page implementation - Philip
 void TransactionList::transactionMenu(){
@@ -425,10 +425,10 @@ void TransactionList::newPurchaseMenu()
     }
 
 }
-// -----------------------------------------------// Menus ends here// ------------------------------------------//
+// ----------------------------------------// Transaction Menus ends here// ---------------------------------------//
 
 
-//----------------------------------------// Helper function starts here //--------------------------------------//
+//----------------------------------------// Helper functions starts here //--------------------------------------//
 
 
 void TransactionList::newTransaction()
@@ -438,7 +438,9 @@ void TransactionList::newTransaction()
     Movie movie1 = Movie("spider",10.0,"Action","13:00","15/2/2022");
     Movie movieArray[]={movie1};
 
-    std::cout << "\n\tWhat movie name you want boii:";
+    //print every movie
+
+    std::cout << "\n\tWhat movie name you want boii:"<<std::endl;
     for (int i=0;i< sizeof(movieArray)/sizeof(movieArray[0]);i++)
     {
         //was trying to replicate the array and print the array
