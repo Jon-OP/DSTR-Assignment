@@ -5,6 +5,7 @@
 #define G8_TP060491_TP061069_TP055727_TRANSACTION_H
 
 #include <string>
+#include "Inventory.h"
 
 class Transaction{
     // Transaction Attributes
@@ -89,8 +90,7 @@ public:
     // Constructor
     TransactionList();
 
-
-    void transactionMenu();
+    void transactionMenu(Movie* movieList);
 
 
     void insertTransactionToList(Transaction* transactionNode);

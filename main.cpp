@@ -35,7 +35,7 @@ void mainMenu(){
 int main() {
 
     // Initialize Movie Array which is our database
-    Movie* adminMovie = new Movie[0];
+    //Movie* adminMovie = new Movie[0];
 
     // Declaration of Transaction Object -> to access public Transaction methods
     TransactionList adminTransaction;
@@ -43,8 +43,16 @@ int main() {
     // TEST SITE FOR MOVIE
     //adding pre-defined data into Inventory of movie
     Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie1 = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie2 = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
+    Movie newMovie1 = Movie("Spiderman", 12.2, "Action, Fight", "12.00 pm", "February");
+    Movie newMovie2 = Movie("John Weak", 12.2, "Action, Fight", "12.00 pm", "February");
+
+    Movie databaseList[0];
+    Movie adminInventory;
+
+    //moviePointers
+    Movie* adminMoviePtr = adminInventory.addMovie(databaseList, newMovie);
+    adminInventory.addMovie()
+
 
     //adminMovie->addMovie(adminMovie, newMovie);
 
@@ -72,7 +80,9 @@ int main() {
     adminTransaction.insertTransactionToList(&testTransaction7);
     adminTransaction.insertTransactionToList(&testTransaction8);
 
-    Movie adminInventory;
+
+
+
 
 
     //main program starts here, for testing, call functions directly before this
@@ -91,12 +101,11 @@ int main() {
         switch (userChoice) {
             case 1:
                 //might need to return a pointer to the movieList
-                adminInventory.inventoryConsoleMenu();
+                adminInventory.inventoryConsoleMenu(adminMovie);
                 break;
             case 2:
                 //accept inventory as parameter || accept pointer to movieList as parameter
-                adminTransaction.transactionMenu();
-                std::cout << "You entered 2\n";
+                adminTransaction.transactionMenu(adminMovie);
                 break;
             case 3:
                 std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";

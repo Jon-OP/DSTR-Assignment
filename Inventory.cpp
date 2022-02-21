@@ -85,7 +85,10 @@ Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
     int counter = 0;
 
     //Define new array with size +1
-    Movie* newMovieList = new Movie[(sizeof(movieList)/sizeof(movieList[0])) + 1];
+
+    //Movie newMovieList[] =  Movie[(sizeof(movieList)/sizeof(movieList[0])) + 1];
+
+    Movie newMovieList[(sizeof(&movieList)/sizeof(movieList[0])) + 1];
 
     //Copy elements to new array
     for (int i=0; i < sizeof(newMovieList)/sizeof(newMovieList[0]) ; i++){
@@ -98,7 +101,6 @@ Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
 
     //Delete old array
     delete[] movieList;
-
     return newMovieList;
 }
 
@@ -144,6 +146,7 @@ Movie * Movie::deleteMovie(Movie movieList[], Movie movieToDelete){
 }
 
 // VIEW movie details
+// PHILIP - fix formating
 void Movie::viewMovie(Movie selectedMovie){
     std::cout << "Movie ID: " << selectedMovie.movieID;
     std::cout << "Movie Name: " << selectedMovie.movieName;
@@ -260,7 +263,8 @@ Movie * Movie::sortMovie(Movie movieList[]){
 
 
 // CONSOLE DISPLAY Methods
-void Movie::inventoryConsoleMenu() {
+void Movie::inventoryConsoleMenu(Movie* movieList) {
+    this->movieList = movieList;
     std::string inventoryMenuMsg = "\n\t---------------------------------------------------------\n"
                                    "\t                    Movie Management Menu                 \n"
                                    "\t-*--------------------------*-----------------------------\n"
@@ -290,6 +294,7 @@ void Movie::inventoryConsoleMenu() {
                 std::cout << "\n\t---------------------------------------------------------\n"
                              "\t                 Select a movie to be updated             \n"
                              "\t----------------------------------------------------------\n";
+                void listMovieDetails();
 
                 break;
 
@@ -331,6 +336,15 @@ void Movie::inventoryConsoleMenu() {
     }while(userChoice != 7);
 
 };
+
+void Movie::listMovieDetails()
+{
+    for(int i=0;i<sizeof(movieList)/sizeof(movieList[0]);i++)
+    {
+        viewMovie(movieList[i]);
+        std:: cout << std::endl;
+    }
+}
 
 //Philip testting, paiseh
 void Movie::inventoryShowDetails()

@@ -324,7 +324,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 // --------------------------------------// Transaction Menus starts here// --------------------------------------//
 
 // Transaction menu landing page implementation - Philip
-void TransactionList::transactionMenu(){
+void TransactionList::transactionMenu(Movie* movieList){
     while (true){
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t                Transaction Management Menu              \n"

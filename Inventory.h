@@ -9,6 +9,7 @@
 
 class Movie {
 
+    Movie* movieList = NULL;
     // Counter for movieID
     static int inventoryCount;
 
@@ -34,7 +35,8 @@ class Movie {
 //    void updateMovie(Movie toUpdate);
 //    void viewMovie(Movie selectedMovie);
 
-
+    //UI methods
+    void listMovieDetails();
 
 
     // Error Validation Method
@@ -51,7 +53,7 @@ public:
               std::string movieTime, std::string movieDate);
 
     // CONSOLE DISPLAY Methods
-    void inventoryConsoleMenu();
+    void inventoryConsoleMenu(Movie* movieList);
 
     //test method - PHILIP
     void inventoryShowDetails();
