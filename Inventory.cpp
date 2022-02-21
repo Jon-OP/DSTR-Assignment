@@ -52,10 +52,29 @@ bool isInt(std::string str) {
 }
 
 // Swaps two movie elements in an array
-void swap(Movie* elem1, Movie* elem2 ){
-    Movie temp = *elem1;
+void swap(std::string* elem1, std::string* elem2 ){
+    std::string temp = *elem1;
     *elem1 = *elem2;
     *elem2 = temp;
+}
+
+// String partition for QuickSwap method (sortMovie())
+int partition (std::string names[], int low, int high)
+{
+    std::string pivot = names[high]; // pivot
+    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+
+    for (int j = low; j <= high - 1; j++)
+    {
+        // If current element is smaller than the pivot
+        if (names[j] < pivot)
+        {
+            i++; // increment index of smaller element
+            swap(&names[i], &names[j]);
+        }
+    }
+    swap(&names[i + 1], &names[high]);
+    return (i + 1);
 }
 
 //----------------------------------{ Functional Methods }--------------------------------------//
