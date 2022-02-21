@@ -27,6 +27,30 @@ Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
 
 }
 
+//----------------------------------{ Input Validation }--------------------------------------//
+
+// Checks if string is float
+bool isFloat(std::string str) {
+    try {
+        float checker = stof(str);
+        return true;
+    }
+    catch (...) {
+        return false;
+    }
+}
+
+// Checks if string is integer
+bool isInt(std::string str) {
+    try {
+        int checker = stoi(str);
+        return true;
+    }
+    catch (...) {
+        return false;
+    }
+}
+
 //----------------------------------{ Functional Methods }--------------------------------------//
 //ADD movie to Movie Array
 Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
@@ -92,6 +116,79 @@ Movie * Movie::deleteMovie(Movie movieList[], Movie movieToDelete){
 
     return newMovieList;
 }
+
+// VIEW movie details
+void Movie::viewMovie(Movie selectedMovie){
+    std::cout << "Movie ID: " << selectedMovie.movieID;
+    std::cout << "Movie Name: " << selectedMovie.movieName;
+    std::cout << "Movie Price: " << selectedMovie.moviePrice;
+    std::cout << "Movie Category: " << selectedMovie.movieCategory;
+    std::cout << "Movie Date: " << selectedMovie.movieDate;
+    std::cout << "Movie Time: " << selectedMovie.movieTime;
+}
+
+// UPDATE movie details
+void Movie::updateMovie(Movie toUpdate){
+    std::string userInput;
+    std::string success = "Successfully Updated. \n";
+    std::string updateMenu = "\t1. Change Movie Name\n"
+                             "\t2. Change Movie Price\n"
+                             "\t3. Change Movie Category\n";
+
+    // Select data to modify
+    int userChoice = validateInteger(updateMenu);
+    switch(userChoice){
+        case 1:
+            // Get user input
+            std::cout << "Enter new movie name: ";
+            std::getline(std::cin, userInput);
+
+            // Replace movie name with input
+            toUpdate.movieName = userInput;
+
+            // Print success message
+            std::cout << success;
+            break;
+
+        case 2:
+            // Get user input
+            std::cout << "Enter new movie price: ";
+            std::getline(std::cin, userInput);
+
+            // If user input is float
+            if (isFloat(userInput)){
+
+                // Set the new movie price
+                float newPrice = std::stof(userInput);
+                toUpdate.moviePrice = newPrice;
+
+                // Print success message
+                std::cout << success;
+
+            } else {
+                std::cout << "Error, please input valid float.";
+            }
+            break;
+
+        case 3:
+            // Get user input
+            std::cout << "Enter new movie category: ";
+            std::getline(std::cin, userInput);
+
+            // Replace movie name with input
+            toUpdate.movieCategory = userInput;
+
+            // Print success message
+            std::cout << success;
+            break;
+    }
+}
+
+// SORT movie array in ascending order
+Movie * Movie::sortMovie(Movie movieList[]){
+
+}
+
 
 
 // CONSOLE DISPLAY Methods
@@ -195,3 +292,5 @@ int Movie::validateInteger(std::string message){
         std::cin.ignore( 10000, '\n');
     }
 }
+
+

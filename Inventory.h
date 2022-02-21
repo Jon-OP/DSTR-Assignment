@@ -29,7 +29,9 @@ class Movie {
     Movie* addMovie(Movie movieList[], Movie newMovie);
     Movie searchMovie(Movie *movieList, std::string criteria);
     Movie* deleteMovie(Movie *movieList, Movie movieToDelete);
-
+    Movie* sortMovie(Movie *movieList);
+    void updateMovie(Movie toUpdate);
+    void viewMovie(Movie selectedMovie);
 
 
 
@@ -45,6 +47,8 @@ public:
 
     // CONSOLE DISPLAY Methods
     void inventoryConsoleMenu();
+
+
 
 };
 
