@@ -48,6 +48,8 @@ public:
     // CONSOLE DISPLAY Methods
     void inventoryConsoleMenu();
 
+    //test method - PHILIP
+    void inventoryShowDetails();
 
 
 };

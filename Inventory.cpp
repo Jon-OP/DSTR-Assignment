@@ -255,6 +255,9 @@ void Movie::inventoryConsoleMenu() {
 
 };
 
+//Philip testting, paiseh
+void Movie::inventoryShowDetails(){}
+
 
 // Error Validation Method
 int Movie::validateInteger(std::string message){

@@ -75,7 +75,7 @@ class TransactionList {
     // Sort all transaction
     void sortTransaction_prompt();
 
-    // Prompt user to chose a transaction to view in detail
+    // Prompt user to choose a transaction to view in detail
     void promptTransactionDetails();
 
 

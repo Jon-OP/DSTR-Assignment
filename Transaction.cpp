@@ -2,6 +2,7 @@
 // To enter the implementation, remember to add "Transaction::<methodName>"
 
 #include "Transaction.h"
+#include "Inventory.h"
 #include <iostream>
 
 int userChoice;
@@ -315,7 +316,7 @@ void TransactionList::transactionMenu(){
                      "\t-|3. Sort Purchases          |---------------------------\n"
                      "\t-|4. Delete Purchase Record* |---------------------------\n"
                      "\t-|5. Return to Main Menu     |---------------------------\n"
-                     "\t-*--------------------------*----------------------------\n"
+                     "\t-*---------------------------*---------------------------\n"
                      "\n\t>> Enter your choice:";
         int userChoice = validateInt();
         switch (userChoice) {
@@ -416,12 +417,22 @@ void TransactionList::newTransaction()
 {
     std::string inputMovieName;
     std::string inputSeats;
-    //std::string movie1[] ={"1","Spider","50","bop"} ;
+    Movie movie1 = Movie("spider",10.0,"Action","13:00","15/2/2022");
+    Movie movieArray[]={movie1};
+
     std::cout << "\n\tWhat movie name you want boii:";
+    for (int i=0;i< sizeof(movieArray)/sizeof(movieArray[0]);i++)
+    {
+        //was trying to replicate the array and print the array
+        //cout << movieArray[i]->
+    }
+
     std::cin >> inputMovieName;
     std::cout << "\n\twhat seats you want boii:";
     //might need to print the seats that area available
     std::cin >> inputSeats;
+    Transaction newTrans = Transaction (1, "spider",10.0,);
+    //insertTransactionToList( newTrans);
 }
 
 
