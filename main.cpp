@@ -100,12 +100,12 @@ int main() {
 
         switch (userChoice) {
             case 1:
-                //might need to return a pointer to the movieList
-                adminInventory.inventoryConsoleMenu(adminMovie);
+                adminInventory.inventoryConsoleMenu();
                 break;
             case 2:
-                //accept inventory as parameter || accept pointer to movieList as parameter
-                adminTransaction.transactionMenu(adminMovie);
+                //accept inventory as parameter
+                adminTransaction.transactionMenu();
+                std::cout << "You entered 2\n";
                 break;
             case 3:
                 std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";
