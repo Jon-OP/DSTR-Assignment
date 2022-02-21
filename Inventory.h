@@ -55,7 +55,7 @@ public:
     void inventoryShowDetails();
 
     Movie* addMovie(Movie movieList[], Movie newMovie);
-    void updateMovie(Movie toUpdate);
+    void updateMovie(Movie* toUpdate);
     void viewMovie(Movie selectedMovie);
 };
 

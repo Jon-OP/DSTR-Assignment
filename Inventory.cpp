@@ -135,7 +135,7 @@ void Movie::viewMovie(Movie selectedMovie){
 }
 
 // UPDATE movie details
-void Movie::updateMovie(Movie toUpdate){
+void Movie::updateMovie(Movie* toUpdate){
 
     while(true){
         std::cout << "\n\tUpdate Menu"
@@ -156,7 +156,7 @@ void Movie::updateMovie(Movie toUpdate){
                 std::getline(std::cin, userInput);
 
                 // Replace movie name with input
-                toUpdate.movieName = userInput;
+                toUpdate->movieName = userInput;
 
                 // Print success message
                 std::cout << "\n\tMovie Name successfully updated.";
@@ -177,6 +177,7 @@ void Movie::updateMovie(Movie toUpdate){
 
                     }else{
                         if(newPrice > 0){
+                            toUpdate->moviePrice = newPrice;
                             std::cout << "\n\tMovie Price successfully updated.";
                             break;
                         }else{
@@ -196,7 +197,7 @@ void Movie::updateMovie(Movie toUpdate){
                 std::getline(std::cin, userInput);
 
                 // Replace movie name with input
-                toUpdate.movieCategory = userInput;
+                toUpdate->movieCategory = userInput;
 
                 // Print success message
                 std::cout << "\n\tMovie Category successfully updated.";

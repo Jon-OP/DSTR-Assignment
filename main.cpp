@@ -91,7 +91,7 @@ int main() {
     Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
 
     //adminMovie->addMovie(adminMovie, newMovie);
-    newMovie.updateMovie(newMovie);
+    newMovie.updateMovie(&newMovie);
     newMovie.viewMovie(newMovie);
 
 
