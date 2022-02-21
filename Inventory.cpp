@@ -76,6 +76,7 @@ int partition (std::string names[], int low, int high)
     swap(&names[i + 1], &names[high]);
     return (i + 1);
 }
+//----------------------------------{ Support Methods Ends }--------------------------------------//
 
 //----------------------------------{ Functional Methods }--------------------------------------//
 //ADD movie to Movie Array
@@ -144,6 +145,11 @@ Movie * Movie::deleteMovie(Movie movieList[], Movie movieToDelete){
 
     return newMovieList;
 }
+// SORT movie array in ascending order
+Movie * Movie::sortMovie(Movie movieList[]){
+
+}
+
 // VIEW movie details
 // PHILIP - fix formating
 void Movie::viewMovie(Movie selectedMovie){
@@ -156,9 +162,19 @@ void Movie::viewMovie(Movie selectedMovie){
     std::cout << "\t" << selectedMovie.movieDate;
     std::cout << "\t" << selectedMovie.movieTime;
 }
-// SORT movie array in ascending order
-Movie * Movie::sortMovie(Movie movieList[]){
+void Movie::listMovieDetails()
+{
+    for(int i=0;i<sizeof(movieList)/sizeof(movieList[0]);i++)
+    {
+        viewMovie(movieList[i]);
+        std:: cout << std::endl;
+    }
+}
 
+//Philip testting, paiseh
+void Movie::inventoryShowDetails()
+{
+    std::cout<< movieName + std::to_string(moviePrice) +movieCategory;
 }
 
 //----------------------------------{ Functional Methods Ends }--------------------------------------//
@@ -241,7 +257,7 @@ void Movie::inventoryConsoleMenu(Movie* movieList) {
 
 // UPDATE movie details
 void Movie::updateMovie(Movie* toUpdate){
-
+    //prints the details of the selected movie -> calls viewMovie()
     while(true){
         // include selected movie
         std::cout << "\n\t---------------------------------------------------------\n"
@@ -341,24 +357,7 @@ void Movie::updateMovie(Movie* toUpdate){
 
 //--------------------------------------{ UI Methods Ends }----------------------------------------------//
 
-void Movie::listMovieDetails()
-{
-    for(int i=0;i<sizeof(movieList)/sizeof(movieList[0]);i++)
-    {
-        viewMovie(movieList[i]);
-        std:: cout << std::endl;
-    }
-}
-
-//Philip testting, paiseh
-void Movie::inventoryShowDetails()
-{
-    std::cout<< movieName + std::to_string(moviePrice) +movieCategory;
-}
-
-
-
-// Error Validation Method
+// Error Validation Methods
 int Movie::validateInteger(std::string message){
     bool inputFlag;
     std::string userInput;

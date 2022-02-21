@@ -582,9 +582,6 @@ void TransactionList::deleteTransaction_prompt(){
 
 
 
-
-
-
 //getter to display all transactions
 //std::string Transaction::getDetails()
 //{
@@ -595,9 +592,4 @@ void TransactionList::deleteTransaction_prompt(){
 //
 //    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
 //}
-
-
-//functions to add
-    //function to check last transaction ID -> so we can add it into the userTransaction object
-    //
 
