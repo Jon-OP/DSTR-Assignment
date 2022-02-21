@@ -45,11 +45,13 @@ void mainMenu(){
     Movie adminInventory;
     TransactionList adminTransaction = TransactionList();
 
-    std::string mainMenuMsg = "\tGrandplex Movie Ticketing System\n"
-                              "\t--------------------------------\n"
-                              "\t1. Inventory Management System\n"
-                              "\t2. Transaction Management System\n"
-                              "\t3. Exit Program\n"
+    std::string mainMenuMsg = "\t---------------------------------------------------------\n"
+                              "\t              Grandplex Movie Ticketing System           \n"
+                              "\t-*-------------------------------------*-----------------\n"
+                              "\t-|1. Inventory Management System       |-----------------\n"
+                              "\t-|2. Transaction Management System     |-----------------\n"
+                              "\t-|3. Exit Program                      |-----------------\n"
+                              "\t-*-------------------------------------*-----------------\n"
                               "\n\t>> Enter your choice:";
 
     int userChoice;
