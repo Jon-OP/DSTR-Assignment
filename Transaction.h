@@ -90,7 +90,8 @@ public:
     // Constructor
     TransactionList();
 
-    void transactionMenu(Movie* movieList);
+   //void transactionMenu(Movie* movieList);
+    void transactionMenu();
 
 
     void insertTransactionToList(Transaction* transactionNode);

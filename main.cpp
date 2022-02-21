@@ -42,16 +42,16 @@ int main() {
 
     // TEST SITE FOR MOVIE
     //adding pre-defined data into Inventory of movie
-    Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie1 = Movie("Spiderman", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie2 = Movie("John Weak", 12.2, "Action, Fight", "12.00 pm", "February");
+    //Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
+   // Movie newMovie1 = Movie("Spiderman", 12.2, "Action, Fight", "12.00 pm", "February");
+   // Movie newMovie2 = Movie("John Weak", 12.2, "Action, Fight", "12.00 pm", "February");
 
-    Movie databaseList[0];
+    //Movie databaseList[0];
     Movie adminInventory;
 
     //moviePointers
-    Movie* adminMoviePtr = adminInventory.addMovie(databaseList, newMovie);
-    adminInventory.addMovie()
+   // Movie* adminMoviePtr = adminInventory.addMovie(databaseList, newMovie);
+    //adminInventory.addMovie();
 
 
     //adminMovie->addMovie(adminMovie, newMovie);
@@ -100,7 +100,7 @@ int main() {
 
         switch (userChoice) {
             case 1:
-                adminInventory.inventoryConsoleMenu();
+                //adminInventory.inventoryConsoleMenu();
                 break;
             case 2:
                 //accept inventory as parameter

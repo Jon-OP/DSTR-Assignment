@@ -324,7 +324,8 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 // --------------------------------------// Transaction Menus starts here// --------------------------------------//
 
 // Transaction menu landing page implementation - Philip
-void TransactionList::transactionMenu(Movie* movieList){
+//void TransactionList::transactionMenu(Movie* movieList){
+void TransactionList::transactionMenu(){
     while (true){
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t                Transaction Management Menu              \n"
@@ -423,7 +424,47 @@ void TransactionList::newPurchaseMenu()
                 break;
         }
     }
+}
 
+// Sort Transaction caller
+void TransactionList::sortTransaction_prompt() {
+    while(true){
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                   Choose Sorting Option                  \n"
+                     "\t-*---------------------*----------------------------------\n"
+                     "\t-|1. ID                |----------------------------------\n"
+                     "\t-|2. Total Price       |----------------------------------\n"
+                     "\t-|3. Cancel Sort       |----------------------------------\n"
+                     "\t-*---------------------*----------------------------------\n"
+                     "\n\t>> Enter your choice:";
+        int userChoice = validateInt();
+
+        switch(userChoice){
+            case 1:
+                sortTransaction("ID");
+                return;
+            case 2:
+                sortTransaction("TOTALPRICE");
+                return;
+            case 3:
+                return;
+            case -999:
+                std::cout << "\n\tERROR: Please enter an Index.\n"
+                             "\tPress any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+
+            default:
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> Invalid Input\n\t>> Please enter index from 1 to 3\n\t>> Enter any Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }
 }
 // ----------------------------------------// Transaction Menus ends here// ---------------------------------------//
 
@@ -454,9 +495,7 @@ void TransactionList::newTransaction()
 
     //can even consider accepting movie as a parameter couz might as well
     Transaction newTrans = Transaction ();
-
 }
-
 
 
 // Error Validation to ensure user accept Int
@@ -485,44 +524,6 @@ int TransactionList::validateInt() {
     }
 }
 
-// Sort Transaction caller
-void TransactionList::sortTransaction_prompt() {
-    while(true){
-        std::cout << "\n\tSort By:\n"
-                     "\t--------------\n"
-                     "\t1. ID\n"
-                     "\t2. Total Price\n"
-                     "\t3. Cancel Sort\n\n"
-                     "\t>> Enter your choice:";
-        int userChoice = validateInt();
-
-        switch(userChoice){
-            case 1:
-                sortTransaction("ID");
-                return;
-            case 2:
-                sortTransaction("TOTALPRICE");
-                return;
-            case 3:
-                return;
-            case -999:
-                std::cout << "\n\tERROR: Please enter an Index.\n"
-                             "\tPress any key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-
-            default:
-                // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Invalid Input\n\t>> Please enter index from 1 to 3\n\t>> Enter any Key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-        }
-    }
-}
 
 // Delete Transaction caller
 void TransactionList::deleteTransaction_prompt(){

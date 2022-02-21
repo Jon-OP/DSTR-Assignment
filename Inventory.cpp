@@ -144,17 +144,100 @@ Movie * Movie::deleteMovie(Movie movieList[], Movie movieToDelete){
 
     return newMovieList;
 }
-
 // VIEW movie details
 // PHILIP - fix formating
 void Movie::viewMovie(Movie selectedMovie){
-    std::cout << "Movie ID: " << selectedMovie.movieID;
-    std::cout << "Movie Name: " << selectedMovie.movieName;
-    std::cout << "Movie Price: " << selectedMovie.moviePrice;
-    std::cout << "Movie Category: " << selectedMovie.movieCategory;
-    std::cout << "Movie Date: " << selectedMovie.movieDate;
-    std::cout << "Movie Time: " << selectedMovie.movieTime;
+    //output would be
+    // ID [tab] movieName [tab] moviePrice [tab]
+    std::cout << "\t" << selectedMovie.movieID;
+    std::cout << "\t" << selectedMovie.movieName;
+    std::cout << "\t" << selectedMovie.moviePrice;
+    std::cout << "\t" << selectedMovie.movieCategory;
+    std::cout << "\t" << selectedMovie.movieDate;
+    std::cout << "\t" << selectedMovie.movieTime;
 }
+// SORT movie array in ascending order
+Movie * Movie::sortMovie(Movie movieList[]){
+
+}
+
+//----------------------------------{ Functional Methods Ends }--------------------------------------//
+
+//--------------------------------------{ UI Methods }----------------------------------------------//
+
+
+
+// CONSOLE DISPLAY Methods
+void Movie::inventoryConsoleMenu(Movie* movieList) {
+    this->movieList = movieList;
+    std::string inventoryMenuMsg = "\n\t---------------------------------------------------------\n"
+                                   "\t                    Movie Management Menu                 \n"
+                                   "\t-*--------------------------*-----------------------------\n"
+                                   "\t-|1. Add New Movie          |-----------------------------\n"
+                                   "\t-|2. View Movie Details     |-----------------------------\n"
+                                   "\t-|3. Search Movie by Name   |-----------------------------\n"
+                                   "\t-|4. Update Movie Details   |-----------------------------\n"
+                                   "\t-|5. Sort Movie             |-----------------------------\n"
+                                   "\t-|6. Delete Movie Details   |-----------------------------\n"
+                                   "\t-|7. Back to Main Menu      |-----------------------------\n"
+                                   "\t-*--------------------------*-----------------------------\n"
+                                   "\n\t>> Enter your choice:";
+
+    int userChoice;
+    do{
+        userChoice = validateInteger(inventoryMenuMsg);
+
+        switch(userChoice){
+            case 1:
+                // PROMPT MOVIE
+
+                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
+                break;
+
+            case 2:
+                std::cout << "\n>> We should call listMovieDetails Method\n";
+                std::cout << "\n\t---------------------------------------------------------\n"
+                             "\t                 Select a movie to be updated             \n"
+                             "\t----------------------------------------------------------\n";
+                void listMovieDetails();
+
+                break;
+
+            case 3:
+                std::cout << "\n>> We should call searchMovie Method\n";
+                break;
+
+            case 4:
+
+                std::cout << "\n>> We should call updateMovie Method\n";
+                break;
+
+            case 5:
+                std::cout << "\n>> We should call sortMovie Method\n";
+                break;
+
+            case 6:
+                std::cout << "\n>> We should call deleteMovie Method\n";
+                break;
+
+            case 7:
+                std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+
+            default:
+                //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }while(userChoice != 7);
+};
 
 // UPDATE movie details
 void Movie::updateMovie(Movie* toUpdate){
@@ -255,87 +338,8 @@ void Movie::updateMovie(Movie* toUpdate){
     }
 }
 
-// SORT movie array in ascending order
-Movie * Movie::sortMovie(Movie movieList[]){
 
-}
-
-
-
-// CONSOLE DISPLAY Methods
-void Movie::inventoryConsoleMenu(Movie* movieList) {
-    this->movieList = movieList;
-    std::string inventoryMenuMsg = "\n\t---------------------------------------------------------\n"
-                                   "\t                    Movie Management Menu                 \n"
-                                   "\t-*--------------------------*-----------------------------\n"
-                                   "\t-|1. Add New Movie          |-----------------------------\n"
-                                   "\t-|2. View Movie Details     |-----------------------------\n"
-                                   "\t-|3. Search Movie by Name   |-----------------------------\n"
-                                   "\t-|4. Update Movie Details   |-----------------------------\n"
-                                   "\t-|5. Sort Movie             |-----------------------------\n"
-                                   "\t-|6. Delete Movie Details   |-----------------------------\n"
-                                   "\t-|7. Back to Main Menu      |-----------------------------\n"
-                                   "\t-*--------------------------*-----------------------------\n"
-                                   "\n\t>> Enter your choice:";
-
-    int userChoice;
-    do{
-        userChoice = validateInteger(inventoryMenuMsg);
-
-        switch(userChoice){
-            case 1:
-                // PROMPT MOVIE
-
-                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
-                break;
-
-            case 2:
-                std::cout << "\n>> We should call listMovieDetails Method\n";
-                std::cout << "\n\t---------------------------------------------------------\n"
-                             "\t                 Select a movie to be updated             \n"
-                             "\t----------------------------------------------------------\n";
-                void listMovieDetails();
-
-                break;
-
-            case 3:
-                std::cout << "\n>> We should call searchMovie Method\n";
-                break;
-
-            case 4:
-
-                std::cout << "\n>> We should call updateMovie Method\n";
-                break;
-
-            case 5:
-                std::cout << "\n>> We should call sortMovie Method\n";
-                break;
-
-            case 6:
-                std::cout << "\n>> We should call deleteMovie Method\n";
-                break;
-
-            case 7:
-                std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-
-            default:
-                //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
-                // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-        }
-
-
-    }while(userChoice != 7);
-
-};
+//--------------------------------------{ UI Methods Ends }----------------------------------------------//
 
 void Movie::listMovieDetails()
 {
@@ -351,6 +355,7 @@ void Movie::inventoryShowDetails()
 {
     std::cout<< movieName + std::to_string(moviePrice) +movieCategory;
 }
+
 
 
 // Error Validation Method
