@@ -19,6 +19,12 @@ Transaction::Transaction(int ID, float totalPrice) {
     this->totalPrice = totalPrice;
 };
 
+//testing constructor for soon to be inventory integration
+Transaction::Transaction(int transID, std::string movName, ) {
+    this->transactionID = transID;
+    this->totalPrice = totalPrice;
+};
+
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
 void Transaction::printAllDetails(int index) {
@@ -336,7 +342,6 @@ void TransactionList::transactionMenu(){
                 break;
             case 2:
                 //viewPurchase();
-                //displayAllTransaction();
                 displayAllTransaction();
 
                 // Print error message and prompt user to enter any key to continue
@@ -443,8 +448,8 @@ void TransactionList::newTransaction()
     std::cout << "\n\twhat seats you want boii:";
     //might need to print the seats that area available
     std::cin >> inputSeats;
-    //Transaction newTrans = Transaction (1, "spider",10.0,);
-    //insertTransactionToList( newTrans);
+    Transaction newTrans = Transaction ();
+
 }
 
 
