@@ -217,6 +217,9 @@ void Movie::inventoryConsoleMenu() {
 
         switch(userChoice){
             case 1:
+                // PROMPT MOVIE
+
+
                 std::cout << "\n>> We should CALL newMovie Method\n";
                 break;
 

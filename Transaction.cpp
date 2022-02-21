@@ -20,10 +20,11 @@ Transaction::Transaction(int ID, float totalPrice) {
 };
 
 //testing constructor for soon to be inventory integration
+/*
 Transaction::Transaction(int transID, std::string movName, ) {
     this->transactionID = transID;
     this->totalPrice = totalPrice;
-};
+};*/
 
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
