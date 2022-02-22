@@ -440,6 +440,8 @@ void MovieList::movieMenu(){
 
             case 5:
                 std::cout << "\n>> We should call sortMovie Method\n";
+                sortMovie();
+                std::cout <<"\n called sort function.";
                 break;
 
             case 6:
