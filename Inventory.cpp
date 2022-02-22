@@ -281,12 +281,22 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
                 std::getline(std::cin, userInput);
 
                 // Replace the movie name with input
-                toUpdate->movieName = userInput;
-                std::cout << "\n\t>> Movie Name successfully updated."
-                             "\n\t>> Enter any key to return to Update Menu";
+                if(userInput.length() < 21){
+                    toUpdate->movieName = userInput;
+                    std::cout << "\n\t>> Movie Name successfully updated."
+                                 "\n\t>> Enter any key to return to Update Menu:";
 
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore(10000, '\n');
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+
+                }else{
+                    std::cout << "\n\t>> ERROR: New Name too long."
+                                 "\n\t>> Enter name less than 21 characters."
+                                 "\n\t>> Movie Name failed to update."
+                                 "\n\t>> Returning to Update Menu. Enter any key to continue:";
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+                }
 
                 break;
 
@@ -325,7 +335,7 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
 
                 if(userChoiceInternal > 0 && userChoiceInternal < 4){
 
-                    toUpdate->movieCategory = categoryList[userChoiceInternal];
+                    toUpdate->movieCategory = categoryList[userChoiceInternal-1];
 
                     std::cout << "\n\t>> Movie Category successfully updated."
                                  "\n\t>> Returning to Update Menu."
@@ -374,8 +384,8 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
                     userInputTime = std::to_string(userChoiceInternal);
                     if(userInputTime.length() != 2){
                         userInputTime = "0" + userInputTime;
-                        userInput = userInput + userInputTime;
                     }
+                    userInput = userInput + userInputTime;
                 }else{
                     std::cout << "\n\t>> ERROR: Invalid Input."
                                  "\n\t>> Movie Time failed to update."
