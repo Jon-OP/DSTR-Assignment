@@ -31,14 +31,16 @@ class MovieList { //movieList
     int nodeCount;
     int IDGenerator;
     MovieNode* movieList;
+    std::string categoryList[3] = {"Action","Comedy", "Horror"};
 
     // Methods
     //void addMovie(MovieNode newNodes);
     //MovieNode generateNewNodes();
-    MovieNode searchMovie();
+    MovieNode* searchMovie();
     void deleteMovie();
     void sortMovie();
-    void updateMovie();
+    void updateMovie_prompt();
+    void updateMovie(MovieNode* toUpdate);
 
     // Validation
     int validateInt();

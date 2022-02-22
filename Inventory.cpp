@@ -133,7 +133,7 @@ void MovieList::deleteMovie() {
 }
 
 // Search and Return ONE MovieNode
-MovieList::MovieNode MovieList::searchMovie() {
+MovieList::MovieNode* MovieList::searchMovie() {
     // Prompt user to enter search parameter
     std::cout << "\n\t>> Enter search parameter:";
     std::string searchParameter;
@@ -155,7 +155,6 @@ MovieList::MovieNode MovieList::searchMovie() {
         if( currentName.find(searchParameter) != std::string::npos ){
             foundIndex[internalIndex] = i;
             internalIndex++;
-            //std::cout << "Found;";
         }
     }
 
@@ -163,31 +162,48 @@ MovieList::MovieNode MovieList::searchMovie() {
         while (true) {
             // Print the list of search results
             for (int i = 0; i < internalIndex; i++) {
-                std::cout << "\n\t" << i + 1 << ".\t" << this->movieList[foundIndex[i]].movieName;
+                std::cout << "\n\t" << std::setw(3) << i + 1 << ". " << this->movieList[foundIndex[i]].movieName;
             } //LINE 165 PHILIP @@@
-            std::cout << "\n\n\t>> Enter the index of the movie you are seeking."
+
+            std::cout << "\n\t" << std::setw(3) << internalIndex+1 << ". Exit search."
+                         "\n\n\t>> Enter the index of the movie you are seeking."
                          "\n\t>> Enter your choice:";
 
             int userChoice = validateInt();
 
-            if (userChoice > 0 && userChoice < internalIndex) {
-                return movieList[foundIndex[userChoice]];
-            } else {
-                if (userChoice == -999) {
-                    std::cout << "\n\n\t>> ERROR: Please enter digits only."
-                                 "\n\t>> Enter any key to continue:";
+            if(userChoice == internalIndex+1){
+                std::cout << "\n\tReturning to Inventory Menu."
+                          <<  "\n\tEnter any key to continue:";
 
-                    // Wait for user Input and ignore up to 10,00 characters
-                    std::cin.ignore(10000, '\n');
+                std::cin.ignore(10000, '\n');
+
+                return nullptr;
+            }else{
+                if (userChoice > 0 && userChoice <= internalIndex) {
+                    return &movieList[foundIndex[userChoice]];
                 } else {
-                    std::cout << "\n\n\t>> ERROR: Enter index from 1 to " << internalIndex
-                              << "\n\t>> Enter any key to continue:";
+                    if (userChoice == -999) {
+                        std::cout << "\n\n\t>> ERROR: Please enter digits only."
+                                     "\n\t>> Enter any key to continue:";
 
-                    // Wait for user Input and ignore up to 10,00 characters
-                    std::cin.ignore(10000, '\n');
+                        // Wait for user Input and ignore up to 10,00 characters
+                        std::cin.ignore(10000, '\n');
+                    } else {
+                        std::cout << "\n\n\t>> ERROR: Enter index from 1 to " << internalIndex+1
+                                  << "\n\t>> Enter any key to continue:";
+
+                        // Wait for user Input and ignore up to 10,00 characters
+                        std::cin.ignore(10000, '\n');
+                    }
                 }
             }
         }
+    }else{
+        std::cout << "\n\tERROR: No Movie found with \"" <<searchParameter << "\""
+                  <<  "\n\tReturning. Enter any key to continue:";
+
+        // Ignore up to 10000 chars
+        std::cin.ignore(10000, '\n');
     }
 };
 
@@ -197,23 +213,213 @@ void MovieList::sortMovie(){
 }
 
 // Update the Details
-void MovieList::updateMovie(){
+void MovieList::updateMovie_prompt(){
+    // This section ask users to choose an item to update
+    MovieNode* toUpdate = NULL;
     while(true){
-        std::cout << "\n\t0.\tSearch movie by Name.";
+        std::cout << "\n0. Search Movie By Name";
+        listMovies();
+        std::cout << "\n" << nodeCount+1 << " Return to Inventory Menu.";
 
+        int userChoice = validateInt();
 
+        if(userChoice == 0){
+            toUpdate = searchMovie();
+            if(toUpdate != NULL){
+            }
+        }else{
+            if(userChoice == nodeCount+1){
+                std::cout << "\n\n\t>> Returning to Main Menu"
+                             "\n\t>> Enter any key to continue:";
 
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore(10000, '\n');
+                return;
+            }
 
+            if(userChoice > 0 && userChoice < this->nodeCount){
+                toUpdate = &movieList[userChoice-1];
+            }else{
+                if(userChoice == -999){
+                    std::cout << "\n\n\tERROR: Please enter a viable index."
+                                 "\n\t>> Enter any key to continue:";
 
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+                }
+            }
+        }
+        if(toUpdate != NULL){
+            updateMovie(toUpdate);
+            return;
+        }
+    }
+}
 
+void MovieList::updateMovie(MovieNode *toUpdate) {
+    while (true){
+        std::cout << "\n\t---------------------------------------------------------"
+                     "\n\t                      Updating movie                      "
+                     "\n\t-*----------------------------*---------------------------"
+                     "\n\t-|  1. Name     ->" << std::setw(20) << toUpdate->movieName << " |------------------"
+                     "\n\t-|  2. Price    ->" << std::setw(20) << toUpdate->moviePrice << " |------------------"
+                     "\n\t-|  3. Category ->" << std::setw(20) << toUpdate->movieCategory << " |------------------"
+                     "\n\t-|  4. Time     ->" << std::setw(20) << toUpdate->movieTime << " |------------------"
+                     "\n\t-|  5. Finalize updating details       |------------------"
+                     "\n\t-*--------------------------------------------------------"
+                     "\n\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
+        std::string userInput;
+        std::string userInputTime;
+        int userChoiceInternal;
+        float userPrice;
+        switch(userChoice){
+            case 1:
+                // Prompt and read user input regarding name
+                std::cout << "\n\t>> Enter the new Name:";
+                std::getline(std::cin, userInput);
+
+                // Replace the movie name with input
+                toUpdate->movieName = userInput;
+                std::cout << "\n\t>> Movie Name successfully updated."
+                             "\n\t>> Enter any key to return to Update Menu";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore(10000, '\n');
+
+                break;
+
+            case 2:
+                // Prompt and read user input regarding price
+                std::cout << "\n\n\t>> Enter the new price: RM";
+                userPrice = validateFloat();
+
+                // Update the movie price with input
+                if(userPrice > 0){
+                    toUpdate->moviePrice = userPrice;
+
+                    std::cout << "\n\t>> Movie Price successfully updated."
+                                 "\n\t>> Enter any key to return to Update Menu";
+
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+                }else{
+                    std::cout << "\n\t>> ERROR: Invalid Input."
+                                 "\n\t>> Movie Price failed to update."
+                                 "\n\t>> Returning to Update Menu. Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,000 characters
+                    std::cin.ignore(10000,'\n');
+
+                }
+                break;
+
+            case 3:
+                std::cout << "\n\tIndex\tCategories\n";
+                for(int i = 0; i < 3; i++){
+                    std::cout << i+1 << "\t" <<categoryList[i] << "\n";
+                }
+
+                userChoiceInternal = validateInt();
+
+                if(userChoiceInternal > 0 && userChoiceInternal < 4){
+
+                    toUpdate->movieCategory = categoryList[userChoiceInternal];
+
+                    std::cout << "\n\t>> Movie Category successfully updated."
+                                 "\n\t>> Returning to Update Menu."
+                                 "\n\t>> Enter any key to Continue:";
+
+                    // Wait for user Input and ignore up to 10,000 characters
+                    std::cin.ignore(10000, '\n');
+                }else{
+                    std::cout << "\n\t>> ERROR: Invalid Input."
+                                 "\n\t>> Movie Category failed to update."
+                                 "\n\t>> Returning to Update Menu."
+                                 "\n\t>> Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,000 characters
+                    std::cin.ignore(10000,'\n');
+                }
+                break;
+            case 4:
+                std::cout << "\n\t>> NOTE: Time is stored in 24-hour format"
+                             "\n\t>> Enter the HOUR [0 - 23] for the movie:";
+
+                userChoiceInternal = validateInt();
+
+                if(userChoiceInternal >= 0 && userChoiceInternal < 24){
+                    userInput = std::to_string(userChoiceInternal);
+                    if (userInput.length() != 2){
+                        userInput = "0"+userInput;
+                    }
+                }else{
+                    std::cout << "\n\t>> ERROR: Invalid Input."
+                                 "\n\t>> Movie Time failed to update."
+                                 "\n\t>> Returning to Update Menu."
+                                 "\n\t>> Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,000 characters
+                    std::cin.ignore(10000,'\n');
+                    break;
+                }
+
+                std::cout << "\n\t>> NOTE: Time is stored in 24-hour format"
+                             "\n\t>> Enter the MINUTES [0 - 59] for the movie:";
+
+                userChoiceInternal = validateInt();
+
+                if(userChoiceInternal >= 0 && userChoiceInternal < 60){
+                    userInputTime = std::to_string(userChoiceInternal);
+                    if(userInputTime.length() != 2){
+                        userInputTime = "0" + userInputTime;
+                        userInput = userInput + userInputTime;
+                    }
+                }else{
+                    std::cout << "\n\t>> ERROR: Invalid Input."
+                                 "\n\t>> Movie Time failed to update."
+                                 "\n\t>> Returning to Update Menu."
+                                 "\n\t>> Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,000 characters
+                    std::cin.ignore(10000,'\n');
+                    break;
+                }
+
+                toUpdate->movieTime = userInput;
+                std::cout << "\n\t>> Movie Category successfully updated."
+                             "\n\t>> Returning to Update Menu."
+                             "\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,000 characters
+                std::cin.ignore(10000, '\n');
+                break;
+            case 5:
+                std::cout << "\n\t>> Returning to Inventory Menu."
+                             "\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,000 characters
+                std::cin.ignore(10000, '\n');
+                return;
+            default:
+                std::cout << "\n\t>> ERROR: Invalid Input."
+                             "\n\t>> Returning to Update Menu."
+                             "\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,000 characters
+                std::cin.ignore(10000,'\n');
+                break;
+        }
     }
 }
 
 // View specific details of a movie
+/*
 void MovieList::viewMovie() {
 
     // List is empty
-    if(movieList == NULL){
+    if(this->movieList == NULL){
         std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
                      "\n\t>> Enter any key to continue:";
 
@@ -224,19 +430,42 @@ void MovieList::viewMovie() {
         std::cout << std::setw(10) << "Index"
                   << std::setw(10) << "Movie ID"
                   << std::setw(20) << "Movie Name"
-                  << std::setw(10) << "Category"
-                  << std::setw(10) << "Seats Left"
+                  << std::setw(15) << "Category"
+                  << std::setw(20) << "Seats Left"
                   << std::setw(10) << "Time";
 
         for(int i = 0; i < nodeCount; i++){
-            std::cout << movieList[i].movieName;
+            std::cout << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
         }
     }
-
-
-}
+}*/
 
 // List out the movie, price, and quantity - DONE
+void MovieList::listMovies() {
+    // List is empty
+    if(this->movieList == NULL){
+        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
+                     "\n\t>> Enter any key to continue:";
+
+        // Wait for user Input and ignore up to 10,000 characters
+        std::cin.ignore( 10000, '\n');
+    }else{
+        // Atleast one item in the list
+        std::cout << "\n"
+                  << std::setw(5) << "Index"
+                  << std::setw(10) << "Movie ID"
+                  << std::setw(20) << "Movie Name"
+                  << std::setw(15) << "Category"
+                  << std::setw(20) << "Seats Left"
+                  << std::setw(10) << "Time";
+
+        for(int i = 0; i < nodeCount; i++){
+            std::cout << "\n" << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
+        }
+    }
+}
+
+/*
 void MovieList::listMovies(){
     std::cout << "\n\tIndex\tMovie Name\tPrice\tAvailable Quantity";
     for(int i = 0; i < this->nodeCount; i++){
@@ -244,7 +473,7 @@ void MovieList::listMovies(){
                   << "\t" << this->movieList[i].moviePrice << "\t"
                   << this->movieList[i].ticketQuantity;
     }
-}
+}*/
 
 // MovieList::MovieNode >> Returns movieNode
 MovieList::MovieNode MovieList::generateNewNodes() {
@@ -652,6 +881,7 @@ void MovieList::movieMenu(){
                      "\n\t>> Enter your choice:";
 
         int userChoice = validateInt();
+
         switch(userChoice){
             case 1:
                 // PROMPT MOVIE
@@ -664,7 +894,8 @@ void MovieList::movieMenu(){
                 std::cout << "\n\t---------------------------------------------------------\n"
                              "\t                 Select a movie to be updated             \n"
                              "\t----------------------------------------------------------\n";
-                void listMovieDetails();
+                //void listMovieDetails();
+                listMovies();
 
                 break;
 
@@ -674,8 +905,8 @@ void MovieList::movieMenu(){
                 break;
 
             case 4:
-
-                std::cout << "\n>> We should call updateMovie Method\n";
+                updateMovie_prompt();
+                //std::cout << "\n>> We should call updateMovie Method\n";
                 break;
 
             case 5:
