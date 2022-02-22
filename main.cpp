@@ -26,84 +26,14 @@ int validateInt() {
         return -999;
     }
 }
-// Main Implementation - Jonathan
-void mainMenu(){
-
-
-}
 
 int main() {
-
-    // Initialize Movie Array which is our database
-    //Movie* adminMovie = new Movie[0];
-
-    // Declaration of Transaction Object -> to access public Transaction methods
-    TransactionList adminTransaction;
-
-
-    Movie adminMovie;
-    adminMovie.addMovie(adminMovie.generateNewNodes());
-    adminMovie.addMovie(adminMovie.generateNewNodes());
-    //adminMovie.addMovie(adminMovie.generateNewNodes());
-    //adminMovie.addMovie(adminMovie.generateNewNodes());
-    //adminMovie.listMovies();
-    //adminMovie.deleteMovie();
-    //adminMovie.listMovies();
-    adminMovie.addMovie(adminMovie.generateNewNodes());
-
-    //adminMovie.deleteMovie();
-    //adminMovie.viewMovie();
-
-
-
-
-
-    /*
-    // TEST SITE FOR MOVIE
-    //adding pre-defined data into Inventory of movie
-    Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie1 = Movie("Spiderman", 12.2, "Action, Fight", "12.00 pm", "February");
-    Movie newMovie2 = Movie("John Weak", 12.2, "Action, Fight", "12.00 pm", "February");
-
-    Movie* adminInventory = new Movie[1];
-    adminInventory = adminInventory->addMovie(adminInventory, newMovie);
-    //adminInventory = adminInventory->addMovie(adminInventory, newMovie1);
-    //adminInventory = adminInventory->addMovie(adminInventory, newMovie2);
-    //adminInventory->listMovieDetails(adminInventory);
-    std::cout << adminInventory[0].movieName;*/
-
-    //adminMovie->addMovie(adminMovie, newMovie);
-
-//place holder code to test update and viewmovie
-    //newMovie.updateMovie(&newMovie);
-   // newMovie.viewMovie(newMovie);
-
-
-    //TEST SITE BELOW ONWARDS
-    Transaction testTransaction1 = Transaction(1,12.5);
-    Transaction testTransaction2 = Transaction(2, 13.2);
-    Transaction testTransaction3 = Transaction(3, 10.0);
-    Transaction testTransaction4 = Transaction(4, 11);
-    Transaction testTransaction5 = Transaction(8, 17);
-    Transaction testTransaction6 = Transaction(7, 21.2);
-    Transaction testTransaction7 = Transaction(6, 82.1);
-    Transaction testTransaction8 = Transaction(5, 9.2);
-
-    adminTransaction.insertTransactionToList(&testTransaction1);
-    adminTransaction.insertTransactionToList(&testTransaction2);
-    adminTransaction.insertTransactionToList(&testTransaction3);
-    adminTransaction.insertTransactionToList(&testTransaction4);
-    adminTransaction.insertTransactionToList(&testTransaction5);
-    adminTransaction.insertTransactionToList(&testTransaction6);
-    adminTransaction.insertTransactionToList(&testTransaction7);
-    adminTransaction.insertTransactionToList(&testTransaction8);
-
-
-
-
-
-
     //main program starts here, for testing, call functions directly before this
+
+    MovieList adminMovie;
+    TransactionList adminTransaction;
+    adminMovie.initializeList();
+
     bool flag = true;
     while (flag == true){
         std::cout << "\n\t---------------------------------------------------------\n"

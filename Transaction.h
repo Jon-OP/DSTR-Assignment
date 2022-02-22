@@ -65,7 +65,7 @@ class TransactionList {
 /* --- Transaction Functions ---------------------------------------------------------------------------------------- */
 
     // Placing a new order
-    void newPurchaseMenu(Movie* movieList); // Prompt user to choose movie, ETC
+    void newPurchaseMenu(MovieList* movieList); // Prompt user to choose movie, ETC
 
         // Multiple Sub functions pertaining to newPurchase
         void newTransaction();
@@ -90,7 +90,7 @@ public:
     // Constructor
     TransactionList();
 
-    void transactionMenu(Movie* movieList);
+    void transactionMenu(MovieList* movieList);
 
 
     void insertTransactionToList(Transaction* transactionNode);

@@ -5,12 +5,11 @@
 #include <iostream>
 
 // Constructor Methods
-Movie::Movie() {
+MovieList::MovieList() {
     this->nodeCount = 0;
     this->IDGenerator = 1;
     this->movieList = NULL;
 }
-
 
 //----------------------------------{ Support Methods }--------------------------------------//
 
@@ -64,7 +63,8 @@ int partition (std::string names[], int low, int high)
 
 //----------------------------------{ Functional Methods }--------------------------------------//
 
-void Movie::addMovie(MovieNode newNode) {
+// Done
+void MovieList::addMovie(MovieNode newNode) {
     if(movieList == NULL){
         movieList = new MovieNode[1];
         movieList[0] = newNode;
@@ -93,11 +93,8 @@ void Movie::addMovie(MovieNode newNode) {
     }
 }
 
-Movie::MovieNode Movie::searchMovie() {
-
-};
-
-void Movie::deleteMovie() {
+// Done
+void MovieList::deleteMovie() {
     int indexToDelete;
     listMovies();
     std::cout << "\n\t>> Which movie would you like to delete?"
@@ -135,16 +132,28 @@ void Movie::deleteMovie() {
     }
 }
 
-void Movie::sortMovie(){
+MovieList::MovieNode* MovieList::searchMovie() {
+    std::string searchParameter;
+    std::cout << "\n\t>> Enter the movie name:";
+
+    std::getline(std::cin, searchParameter);
+
+
+
+};
+
+
+
+void MovieList::sortMovie(){
 
 }
 
-void Movie::updateMovie(){
+void MovieList::updateMovie(){
 
 }
 
 // View specific details of a movie
-void Movie::viewMovie() {
+void MovieList::viewMovie() {
     for(int i = 0; i < nodeCount; i++){
         std::cout << movieList[i].movieName;
     }
@@ -152,50 +161,47 @@ void Movie::viewMovie() {
 }
 
 // List out the movie, price, and quantity - DONE
-void Movie::listMovies(){
+void MovieList::listMovies(){
     std::cout << "\n\tIndex\tMovie Name\tPrice\tAvailable Quantity";
     for(int i = 0; i < this->nodeCount; i++){
-        std::cout << "\n\t" << i+1 << "\t" << movieList[i].movieName
-                  << "\t" << movieList[i].moviePrice << "\t"
-                  << movieList[i].ticketQuantity;
+        std::cout << "\n\t" << i+1 << "\t" << this->movieList[i].movieName
+                  << "\t" << this->movieList[i].moviePrice << "\t"
+                  << this->movieList[i].ticketQuantity;
     }
 }
 
-Movie::MovieNode Movie::generateNewNodes() {
+// MovieList::MovieNode >> Returns movieNode
+MovieList::MovieNode MovieList::generateNewNodes() {
     int id = 1, quantity = 25;
     float price = 10;
-    std::string name, time = "12PM", date = "FEB";
-    std::string category[] = {"Valbo", "Testa"};
+    std::string name, time = "12PM";
+    std::string category = "Taste";
     int seat[] = { 1, 2};
 
     std::cout << "Name:";
     std::cin >> name;
 
-    MovieNode newNode = MovieNode(id, name,price, quantity, seat, category, date, time);
+    MovieNode newNode = MovieNode(id, name,price, category, time);
     return newNode;
 }
 
-
-
-
-
-
-
-
-Movie::MovieNode::MovieNode() {
+MovieList::MovieNode::MovieNode() {
     this->movieName = "";
 };
 
-Movie::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, int ticketQuantity, int* seat,
-                            std::string* movieCategory, std::string movieDate, std::string movieTime){
+MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
+                            std::string movieTime){
     this->movieID = movieID;
     this->movieName = movieName;
     this->moviePrice = moviePrice;
-    this->ticketQuantity = ticketQuantity;
-    this->seat = seat;
     this->movieCategory = movieCategory;
-    this->movieDate = movieDate;
     this->movieTime = movieTime;
+
+    this->ticketQuantity = 25;
+    for(int i = 0; i < 25; i++){
+        this->seatAllocation[i] = false;
+    }
+
 }
 
 /*
@@ -270,7 +276,6 @@ void Movie::viewMovie(Movie selectedMovie){
     std::cout << "Movie Name: " << selectedMovie.movieName;
     std::cout << "Movie Price: " << selectedMovie.moviePrice;
     std::cout << "Movie Category: " << selectedMovie.movieCategory;
-    std::cout << "Movie Date: " << selectedMovie.movieDate;
     std::cout << "Movie Time: " << selectedMovie.movieTime;
 }
 
@@ -559,7 +564,7 @@ float Movie::validateFloat(){
 }
 */
 
-void Movie::movieMenu(){
+void MovieList::movieMenu(){
     while(true){
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t                    Movie Management Menu                 \n"
@@ -628,7 +633,7 @@ void Movie::movieMenu(){
 }
 
 // Error Validation
-int Movie::validateInt() {
+int MovieList::validateInt() {
     // Read userInput
     std::string userInput;
     std::getline(std::cin, userInput);
@@ -653,7 +658,7 @@ int Movie::validateInt() {
     }
 }
 
-float Movie::validateFloat(){
+float MovieList::validateFloat(){
     // Read userInput
     std::string userInput;
     std::getline(std::cin, userInput);
@@ -676,4 +681,40 @@ float Movie::validateFloat(){
     }else{
         return -999;
     }
+}
+
+// Initialize List
+void MovieList::initializeList() {
+    MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12.5, "Action", "2300");
+    IDGenerator;
+    MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15.5, "Action", "2330");
+    IDGenerator;
+    MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20.5, "Comedy", "1140");
+    IDGenerator;
+    MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10.0, "Action", "2100");
+    IDGenerator;
+    MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15.0, "Horror", "1500");
+    IDGenerator;
+    MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32.5, "Action", "1315");
+    IDGenerator;
+    MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25.0, "Comedy", "1145");
+    IDGenerator;
+    MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27.5, "Horror", "1200");
+    IDGenerator;
+    MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23.5, "Comedy", "0000");
+    IDGenerator++;
+    MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21.0, "Horror", "0115");
+    IDGenerator++;
+
+
+    addMovie(movie_1);
+    addMovie(movie_2);
+    addMovie(movie_3);
+    addMovie(movie_4);
+    addMovie(movie_5);
+    addMovie(movie_6);
+    addMovie(movie_7);
+    addMovie(movie_8);
+    addMovie(movie_9);
+    addMovie(movie_10);
 }

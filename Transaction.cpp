@@ -150,7 +150,7 @@ int TransactionList::displayAllTransaction() {
     std::cout << "\n\t---------------------------------------------------------------------------------\n"
                  "\t\t\t\t\tList of Transactions\n"
                  "\t---------------------------------------------------------------------------------\n"
-                 "\tIndex\tID\tMovie Name\tTotal Price\tSeat Count\tTime\tDate\n";
+                 "\tIndex\tID\tMovie Name\tTotal Price\tSeat Count\tTime\n";
 
     Transaction* current = head;
     do{
@@ -324,7 +324,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 // --------------------------------------// Transaction Menus starts here// --------------------------------------//
 
 // Transaction menu landing page implementation - Philip
-void TransactionList::transactionMenu(Movie* movieList){
+void TransactionList::transactionMenu(MovieList* movieList){
     while (true){
         movieList->listMovies();
         std::cout << "\n\t---------------------------------------------------------\n"
@@ -381,7 +381,7 @@ void TransactionList::transactionMenu(Movie* movieList){
     }
 }
 
-void TransactionList::newPurchaseMenu(Movie* movieList)
+void TransactionList::newPurchaseMenu(MovieList* movieList)
 {
     while (true){
         std::cout << "\n\t---------------------------------------------------------\n"

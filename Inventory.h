@@ -7,7 +7,7 @@
 #include <string>
 #include <algorithm>
 
-class Movie { //movieList
+class MovieList { //movieList
 
     struct MovieNode{
         // Attributes
@@ -17,16 +17,14 @@ class Movie { //movieList
         int ticketQuantity;
 
         bool seatAllocation[25];
-        int* seat;
 
-        std::string* movieCategory;
-        std::string movieDate;
+        std::string movieCategory;
         std::string movieTime;
 
         // Methods
         MovieNode();
-        MovieNode(int movieID, std::string movieName, float moviePrice, int ticketQuantity, int* seat,
-                  std::string* movieCategory, std::string movieDate, std::string movieTime);
+        MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
+                  std::string movieTime);
 
     };
 
@@ -38,7 +36,7 @@ class Movie { //movieList
     // Methods
     //void addMovie(MovieNode newNodes);
     //MovieNode generateNewNodes();
-    MovieNode searchMovie();
+    MovieNode* searchMovie();
     void deleteMovie();
     void sortMovie();
     void updateMovie();
@@ -58,7 +56,10 @@ public:
     void movieMenu();
 
     // Constructors
-    Movie();
+    MovieList();
+
+    // List initializer: To initialize list with dummy data
+    void initializeList();
 
 };
 
