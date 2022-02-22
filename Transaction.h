@@ -37,7 +37,7 @@ class TransactionList {
 /* --- Linked List Attribute Implementation ------------------------------------------------------------------------- */
     Transaction* head;
     Transaction* tail; // Think about it
-
+    int transactionIDGenerator = 1;
 /* --- Private Linked List Implementation Methods ------------------------------------------------------------------- */
 
     // Inserting new transaction at the end
@@ -95,6 +95,7 @@ public:
     void insertTransactionToList(Transaction* transactionNode);
     //void displayAllTransaction();
     void sortTransaction(std::string sortParameter);
+    void initializeTransactionList();
 };
 
 

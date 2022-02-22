@@ -32,6 +32,7 @@ int main() {
 
     MovieList adminMovie;
     TransactionList adminTransaction;
+    adminTransaction.initializeTransactionList();
     adminMovie.initializeList();
 
     bool flag = true;

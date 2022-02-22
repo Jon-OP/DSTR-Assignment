@@ -129,6 +129,7 @@ void TransactionList::deleteTransaction(int index) {
 
         // Deallocate the current from memory
     delete current;
+    current = nullptr;
     return;
 }
 
@@ -446,7 +447,9 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                     movieList->deductMovieQuantity(userIndex,userQuantity);
                     //code to test add transaction
                     //need contructor
-                    Transaction newTrans = Transaction();
+                    Transaction* newTrans = new Transaction(transactionIDGenerator++, 12);
+                    insertTransactionToList(newTrans);
+
                     std::cout <<"\n\t>>Purchase created successfully. ";
                     return;
                 }
@@ -655,3 +658,17 @@ void TransactionList::deleteTransaction_prompt(){
     //function to check last transaction ID -> so we can add it into the userTransaction object
     //
 
+void TransactionList::initializeTransactionList() {
+    Transaction* newTrans = new Transaction(this->transactionIDGenerator++, 1.2);
+    //transactionIDGenerator++;
+    Transaction* newTrans2 = new Transaction(this->transactionIDGenerator++, 1.2);
+    //transactionIDGenerator++;
+    Transaction* newTrans3 = new Transaction(this->transactionIDGenerator++, 1.2);
+    //transactionIDGenerator++;
+    Transaction* newTrans4 = new Transaction(this->transactionIDGenerator++, 1.2);
+    //transactionIDGenerator++;
+    insertTransactionToList(newTrans);
+    insertTransactionToList(newTrans2);
+    insertTransactionToList(newTrans3);
+    insertTransactionToList(newTrans4);
+}
