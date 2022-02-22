@@ -11,7 +11,7 @@ MovieList::MovieList() {
     this->movieList = NULL;
 }
 
-//----------------------------------{ Support Methods }--------------------------------------//
+//----------------------------------{ Helper Methods Starts}--------------------------------------//
 
 // Checks if string is float
 bool isFloat(std::string str) {
@@ -63,7 +63,7 @@ int MovieList::partition (MovieNode* IDs, int low, int high)
     swapNode(&IDs[i + 1], &IDs[high]);
     return (i + 1);
 }
-
+//----------------------------------{ Helper Methods Ends }--------------------------------------//
 void MovieList::quickSort(MovieNode* IDs, int low, int high)
 {
     if (low < high)
@@ -79,7 +79,7 @@ void MovieList::quickSort(MovieNode* IDs, int low, int high)
     }
 }
 //----------------------------------{ Functional Methods }--------------------------------------//
-
+//-----------------------------------{ Movie handling methods starts } ------------------------//
 // Done
 void MovieList::addMovie(MovieNode newNode) {
     if(movieList == NULL){
@@ -289,6 +289,333 @@ void MovieList::updateMovie_prompt(){
     }
 }
 
+// View specific details of a movie
+/*
+void MovieList::viewMovie() {
+
+    // List is empty
+    if(this->movieList == NULL){
+        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
+                     "\n\t>> Enter any key to continue:";
+
+        // Wait for user Input and ignore up to 10,000 characters
+        std::cin.ignore( 10000, '\n');
+    }else{
+        // Atleast one item in the list
+        std::cout << std::setw(10) << "Index"
+                  << std::setw(10) << "Movie ID"
+                  << std::setw(20) << "Movie Name"
+                  << std::setw(15) << "Category"
+                  << std::setw(20) << "Seats Left"
+                  << std::setw(10) << "Time";
+
+        for(int i = 0; i < nodeCount; i++){
+            std::cout << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
+        }
+    }
+}*/
+
+//Function to display all the movies in the movieList
+// List out the movie, price, and quantity - DONE
+void MovieList::listMovies() {
+
+    // Checks if movieList is empty
+    if(this->movieList == NULL){
+        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
+                     "\n\t>> Enter any key to continue:";
+
+        // Wait for user Input and ignore up to 10,000 characters
+        std::cin.ignore( 10000, '\n');
+    }else{
+        //Executes if at least one item(movie) is in the movieList
+        std::cout << "\tIndex"
+                  << std::left<<std::setw(10) << "\tMovie ID"
+                  << std::right<<std::setw(16)  << "Movie Name"
+                  << std::left<<"\t       Price"
+                  << std::left<< "\tCategory"
+                  << std::left<< "\tSeats Left"
+                  << std::left<< "\tTime";
+
+        for(int i = 0; i < nodeCount; i++){
+            std::cout   <<"\n\t"<< i+1
+                    << std::left << std::setw(2) <<"\t" << movieList[i].movieID
+                    << std::left <<std::setw(8)<<"\t"<< movieList[i].movieName;
+
+            if (movieList[i].movieName.length()<8)
+            {
+                std::cout  <<std::setw(16)<<"\t "<< movieList[i].moviePrice;
+            }else if (movieList[i].movieName.length()>8 && movieList[i].movieName.length()<16)
+            {
+                std::cout << std::setw(8) << "\t " <<movieList[i].moviePrice;
+            }else
+            {
+                std::cout<< "\t" << movieList[i].moviePrice;
+            }
+            std::cout
+                    << std::left<<"\t" << movieList[i].movieCategory
+                    << std::left<<"\t\t" << movieList[i].ticketQuantity
+                    << std::left<<"\t\t" << movieList[i].movieTime;
+        }
+    }
+}
+
+
+// MovieList::MovieNode >> Returns movieNode
+MovieList::MovieNode MovieList::generateNewNodes() {
+    int id = 1, quantity = 25;
+    float price = 10;
+    std::string name, time = "12PM";
+    std::string category = "Taste";
+    int seat[] = { 1, 2};
+
+    std::cout << "Name:";
+    std::cin >> name;
+
+    MovieNode newNode = MovieNode(id, name,price, category, time);
+    return newNode;
+}
+
+MovieList::MovieNode::MovieNode() {
+    this->movieName = "";
+};
+
+MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
+                            std::string movieTime){
+    this->movieID = movieID;
+    this->movieName = movieName;
+    this->moviePrice = moviePrice;
+    this->movieCategory = movieCategory;
+    this->movieTime = movieTime;
+
+    this->ticketQuantity = 25;
+}
+
+//--------------------------------------------{ Movie handling methods ends } --------------------------//
+
+//---------------------------------------------{ UI methods starts }------------------------------------//
+
+
+void MovieList::movieMenu(){
+    while(true){
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                    Movie Management Menu                 \n"
+                     "\t-*--------------------------*-----------------------------\n"
+                     "\t-|1. Add New Movie          |-----------------------------\n"
+                     "\t-|2. View Movie Details     |-----------------------------\n"
+                     "\t-|3. Search Movie by Name   |-----------------------------\n"
+                     "\t-|4. Update Movie Details   |-----------------------------\n"
+                     "\t-|5. Sort Movie             |-----------------------------\n"
+                     "\t-|6. Delete Movie Details   |-----------------------------\n"
+                     "\t-|7. Back to Main Menu      |-----------------------------\n"
+                     "\t-*--------------------------*-----------------------------\n"
+                     "\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
+
+        switch(userChoice){
+            case 1:
+                // PROMPT MOVIE
+                addMovie_prompt();
+                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
+                break;
+
+            case 2:
+                std::cout << "\n\t-----------------------------------------------------------------------------------------------------\n"
+                             "\t                                         Displaying all movies                                        \n"
+                             "\t------------------------------------------------------------------------------------------------------\n";
+                listMovies();
+                std::cout<< "\n\t-----------------------------------------------------------------------------------------------------\n"
+                            "\tPress any key to continue:";
+                std::cin.ignore( 10000, '\n');
+                break;
+            case 3:
+                searchMovie();
+                //std::cout << "\n>> We should call searchMovie Method\n";
+                break;
+
+            case 4:
+                updateMovie_prompt();
+                //std::cout << "\n>> We should call updateMovie Method\n";
+                break;
+
+            case 5:
+                std::cout << "\n>> We should call sortMovie Method\n";
+                break;
+
+            case 6:
+                std::cout << "\n>> We should call deleteMovie Method\n";
+                break;
+
+            case 7:
+                std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                return;
+
+            default:
+                //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }
+}
+void MovieList::addMovie_prompt(){
+    std::string movieName, movieCategory, movieTime, tempString;
+    float moviePrice;
+    int movieID, tempTime;
+    std::cout << "\n\t-*----------------------------------------------*-"
+                 "\n\t-|               Adding New Movie               |-"
+                 "\n\t-*----------------------------------------------*-\n"
+                 "\n\t>> Movie Name [Maximum of 20 characters]"
+                 "\n\t>> Enter the new movie name:";;
+
+    // Getting Movie Name and validating their input
+    while(true){
+        std::getline(std::cin, movieName);
+        if(movieName.length() < 21 && movieName.length() != 0){
+            std::cout << "\n\t>> [ Movie Name: " << movieName << " ] - User input accepted...";
+            break;
+        }else{
+            std::cout << "\n\t>> ERROR: Movie name has to be lesser than 20 characters long"
+                         "\n\t>> Enter the Movie Name:";
+        }
+    }
+
+    // Getting Movie Price and validating their input
+    std::cout << "\n\n\t>> Movie Price [In Ringgit Malaysia, must be more than RM 0]"
+                 "\n\t>> Enter the Movie Price: RM";
+    while(true){
+        moviePrice = validateFloat();
+        // User enters a valid price for movie
+        if(moviePrice > 0 && moviePrice < 1000){
+            std::cout << "\n\t>> [ Price: RM" << moviePrice << " ] - User input accepted...";
+            break;
+        }else{
+            // User entered < 0 OR validateFloat returns -999 which is an error code
+            std::cout << "\n\t>> ERROR: Invalid Input."
+                         "\n\t>> Price must be a positive number [More than RM 0]."
+                         "\n\t>> Please re-enter the new movie price:";
+        }
+    }
+
+    // Getting Category from user
+    while(true){
+        std::cout << "\n\n\t-*--------------*-"
+                     "\n\t-| Category List |-"
+                     "\n\t-*---------------*-";
+        for(int i = 0; i < (sizeof (categoryList)/sizeof (categoryList[0])); i++ ){
+            std::cout << "\n\t-| " << i+1 << ". " << std::left << std::setw(10) << categoryList[i] << " |-";
+        }
+        std::cout << "\n\t-*---------------*-"
+                     "\n\n\t>> [Enter the index between 1 to 3]"
+                     "\n\t>> Choose a category for the new movie:";
+
+        int userChoice = validateInt();
+
+        if(userChoice > 0 && userChoice <= (sizeof(categoryList)/sizeof (categoryList[0]))){
+            movieCategory = categoryList[userChoice-1];
+            std::cout << "\n\t>> [ Movie Category: " << movieCategory << " ] - User input accepted...";
+            break;
+        }else{
+            std::cout << "\n\t>> ERROR: Invalid Input detected."
+                         "\n\t>> Please choose an appropriate index."
+                         "\n\t>> Enter any key to continue:";
+            std::cin.ignore(10000,'\n');
+        }
+    }
+
+    // Get HOURS from user
+    std::cout << "\n\n\t>> Selecting the start time for Movie in HOURS [0 - 23]"
+                 "\n\t>> Enter the movie start time:";
+    while(true){
+        tempTime = validateInt();
+        if(tempTime >= 0 && tempTime < 24){
+            movieTime = std::to_string(tempTime);
+
+            // Time entered by user is less than 10 so its 1, 2, 3, ...
+            // Convert to 24 hour representation like 01, 02, 03, ...
+            if(tempTime < 10){
+                movieTime = "0" + movieTime;
+            }
+            std::cout << "\n\n\t>> [ Time(Hours): " << movieTime << " ] - User input accepted...";
+            break;
+        }else{
+            std::cout << "\n\tERROR: Invalid HOURS value detected."
+                         "\n\t>> Please enter the HOURS from [0 - 23]."
+                         "\n\t>> Enter the movie start time:";
+        }
+    }
+
+    // Get MINUTES from user
+    std::cout << "\n\n\t>> Selecting the starting for Movie in MINUTES [0 - 59]"
+                 "\n\t>> Enter the movie start time:";
+    while(true){
+        tempTime = validateInt();
+        if(tempTime >= 0 && tempTime < 60){
+            tempString = std::to_string(tempTime);
+            // Format string to print 9 like 09
+            if(tempTime < 10){
+                tempString = "0" + tempString;
+            }
+            std::cout << "\n\n\t>> [ Movie Time [MINUTES]: " << tempString << " ] - User input accepted...";
+            // Concatenate movieTime and tempString to get the appropriate 24 HOURS time format
+            movieTime = movieTime + tempString;
+            break;
+        }else{
+            std::cout << "\n\tERROR: Invalid MINUTES value detected."
+                         "\n\t>> Please enter the MINUTES from [0 - 59]."
+                         "\n\t>> Enter the movie start time:";
+        }
+    }
+
+    // FINAL CONFIRMATION TO ADD NEW MOVIE
+    while(true){
+        std::cout << "\n\n\t-*-----------------------------------------------------*-"
+                  <<   "\n\t-|                  New Movie Details                  |-"
+                  <<   "\n\t-*-----------------------------------------------------*-"
+                  <<   "\n\t-| Movie Name     : " << std::left << std::setw(21) << movieName << " |------------|-"
+                  <<   "\n\t-| Movie Price    : RM " << std::left << std::setw(18) <<moviePrice << " |------------|-"
+                  <<   "\n\t-| Movie Category : " << std::left << std::setw(21) << movieCategory << " |------------|-"
+                  <<   "\n\t-| Movie Time     : " << std::left << std::setw(21) << movieTime << " |------------|-"
+                  <<   "\n\t-*------------------------------------------------------*";
+        std::cout << "\n\n\t>> [ 1 = Yes , 2 = No ]"
+                     "\n\t>> Confirm adding this movie?"
+                     "\n\t>> Enter your choice:";
+        int userChoice = validateInt();
+        if(userChoice == 1){
+            IDGenerator++;
+            movieID = this->IDGenerator;
+            MovieNode newMovie = MovieNode(movieID, movieName, moviePrice, movieCategory, movieTime);
+            this->addMovie(newMovie);
+            std::cout << "\n\t>> New Movie has been added to the list."
+                         "\n\t>> Returning to Inventory menu."
+                         "\n\t>> Enter any key to continue:";
+            std::cin.ignore(10000, '\n');
+            break;
+        }else{
+            if(userChoice == 2) {
+                std::cout << "\n\tAdding New Movie process has been cancelled."
+                             "\n\tCurrent Movie details have been discarded."
+                             "\n\tReturning to Inventory Menu."
+                             "\n\tEnter any key to continue:";
+                std::cin.ignore(10000, '\n');
+                break;
+            } else{
+                std::cout << "\n\tERROR: Invalid Input."
+                             "\n\tEnter any key to continue:";
+                std::cin.ignore(10000,'\n');
+            }
+        }
+    }
+    return;
+}
+
+
 void MovieList::updateMovie(MovieNode *toUpdate) {
     while (true){
         std::cout << "\n\t---------------------------------------------------------"
@@ -301,7 +628,6 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
                      "\n\t-|  5. Finalize updating details       |------------------"
                      "\n\t-*--------------------------------------------------------"
                      "\n\n\t>> Enter your choice:";
-
         int userChoice = validateInt();
         std::string userInput;
         std::string userInputTime;
@@ -456,97 +782,121 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
         }
     }
 }
+//Getters and setters
+int MovieList::getMovieListNodeCount()
+{
+    return nodeCount;
+}
+std::string MovieList::getMovieName(int index)
+{
+    return movieList[index].movieName;
+}
+std::string MovieList::getMovieCategory(int index)
+{
+    return movieList[index].movieCategory;
+}
+int MovieList::getSeatsLeft(int index)
+{
+    return movieList[index].ticketQuantity;
+}
+std::string MovieList::getTime(int index)
+{
+    return movieList[index].movieTime;
+}
+void MovieList::deductMovieQuantity(int inputQuantity)
+{
 
-// View specific details of a movie
-/*
-void MovieList::viewMovie() {
+}
 
-    // List is empty
-    if(this->movieList == NULL){
-        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
-                     "\n\t>> Enter any key to continue:";
 
-        // Wait for user Input and ignore up to 10,000 characters
-        std::cin.ignore( 10000, '\n');
-    }else{
-        // Atleast one item in the list
-        std::cout << std::setw(10) << "Index"
-                  << std::setw(10) << "Movie ID"
-                  << std::setw(20) << "Movie Name"
-                  << std::setw(15) << "Category"
-                  << std::setw(20) << "Seats Left"
-                  << std::setw(10) << "Time";
+// Error Validation
+int MovieList::validateInt() {
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
 
-        for(int i = 0; i < nodeCount; i++){
-            std::cout << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
         }
-    }
-}*/
-
-// List out the movie, price, and quantity - DONE
-void MovieList::listMovies() {
-    // List is empty
-    if(this->movieList == NULL){
-        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
-                     "\n\t>> Enter any key to continue:";
-
-        // Wait for user Input and ignore up to 10,000 characters
-        std::cin.ignore( 10000, '\n');
-    }else{
-        // Atleast one item in the list
-        std::cout << "\n"
-                  << std::setw(5) << "Index"
-                  << std::setw(10) << "Movie ID"
-                  << std::setw(20) << "Movie Name"
-                  << std::setw(15) << "Category"
-                  << std::setw(20) << "Seats Left"
-                  << std::setw(10) << "Time";
-
-        for(int i = 0; i < nodeCount; i++){
-            std::cout << "\n" << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stoi(userInput);
         }
+    }else{
+        return -999;
     }
 }
 
-/*
-void MovieList::listMovies(){
-    std::cout << "\n\tIndex\tMovie Name\tPrice\tAvailable Quantity";
-    for(int i = 0; i < this->nodeCount; i++){
-        std::cout << "\n\t" << i+1 << "\t" << this->movieList[i].movieName
-                  << "\t" << this->movieList[i].moviePrice << "\t"
-                  << this->movieList[i].ticketQuantity;
+float MovieList::validateFloat(){
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
+
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stof(userInput);
+        }
+    }else{
+        return -999;
     }
-}*/
-
-// MovieList::MovieNode >> Returns movieNode
-MovieList::MovieNode MovieList::generateNewNodes() {
-    int id = 1, quantity = 25;
-    float price = 10;
-    std::string name, time = "12PM";
-    std::string category = "Taste";
-    int seat[] = { 1, 2};
-
-    std::cout << "Name:";
-    std::cin >> name;
-
-    MovieNode newNode = MovieNode(id, name,price, category, time);
-    return newNode;
 }
 
-MovieList::MovieNode::MovieNode() {
-    this->movieName = "";
-};
+// Initialize List
+void MovieList::initializeList() {
+    MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12.5, "Action", "2300");
+    IDGenerator++;
+    MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15.5, "Action", "2330");
+    IDGenerator++;;
+    MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20.5, "Comedy", "1140");
+    IDGenerator++;;
+    MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10.0, "Action", "2100");
+    IDGenerator++;;
+    MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15.0, "Horror", "1500");
+    IDGenerator++;;
+    MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32.5, "Action", "1315");
+    IDGenerator++;;
+    MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25.0, "Comedy", "1145");
+    IDGenerator++;;
+    MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27.5, "Horror", "1200");
+    IDGenerator++;;
+    MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23.5, "Comedy", "0000");
+    IDGenerator++;
+    MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21.0, "Horror", "0115");
+    IDGenerator++;
 
-MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
-                            std::string movieTime){
-    this->movieID = movieID;
-    this->movieName = movieName;
-    this->moviePrice = moviePrice;
-    this->movieCategory = movieCategory;
-    this->movieTime = movieTime;
 
-    this->ticketQuantity = 25;
+    addMovie(movie_1);
+    addMovie(movie_2);
+    addMovie(movie_3);
+    addMovie(movie_4);
+    addMovie(movie_5);
+    addMovie(movie_6);
+    addMovie(movie_7);
+    addMovie(movie_8);
+    addMovie(movie_9);
+    addMovie(movie_10);
 }
+
+
 
 /*
 //ADD movie to Movie Array
@@ -908,163 +1258,4 @@ float Movie::validateFloat(){
 }
 */
 
-void MovieList::movieMenu(){
-    while(true){
-        std::cout << "\n\t---------------------------------------------------------\n"
-                     "\t                    Movie Management Menu                 \n"
-                     "\t-*--------------------------*-----------------------------\n"
-                     "\t-|1. Add New Movie          |-----------------------------\n"
-                     "\t-|2. View Movie Details     |-----------------------------\n"
-                     "\t-|3. Search Movie by Name   |-----------------------------\n"
-                     "\t-|4. Update Movie Details   |-----------------------------\n"
-                     "\t-|5. Sort Movie             |-----------------------------\n"
-                     "\t-|6. Delete Movie Details   |-----------------------------\n"
-                     "\t-|7. Back to Main Menu      |-----------------------------\n"
-                     "\t-*--------------------------*-----------------------------\n"
-                     "\n\t>> Enter your choice:";
 
-        int userChoice = validateInt();
-
-        switch(userChoice){
-            case 1:
-                // PROMPT MOVIE
-
-                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
-                break;
-
-            case 2:
-                std::cout << "\n>> We should call listMovieDetails Method\n";
-                std::cout << "\n\t---------------------------------------------------------\n"
-                             "\t                 Select a movie to be updated             \n"
-                             "\t----------------------------------------------------------\n";
-                //void listMovieDetails();
-                listMovies();
-
-                break;
-
-            case 3:
-                searchMovie();
-                //std::cout << "\n>> We should call searchMovie Method\n";
-                break;
-
-            case 4:
-                updateMovie_prompt();
-                //std::cout << "\n>> We should call updateMovie Method\n";
-                break;
-
-            case 5:
-                std::cout << "\n>> We should call sortMovie Method\n";
-                sortMovie();
-                std::cout << "\n sortMovie method has been called\n";
-
-                break;
-
-            case 6:
-                std::cout << "\n>> We should call deleteMovie Method\n";
-                break;
-
-            case 7:
-                std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                return;
-
-            default:
-                //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
-                // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
-
-                // Wait for user Input and ignore up to 10,00 characters
-                std::cin.ignore( 10000, '\n');
-                break;
-        }
-    }
-}
-
-// Error Validation
-int MovieList::validateInt() {
-    // Read userInput
-    std::string userInput;
-    std::getline(std::cin, userInput);
-
-    // Iterate and set hasChar to true if there is char in msg
-    if(userInput.length() != 0){
-        bool hasChar = false;
-        for(int i = 0; i < userInput.length(); i++){
-            if( !(std::isdigit(userInput[i]))){
-                hasChar = true;
-            }
-        }
-        // hasChar = true, return -99 to signify error
-        if(hasChar){
-            return -999;
-        }else{
-            // hasChar = false, convert msg to int and return
-            return std::stoi(userInput);
-        }
-    }else{
-        return -999;
-    }
-}
-
-float MovieList::validateFloat(){
-    // Read userInput
-    std::string userInput;
-    std::getline(std::cin, userInput);
-
-    // Iterate and set hasChar to true if there is char in msg
-    if(userInput.length() != 0){
-        bool hasChar = false;
-        for(int i = 0; i < userInput.length(); i++){
-            if( !(std::isdigit(userInput[i]))){
-                hasChar = true;
-            }
-        }
-        // hasChar = true, return -99 to signify error
-        if(hasChar){
-            return -999;
-        }else{
-            // hasChar = false, convert msg to int and return
-            return std::stof(userInput);
-        }
-    }else{
-        return -999;
-    }
-}
-
-// Initialize List
-void MovieList::initializeList() {
-    MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12.5, "Action", "2300");
-    IDGenerator;
-    MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15.5, "Action", "2330");
-    IDGenerator;
-    MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20.5, "Comedy", "1140");
-    IDGenerator;
-    MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10.0, "Action", "2100");
-    IDGenerator;
-    MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15.0, "Horror", "1500");
-    IDGenerator;
-    MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32.5, "Action", "1315");
-    IDGenerator;
-    MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25.0, "Comedy", "1145");
-    IDGenerator;
-    MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27.5, "Horror", "1200");
-    IDGenerator;
-    MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23.5, "Comedy", "0000");
-    IDGenerator++;
-    MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21.0, "Horror", "0115");
-    IDGenerator++;
-
-
-    addMovie(movie_1);
-    addMovie(movie_2);
-    addMovie(movie_3);
-    addMovie(movie_4);
-    addMovie(movie_5);
-    addMovie(movie_6);
-    addMovie(movie_7);
-    addMovie(movie_8);
-    addMovie(movie_9);
-    addMovie(movie_10);
-}

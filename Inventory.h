@@ -44,12 +44,14 @@ class MovieList { //movieList
     MovieNode* searchMovie();
     void deleteMovie();
     void sortMovie();
+    void addMovie_prompt();
     void updateMovie_prompt();
     void updateMovie(MovieNode* toUpdate);
 
     // Validation
     int validateInt();
     float validateFloat();
+
 
 public:
     void addMovie(MovieNode newNodes);
@@ -68,6 +70,15 @@ public:
     void initializeList();
 
     void swapNode(MovieNode *elem1, MovieNode *elem2);
+
+    //Getters and setters
+    int getMovieListNodeCount();
+    std::string getMovieName(int index);
+    std::string getMovieCategory(int index);
+    int getSeatsLeft(int index);
+    std::string getTime(int index);
+    void deductMovieQuantity(int inputQuantity);
+
 };
 
 

@@ -326,7 +326,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 // Transaction menu landing page implementation - Philip
 void TransactionList::transactionMenu(MovieList* movieList){
     while (true){
-        movieList->listMovies();
+        //movieList->listMovies();
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t                Transaction Management Menu              \n"
                      "\t-*---------------------------*---------------------------\n"
@@ -343,7 +343,6 @@ void TransactionList::transactionMenu(MovieList* movieList){
                 newPurchaseMenu(movieList); //call function for creation of new purchase
                 break;
             case 2:
-                //viewPurchase();
                 displayAllTransaction();
 
                 // Print error message and prompt user to enter any key to continue
@@ -351,7 +350,6 @@ void TransactionList::transactionMenu(MovieList* movieList){
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
-
                 break;
             case 3:
                 //placeholder for sort purchase
@@ -396,11 +394,22 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
 
         int userChoice = validateInt();
         switch (userChoice) {
-            case 1:
+            case 1: {
+                std::cout << "\n\t-----------------------------------------------------------------------------------------------------\n"
+                             "\t                                       Which movie to be purchased?                                   \n"
+                             "\t------------------------------------------------------------------------------------------------------\n";
                 movieList->listMovies();
-                //placeholder for View All Product(CALL FROM - I) > WHICH MOVIE DO YOU WANT() > WHICH SEAT YOU WANT > CONFIRM > CREATE PURCHASE(TRANS OBJ) > ADD TO LINKED LIST
-                //newTransaction();
+                std::cout << "\n\t----------------------------------------------------------------------------------------------------\n"
+                             "\tSelect the index of the movie:";
+                userChoice = validateInt();
+                int maxIndex = movieList->getMovieListNodeCount();
+                if (userChoice == -999) {
+                    std::cout << "\n\tInvalid input entered. Enter 1 to " << maxIndex <<
+                              ".\n\tEnter any Key to continue:";
+                }
+                std:: cout<<"\n\tSelected movie:"  ;
                 break;
+            }
             case 2:
                 // placeholder for Search Product by Category
                 break;
