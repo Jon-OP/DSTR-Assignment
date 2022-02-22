@@ -400,8 +400,9 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                             "\t----------------------------------------------------------\n"
                             ;
                 movieList->listMovies();
-                //placeholder for View All Product(CALL FROM - I) > WHICH MOVIE DO YOU WANT() > WHICH SEAT YOU WANT > CONFIRM > CREATE PURCHASE(TRANS OBJ) > ADD TO LINKED LIST
-                //newTransaction();
+                std::cout<< "\n\t---------------------------------------------------------\n"
+                            "\tPress any key to continue:";
+                std::cin.ignore( 10000, '\n');
                 break;
             case 2:
                 // placeholder for Search Product by Category

@@ -921,11 +921,11 @@ void MovieList::movieMenu(){
                 std::cout << "\n\t---------------------------------------------------------\n"
                              "\t                 Select a movie to be updated             \n"
                              "\t----------------------------------------------------------\n";
-                //void listMovieDetails();
                 listMovies();
-
+                std::cout<< "\n\t---------------------------------------------------------\n"
+                            "\tPress any key to continue:";
+                std::cin.ignore( 10000, '\n');
                 break;
-
             case 3:
                 searchMovie();
                 //std::cout << "\n>> We should call searchMovie Method\n";
