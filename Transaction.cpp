@@ -394,16 +394,22 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
 
         int userChoice = validateInt();
         switch (userChoice) {
-            case 1:
-                std::cout<< "\n\t---------------------------------------------------------\n"
-                            "\t               Which movie to be purchased?               \n"
-                            "\t----------------------------------------------------------\n"
-                            ;
+            case 1: {
+                std::cout << "\n\t----------------------------------------------------------------------\n"
+                             "\t                       Which movie to be purchased?                    \n"
+                             "\t-----------------------------------------------------------------------\n";
                 movieList->listMovies();
-                std::cout<< "\n\t---------------------------------------------------------\n"
-                            "\tSelect the index of the movie:";
-                std::cin.ignore( 10000, '\n');
+                std::cout << "\n\t---------------------------------------------------------\n"
+                             "\tSelect the index of the movie:";
+                userChoice = validateInt();
+                int maxIndex = movieList->getMovieListNodeCount();
+                if (userChoice == -999) {
+                    std::cout << "\n\tInvalid input entered. Enter 1 to " << maxIndex <<
+                              ".\n\tEnter any Key to continue:";
+                }
+                std:: cout<<"\n\tSelected movie:" << ;
                 break;
+            }
             case 2:
                 // placeholder for Search Product by Category
                 break;

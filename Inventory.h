@@ -62,6 +62,14 @@ public:
     // List initializer: To initialize list with dummy data
     void initializeList();
 
+    //Getters and setters
+    int getMovieListNodeCount();
+    std::string getMovieName(int index);
+    std::string getMovieCategory(int index);
+    int getSeatsLeft(int index);
+    std::string getTime(int index);
+    void deductMovieQuantity(int inputQuantity);
+
 };
 
 

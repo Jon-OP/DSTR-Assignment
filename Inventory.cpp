@@ -304,8 +304,8 @@ void MovieList::listMovies() {
                   << "\tTime";
 
         for(int i = 0; i < nodeCount; i++){
-            std::cout   <<"\n\t"<< i
-                    <<"\t" << movieList[i].movieID
+            std::cout   <<"\n\t"<< i+1
+                    << std::setw(2) <<"\t" << movieList[i].movieID
                     <<std::setw(8)<<"\t"<< movieList[i].movieName;
 
             if (movieList[i].movieName.length()<8)
@@ -319,8 +319,7 @@ void MovieList::listMovies() {
             }
             std::cout
                     <<"\t\t" << movieList[i].ticketQuantity
-                    <<"\t\t" << movieList[i].movieTime;   // @PHILIP PRINT ALL DETAILS
-
+                    <<"\t\t" << movieList[i].movieTime;
         }
     }
 }
@@ -356,9 +355,9 @@ MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float movieP
     this->ticketQuantity = 25;
 }
 
-//--------------------------------------------{ Movie handling methods ends } ---------------------------
+//--------------------------------------------{ Movie handling methods ends } --------------------------//
 
-//---------------------------------------------{ UI methods starts }------------------------------------
+//---------------------------------------------{ UI methods starts }------------------------------------//
 
 
 void MovieList::movieMenu(){
@@ -598,6 +597,31 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
         }
     }
 }
+//Getters and setters
+int MovieList::getMovieListNodeCount()
+{
+    return nodeCount;
+}
+std::string MovieList::getMovieName(int index)
+{
+    return movieList[index].movieName;
+}
+std::string MovieList::getMovieCategory(int index)
+{
+    return movieList[index].movieCategory;
+}
+int MovieList::getSeatsLeft(int index)
+{
+    return movieList[index].ticketQuantity;
+}
+std::string MovieList::getTime(int index)
+{
+    return movieList[index].movieTime;
+}
+void MovieList::deductMovieQuantity(int inputQuantity)
+{
+
+}
 
 
 // Error Validation
@@ -654,21 +678,21 @@ float MovieList::validateFloat(){
 // Initialize List
 void MovieList::initializeList() {
     MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12.5, "Action", "2300");
-    IDGenerator;
+    IDGenerator++;
     MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15.5, "Action", "2330");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20.5, "Comedy", "1140");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10.0, "Action", "2100");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15.0, "Horror", "1500");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32.5, "Action", "1315");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25.0, "Comedy", "1145");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27.5, "Horror", "1200");
-    IDGenerator;
+    IDGenerator++;;
     MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23.5, "Comedy", "0000");
     IDGenerator++;
     MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21.0, "Horror", "0115");
