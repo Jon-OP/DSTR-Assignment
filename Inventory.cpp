@@ -132,27 +132,107 @@ void MovieList::deleteMovie() {
     }
 }
 
-MovieList::MovieNode* MovieList::searchMovie(std::string searchParameter) {
+// Search and Return ONE MovieNode
+MovieList::MovieNode MovieList::searchMovie() {
+    // Prompt user to enter search parameter
+    std::cout << "\n\t>> Enter search parameter:";
+    std::string searchParameter;
+    std::getline(std::cin, searchParameter);
 
+    // Initialize a temporary array to store search results
+    int foundIndex[nodeCount];
+    int internalIndex = 0;
 
+    for(int i = 0; i < nodeCount; i++){
+        // Input and comparison sanitation to allow case-insensitive searches
+            // Search Parameter set to LOWER CASE
+        std::transform(searchParameter.begin(),searchParameter.end(),searchParameter.begin(),::tolower);
 
+            // Movie Name set to LOWER CASE
+        std::string currentName = this->movieList[i].movieName;
+        std::transform(currentName.begin(), currentName.end(), currentName.begin(), ::tolower);
+
+        if( currentName.find(searchParameter) != std::string::npos ){
+            foundIndex[internalIndex] = i;
+            internalIndex++;
+            //std::cout << "Found;";
+        }
+    }
+
+    if(internalIndex != 0) {
+        while (true) {
+            // Print the list of search results
+            for (int i = 0; i < internalIndex; i++) {
+                std::cout << "\n\t" << i + 1 << ".\t" << this->movieList[foundIndex[i]].movieName;
+            } //LINE 165 PHILIP @@@
+            std::cout << "\n\n\t>> Enter the index of the movie you are seeking."
+                         "\n\t>> Enter your choice:";
+
+            int userChoice = validateInt();
+
+            if (userChoice > 0 && userChoice < internalIndex) {
+                return movieList[foundIndex[userChoice]];
+            } else {
+                if (userChoice == -999) {
+                    std::cout << "\n\n\t>> ERROR: Please enter digits only."
+                                 "\n\t>> Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+                } else {
+                    std::cout << "\n\n\t>> ERROR: Enter index from 1 to " << internalIndex
+                              << "\n\t>> Enter any key to continue:";
+
+                    // Wait for user Input and ignore up to 10,00 characters
+                    std::cin.ignore(10000, '\n');
+                }
+            }
+        }
+    }
 };
 
-
-
+// Sort will be done by Eugene
 void MovieList::sortMovie(){
 
 }
 
+// Update the Details
 void MovieList::updateMovie(){
+    while(true){
+        std::cout << "\n\t0.\tSearch movie by Name.";
 
+
+
+
+
+
+    }
 }
 
 // View specific details of a movie
 void MovieList::viewMovie() {
-    for(int i = 0; i < nodeCount; i++){
-        std::cout << movieList[i].movieName;
+
+    // List is empty
+    if(movieList == NULL){
+        std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
+                     "\n\t>> Enter any key to continue:";
+
+        // Wait for user Input and ignore up to 10,000 characters
+        std::cin.ignore( 10000, '\n');
+    }else{
+        // Atleast one item in the list
+        std::cout << std::setw(10) << "Index"
+                  << std::setw(10) << "Movie ID"
+                  << std::setw(20) << "Movie Name"
+                  << std::setw(10) << "Category"
+                  << std::setw(10) << "Seats Left"
+                  << std::setw(10) << "Time";
+
+        for(int i = 0; i < nodeCount; i++){
+            std::cout << movieList[i].movieName;
+        }
     }
+
 
 }
 
@@ -194,10 +274,6 @@ MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float movieP
     this->movieTime = movieTime;
 
     this->ticketQuantity = 25;
-    for(int i = 0; i < 25; i++){
-        this->seatAllocation[i] = false;
-    }
-
 }
 
 /*
@@ -593,7 +669,8 @@ void MovieList::movieMenu(){
                 break;
 
             case 3:
-                std::cout << "\n>> We should call searchMovie Method\n";
+                searchMovie();
+                //std::cout << "\n>> We should call searchMovie Method\n";
                 break;
 
             case 4:

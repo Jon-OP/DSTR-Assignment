@@ -66,7 +66,7 @@ int main() {
                 std::cout << "\n\t>> ERROR: Please enter an index."
                              "\n\t>> Enter any key to continue:";
 
-                // Wait for user Input and ignore up to 10,00 characters
+                // Wait for user Input and ignore up to 10,000 characters
                 std::cin.ignore( 10000, '\n');
 
                 break;

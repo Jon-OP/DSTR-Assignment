@@ -6,6 +6,7 @@
 
 #include <string>
 #include <algorithm>
+#include <iomanip>
 
 class MovieList { //movieList
 
@@ -15,8 +16,6 @@ class MovieList { //movieList
         std::string movieName;
         float moviePrice;
         int ticketQuantity;
-
-        bool seatAllocation[25];
 
         std::string movieCategory;
         std::string movieTime;
@@ -36,7 +35,7 @@ class MovieList { //movieList
     // Methods
     //void addMovie(MovieNode newNodes);
     //MovieNode generateNewNodes();
-    MovieNode* searchMovie(std::string searchParameter);
+    MovieNode searchMovie();
     void deleteMovie();
     void sortMovie();
     void updateMovie();
