@@ -42,7 +42,30 @@ void MovieList::swapNode(MovieNode* elem1, MovieNode* elem2 ){
     *elem2 = temp;
 }
 
-// String partition for QuickSwap method (sortMovie())
+// Partition for quickSort by X (NOT WORKING)
+int MovieList::partition2 (MovieNode* IDs, int low, int high)
+{
+    // pivot
+    MovieNode pivot = IDs[high];
+    // Index of smaller element and indicates the right position of pivot found so far
+    int i = (low - 1);
+
+
+    for (int j = low; j <= high - 1; j++)
+    {
+        // If current element is smaller than the pivot
+        if (static_cast<int>(IDs[j].moviePrice) < static_cast<int>(pivot.moviePrice))
+        {
+            i++; // increment index of smaller element
+            swapNode(&IDs[i], &IDs[j]);
+        }
+    }
+    swapNode(&IDs[i + 1], &IDs[high]);
+    return (i + 1);
+}
+
+
+// Partition for quickSort by ID
 int MovieList::partition (MovieNode* IDs, int low, int high)
 {
     // pivot
@@ -64,6 +87,7 @@ int MovieList::partition (MovieNode* IDs, int low, int high)
     return (i + 1);
 }
 //----------------------------------{ Helper Methods Ends }--------------------------------------//
+// Quick Sort method
 void MovieList::quickSort(MovieNode* IDs, int low, int high)
 {
     if (low < high)
@@ -71,6 +95,21 @@ void MovieList::quickSort(MovieNode* IDs, int low, int high)
         /* pi is partitioning index, arr[p] is now
         at right place */
         int pi = partition(IDs, low, high);
+
+        // Separately sort elements before
+        // partition and after partition
+        quickSort(IDs, low, pi - 1);
+        quickSort(IDs, pi + 1, high);
+    }
+}
+
+void MovieList::quickSort2(MovieNode* IDs, int low, int high) //NOT WORKING
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[p] is now
+        at right place */
+        int pi = partition2(IDs, low, high);
 
         // Separately sort elements before
         // partition and after partition
@@ -234,14 +273,13 @@ void MovieList::sortMovie(){
 
         if (userChoice == 1) {
             //Sort the array by ID
-
             quickSort(movieList, 0, nodeCount - 1);
             std::cout << "Quicksort function called \n";
 
-            //std::cout << "New array : " << movieList << "\n";
-
         } else if (userChoice == 2) {
-            std::cout << "Will sort by name soon, work in progress";
+            //Sort the array by name
+            quickSort2(movieList, 0, nodeCount - 1);
+            std::cout << "Quicksort function called \n";
         }
 }
 
