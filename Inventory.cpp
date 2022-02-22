@@ -4,28 +4,13 @@
 #include "Inventory.h"
 #include <iostream>
 
-// Counter to keep track of number of Movies -> For movieID
-int Movie::inventoryCount = 0;
-
 // Constructor Methods
-Movie::Movie() {}
-
-Movie::Movie(std::string movieName, float moviePrice, std::string movieCategory,
-             std::string movieTime, std::string movieDate) {
-    this->movieID = inventoryCount+1;
-    this->movieName = movieName;
-    this->moviePrice = moviePrice;
-    this->movieCategory = movieCategory;
-    this->movieTime = movieTime;
-    this->movieDate = movieDate;
-
-
-    // Initialize all seatAllocation indices to FALSE (Available for Reservation)
-    for(int i = 0; i < 25; i++){
-        this->seatAllocation[i] = false;
-    }
-
+Movie::Movie() {
+    this->nodeCount = 0;
+    this->IDGenerator = 1;
+    this->movieList = NULL;
 }
+
 
 //----------------------------------{ Support Methods }--------------------------------------//
 
@@ -78,30 +63,163 @@ int partition (std::string names[], int low, int high)
 }
 
 //----------------------------------{ Functional Methods }--------------------------------------//
-//ADD movie to Movie Array
-Movie * Movie::addMovie(Movie movieList[], Movie newMovie){
 
-    //Element counter
-    int counter = 0;
+void Movie::addMovie(MovieNode newNode) {
+    if(movieList == NULL){
+        movieList = new MovieNode[1];
+        movieList[0] = newNode;
+        nodeCount++;
+    }else{
 
-    //Define new array with size +1
+        // Create a static List to copy with size+1
+        MovieNode copyList[nodeCount+1];
+        for(int i = 0; i < nodeCount; i++){
+            copyList[i] = movieList[i];
+        }
+        // Add the new Movie to end of the copyList
+        copyList[nodeCount] = newNode;
 
-    //Movie newMovieList[] =  Movie[(sizeof(movieList)/sizeof(movieList[0])) + 1];
+        // Delete the movieList content
+        delete[] movieList;
+        movieList = NULL;
 
-    Movie newMovieList[(sizeof(&movieList)/sizeof(movieList[0])) + 1];
+        movieList = new MovieNode[nodeCount+1];
+        for(int i = 0; i < nodeCount+1 ; i++){
+            movieList[i] = copyList[i];
+        }
 
-    //Copy elements to new array
-    for (int i=0; i < sizeof(newMovieList)/sizeof(newMovieList[0]) ; i++){
-        newMovieList[i] = movieList[i];
-        counter++;
+        //movieList = copyList;
+        nodeCount++;
+    }
+}
+
+Movie::MovieNode Movie::searchMovie() {
+
+};
+
+void Movie::deleteMovie() {
+    int indexToDelete;
+    listMovies();
+    std::cout << "\n\t>> Which movie would you like to delete?"
+                 "\n\t>> Enter your choice:";
+    std::cin >> indexToDelete;
+    indexToDelete = indexToDelete - 1;
+    nodeCount; // Reduce nodeCount before resizing array
+
+    if(nodeCount == 0){
+        delete[] movieList;
+        movieList = NULL;
+    }else{
+        MovieNode copyList[nodeCount];
+
+        movieList[indexToDelete] = MovieNode();
+
+        // Copy the list
+        int copyListCount = 0;
+        for(int i = 0; i < nodeCount; i++){
+            if(movieList[i].movieName != ""){
+                copyList[copyListCount] = movieList[i];
+                copyListCount++;
+            }
+        }
+
+        delete[] movieList;
+        movieList = NULL;
+
+        nodeCount--;
+
+        movieList = new MovieNode[nodeCount];
+        for(int i = 0; i < nodeCount; i++){
+            movieList[i] = copyList[i];
+        }
+    }
+}
+
+void Movie::sortMovie(){
+
+}
+
+void Movie::updateMovie(){
+
+}
+
+// View specific details of a movie
+void Movie::viewMovie() {
+    for(int i = 0; i < nodeCount; i++){
+        std::cout << movieList[i].movieName;
     }
 
-    //Append new movie to new array
-    newMovieList[counter] = newMovie;
+}
 
-    //Delete old array
-    delete[] movieList;
-    return newMovieList;
+// List out the movie, price, and quantity - DONE
+void Movie::listMovies(){
+    std::cout << "\n\tIndex\tMovie Name\tPrice\tAvailable Quantity";
+    for(int i = 0; i < this->nodeCount; i++){
+        std::cout << "\n\t" << i+1 << "\t" << movieList[i].movieName
+                  << "\t" << movieList[i].moviePrice << "\t"
+                  << movieList[i].ticketQuantity;
+    }
+}
+
+Movie::MovieNode Movie::generateNewNodes() {
+    int id = 1, quantity = 25;
+    float price = 10;
+    std::string name, time = "12PM", date = "FEB";
+    std::string category[] = {"Valbo", "Testa"};
+    int seat[] = { 1, 2};
+
+    std::cout << "Name:";
+    std::cin >> name;
+
+    MovieNode newNode = MovieNode(id, name,price, quantity, seat, category, date, time);
+    return newNode;
+}
+
+
+
+
+
+
+
+
+Movie::MovieNode::MovieNode() {
+    this->movieName = "";
+};
+
+Movie::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, int ticketQuantity, int* seat,
+                            std::string* movieCategory, std::string movieDate, std::string movieTime){
+    this->movieID = movieID;
+    this->movieName = movieName;
+    this->moviePrice = moviePrice;
+    this->ticketQuantity = ticketQuantity;
+    this->seat = seat;
+    this->movieCategory = movieCategory;
+    this->movieDate = movieDate;
+    this->movieTime = movieTime;
+}
+
+/*
+//ADD movie to Movie Array
+Movie* Movie::addMovie(Movie* movieList, Movie newMovie){
+
+
+    if(movieList == NULL){
+        movieList = new Movie[1];
+        movieList[0] = newMovie;
+        movieCount++;
+    }else{
+        Movie* copyList = new Movie[this->movieCount+1];
+        for(int i = 0; i < this->movieCount; i++){
+            copyList[i] = movieList [i];
+        }
+
+        copyList[this->movieCount] = newMovie;
+
+        delete[] movieList[];
+        movieList = copyList;
+        nodeCount++'
+        return movieList;
+    }
 }
 
 //SEARCH for a movie in Movie Array
@@ -263,8 +381,8 @@ Movie * Movie::sortMovie(Movie movieList[]){
 
 
 // CONSOLE DISPLAY Methods
-void Movie::inventoryConsoleMenu(Movie* movieList) {
-    this->movieList = movieList;
+void Movie::inventoryConsoleMenu(Movie* movieListParam) {
+    Movie* movieList = movieListParam;
     std::string inventoryMenuMsg = "\n\t---------------------------------------------------------\n"
                                    "\t                    Movie Management Menu                 \n"
                                    "\t-*--------------------------*-----------------------------\n"
@@ -337,7 +455,7 @@ void Movie::inventoryConsoleMenu(Movie* movieList) {
 
 };
 
-void Movie::listMovieDetails()
+void Movie::listMovieDetails(Movie* movieList)
 {
     for(int i=0;i<sizeof(movieList)/sizeof(movieList[0]);i++)
     {
@@ -390,6 +508,126 @@ int Movie::validateInteger(std::string message){
     }
 }
 
+int Movie::validateInt() {
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
+
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stoi(userInput);
+        }
+    }else{
+        return -999;
+    }
+}
+
+float Movie::validateFloat(){
+    // Read userInput
+    std::string userInput;
+    std::getline(std::cin, userInput);
+
+    // Iterate and set hasChar to true if there is char in msg
+    if(userInput.length() != 0){
+        bool hasChar = false;
+        for(int i = 0; i < userInput.length(); i++){
+            if( !(std::isdigit(userInput[i]))){
+                hasChar = true;
+            }
+        }
+        // hasChar = true, return -99 to signify error
+        if(hasChar){
+            return -999;
+        }else{
+            // hasChar = false, convert msg to int and return
+            return std::stof(userInput);
+        }
+    }else{
+        return -999;
+    }
+}
+*/
+
+void Movie::movieMenu(){
+    while(true){
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                    Movie Management Menu                 \n"
+                     "\t-*--------------------------*-----------------------------\n"
+                     "\t-|1. Add New Movie          |-----------------------------\n"
+                     "\t-|2. View Movie Details     |-----------------------------\n"
+                     "\t-|3. Search Movie by Name   |-----------------------------\n"
+                     "\t-|4. Update Movie Details   |-----------------------------\n"
+                     "\t-|5. Sort Movie             |-----------------------------\n"
+                     "\t-|6. Delete Movie Details   |-----------------------------\n"
+                     "\t-|7. Back to Main Menu      |-----------------------------\n"
+                     "\t-*--------------------------*-----------------------------\n"
+                     "\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
+        switch(userChoice){
+            case 1:
+                // PROMPT MOVIE
+
+                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
+                break;
+
+            case 2:
+                std::cout << "\n>> We should call listMovieDetails Method\n";
+                std::cout << "\n\t---------------------------------------------------------\n"
+                             "\t                 Select a movie to be updated             \n"
+                             "\t----------------------------------------------------------\n";
+                void listMovieDetails();
+
+                break;
+
+            case 3:
+                std::cout << "\n>> We should call searchMovie Method\n";
+                break;
+
+            case 4:
+
+                std::cout << "\n>> We should call updateMovie Method\n";
+                break;
+
+            case 5:
+                std::cout << "\n>> We should call sortMovie Method\n";
+                break;
+
+            case 6:
+                std::cout << "\n>> We should call deleteMovie Method\n";
+                break;
+
+            case 7:
+                std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                return;
+
+            default:
+                //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
+                // Print error message and prompt user to enter any key to continue
+                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
+
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore( 10000, '\n');
+                break;
+        }
+    }
+}
+
+// Error Validation
 int Movie::validateInt() {
     // Read userInput
     std::string userInput;

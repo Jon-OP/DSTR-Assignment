@@ -326,6 +326,7 @@ void TransactionList::sortTransaction(std::string sortParameter) {
 // Transaction menu landing page implementation - Philip
 void TransactionList::transactionMenu(Movie* movieList){
     while (true){
+        movieList->listMovies();
         std::cout << "\n\t---------------------------------------------------------\n"
                      "\t                Transaction Management Menu              \n"
                      "\t-*---------------------------*---------------------------\n"
@@ -339,7 +340,7 @@ void TransactionList::transactionMenu(Movie* movieList){
         int userChoice = validateInt();
         switch (userChoice) {
             case 1:
-                newPurchaseMenu(); //call function for creation of new purchase
+                newPurchaseMenu(movieList); //call function for creation of new purchase
                 break;
             case 2:
                 //viewPurchase();
@@ -380,7 +381,7 @@ void TransactionList::transactionMenu(Movie* movieList){
     }
 }
 
-void TransactionList::newPurchaseMenu()
+void TransactionList::newPurchaseMenu(Movie* movieList)
 {
     while (true){
         std::cout << "\n\t---------------------------------------------------------\n"
@@ -396,8 +397,9 @@ void TransactionList::newPurchaseMenu()
         int userChoice = validateInt();
         switch (userChoice) {
             case 1:
+                movieList->listMovies();
                 //placeholder for View All Product(CALL FROM - I) > WHICH MOVIE DO YOU WANT() > WHICH SEAT YOU WANT > CONFIRM > CREATE PURCHASE(TRANS OBJ) > ADD TO LINKED LIST
-                newTransaction();
+                //newTransaction();
                 break;
             case 2:
                 // placeholder for Search Product by Category
@@ -430,9 +432,10 @@ void TransactionList::newPurchaseMenu()
 
 //----------------------------------------// Helper functions starts here //--------------------------------------//
 
-
+/*
 void TransactionList::newTransaction()
 {
+
     std::string inputMovieName;
     std::string inputSeats;
     Movie movie1 = Movie("spider",10.0,"Action","13:00","15/2/2022");
@@ -455,7 +458,7 @@ void TransactionList::newTransaction()
     //can even consider accepting movie as a parameter couz might as well
     Transaction newTrans = Transaction ();
 
-}
+}*/
 
 
 

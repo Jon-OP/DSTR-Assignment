@@ -7,60 +7,58 @@
 #include <string>
 #include <algorithm>
 
-class Movie {
+class Movie { //movieList
 
-    Movie* movieList = NULL;
-    // Counter for movieID
-    static int inventoryCount;
+    struct MovieNode{
+        // Attributes
+        int movieID;
+        std::string movieName;
+        float moviePrice;
+        int ticketQuantity;
 
-    // Attributes of Inventory Class which will be kept Private
-    int movieID;
-    std::string movieName;
-    float moviePrice;
+        bool seatAllocation[25];
+        int* seat;
 
-    // Ticket Quantity = 25
-    int ticketQuantity = 25;
-    bool seatAllocation[25];
+        std::string* movieCategory;
+        std::string movieDate;
+        std::string movieTime;
 
-    std::string movieCategory;
-    std::string movieTime; // HOUR, MINUTE, AM/PM
-    std::string movieDate; // DAY, MONTH, YEAR
+        // Methods
+        MovieNode();
+        MovieNode(int movieID, std::string movieName, float moviePrice, int ticketQuantity, int* seat,
+                  std::string* movieCategory, std::string movieDate, std::string movieTime);
 
-    // Functional Methods
-//    Movie* addMovie(Movie movieList[], Movie newMovie);
-    Movie searchMovie(Movie *movieList, std::string criteria);
-    Movie* deleteMovie(Movie *movieList, Movie movieToDelete);
-    Movie* sortMovie(Movie *movieList);
+    };
 
-//    void updateMovie(Movie toUpdate);
-//    void viewMovie(Movie selectedMovie);
+    // Attributes
+    int nodeCount;
+    int IDGenerator;
+    MovieNode* movieList;
 
-    //UI methods
-    void listMovieDetails();
+    // Methods
+    //void addMovie(MovieNode newNodes);
+    //MovieNode generateNewNodes();
+    MovieNode searchMovie();
+    void deleteMovie();
+    void sortMovie();
+    void updateMovie();
 
-
-    // Error Validation Method
-    int validateInteger(std::string message);
-
+    // Validation
     int validateInt();
     float validateFloat();
 
 public:
+    void addMovie(MovieNode newNodes);
+    MovieNode generateNewNodes();
+    void listMovies();
+    void viewMovie();
+    // void decreaseQuantity();
 
-    // Constructor Methods
+    // User Interface
+    void movieMenu();
+
+    // Constructors
     Movie();
-    Movie(std::string movieName, float moviePrice, std::string movieCategory,
-              std::string movieTime, std::string movieDate);
-
-    // CONSOLE DISPLAY Methods
-    void inventoryConsoleMenu(Movie* movieList);
-
-    //test method - PHILIP
-    void inventoryShowDetails();
-    void viewMovie(Movie selectedMovie);
-
-    Movie* addMovie(Movie movieList[], Movie newMovie);
-    void updateMovie(Movie* toUpdate);
 
 };
 

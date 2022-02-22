@@ -40,19 +40,37 @@ int main() {
     // Declaration of Transaction Object -> to access public Transaction methods
     TransactionList adminTransaction;
 
+
+    Movie adminMovie;
+    adminMovie.addMovie(adminMovie.generateNewNodes());
+    adminMovie.addMovie(adminMovie.generateNewNodes());
+    //adminMovie.addMovie(adminMovie.generateNewNodes());
+    //adminMovie.addMovie(adminMovie.generateNewNodes());
+    //adminMovie.listMovies();
+    //adminMovie.deleteMovie();
+    //adminMovie.listMovies();
+    adminMovie.addMovie(adminMovie.generateNewNodes());
+
+    //adminMovie.deleteMovie();
+    //adminMovie.viewMovie();
+
+
+
+
+
+    /*
     // TEST SITE FOR MOVIE
     //adding pre-defined data into Inventory of movie
     Movie newMovie = Movie("John Wick", 12.2, "Action, Fight", "12.00 pm", "February");
     Movie newMovie1 = Movie("Spiderman", 12.2, "Action, Fight", "12.00 pm", "February");
     Movie newMovie2 = Movie("John Weak", 12.2, "Action, Fight", "12.00 pm", "February");
 
-    Movie databaseList[0];
-    Movie adminInventory;
-
-    //moviePointers
-    Movie* adminMoviePtr = adminInventory.addMovie(databaseList, newMovie);
-    adminInventory.addMovie()
-
+    Movie* adminInventory = new Movie[1];
+    adminInventory = adminInventory->addMovie(adminInventory, newMovie);
+    //adminInventory = adminInventory->addMovie(adminInventory, newMovie1);
+    //adminInventory = adminInventory->addMovie(adminInventory, newMovie2);
+    //adminInventory->listMovieDetails(adminInventory);
+    std::cout << adminInventory[0].movieName;*/
 
     //adminMovie->addMovie(adminMovie, newMovie);
 
@@ -100,11 +118,11 @@ int main() {
 
         switch (userChoice) {
             case 1:
-                adminInventory.inventoryConsoleMenu();
+                adminMovie.movieMenu();
                 break;
             case 2:
                 //accept inventory as parameter
-                adminTransaction.transactionMenu();
+                adminTransaction.transactionMenu(&adminMovie);
                 std::cout << "You entered 2\n";
                 break;
             case 3:

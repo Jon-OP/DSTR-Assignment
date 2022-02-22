@@ -65,7 +65,7 @@ class TransactionList {
 /* --- Transaction Functions ---------------------------------------------------------------------------------------- */
 
     // Placing a new order
-    void newPurchaseMenu(); // Prompt user to choose movie, ETC
+    void newPurchaseMenu(Movie* movieList); // Prompt user to choose movie, ETC
 
         // Multiple Sub functions pertaining to newPurchase
         void newTransaction();
