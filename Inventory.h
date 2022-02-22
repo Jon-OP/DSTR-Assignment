@@ -39,12 +39,14 @@ class MovieList { //movieList
     MovieNode* searchMovie();
     void deleteMovie();
     void sortMovie();
+    void addMovie_prompt();
     void updateMovie_prompt();
     void updateMovie(MovieNode* toUpdate);
 
     // Validation
     int validateInt();
     float validateFloat();
+
 
 public:
     void addMovie(MovieNode newNodes);
