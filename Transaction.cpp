@@ -396,12 +396,12 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
         switch (userChoice) {
             case 1:
                 std::cout<< "\n\t---------------------------------------------------------\n"
-                            "\t                       List of Movies                     \n"
+                            "\t               Which movie to be purchased?               \n"
                             "\t----------------------------------------------------------\n"
                             ;
                 movieList->listMovies();
                 std::cout<< "\n\t---------------------------------------------------------\n"
-                            "\tPress any key to continue:";
+                            "\tSelect the index of the movie:";
                 std::cin.ignore( 10000, '\n');
                 break;
             case 2:
