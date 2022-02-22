@@ -35,32 +35,49 @@ bool isInt(std::string str) {
     }
 }
 
-// Swaps two movie elements in an array
-void swap(std::string* elem1, std::string* elem2 ){
-    std::string temp = *elem1;
+// Swaps two node elements in an array
+void MovieList::swapNode(MovieNode* elem1, MovieNode* elem2 ){
+    MovieNode temp = *elem1;
     *elem1 = *elem2;
     *elem2 = temp;
 }
 
 // String partition for QuickSwap method (sortMovie())
-int partition (std::string names[], int low, int high)
+int MovieList::partition (MovieNode* IDs, int low, int high)
 {
-    std::string pivot = names[high]; // pivot
-    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+    // pivot
+    MovieNode pivot = IDs[high];
+    // Index of smaller element and indicates the right position of pivot found so far
+    int i = (low - 1);
+
 
     for (int j = low; j <= high - 1; j++)
     {
         // If current element is smaller than the pivot
-        if (names[j] < pivot)
+        if (IDs[j].movieID < pivot.movieID)
         {
             i++; // increment index of smaller element
-            swap(&names[i], &names[j]);
+            swapNode(&IDs[i], &IDs[j]);
         }
     }
-    swap(&names[i + 1], &names[high]);
+    swapNode(&IDs[i + 1], &IDs[high]);
     return (i + 1);
 }
 
+void MovieList::quickSort(MovieNode* IDs, int low, int high)
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[p] is now
+        at right place */
+        int pi = partition(IDs, low, high);
+
+        // Separately sort elements before
+        // partition and after partition
+        quickSort(IDs, low, pi - 1);
+        quickSort(IDs, pi + 1, high);
+    }
+}
 //----------------------------------{ Functional Methods }--------------------------------------//
 
 // Done
@@ -210,6 +227,22 @@ MovieList::MovieNode* MovieList::searchMovie() {
 // Sort will be done by Eugene
 void MovieList::sortMovie(){
 
+    std::cout << "\n\t1. Sort by ID"
+              << "\n\t2. Sort by name"
+              << "\n\n\t Enter your choice: ";
+    int userChoice = validateInt();
+
+        if (userChoice == 1) {
+            //Sort the array by ID
+
+            quickSort(movieList, 0, nodeCount - 1);
+            std::cout << "Quicksort function called \n";
+
+            //std::cout << "New array : " << movieList << "\n";
+
+        } else if (userChoice == 2) {
+            std::cout << "Will sort by name soon, work in progress";
+        }
 }
 
 // Update the Details
@@ -921,6 +954,9 @@ void MovieList::movieMenu(){
 
             case 5:
                 std::cout << "\n>> We should call sortMovie Method\n";
+                sortMovie();
+                std::cout << "\n sortMovie method has been called\n";
+
                 break;
 
             case 6:

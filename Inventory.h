@@ -34,6 +34,11 @@ class MovieList { //movieList
     std::string categoryList[3] = {"Action","Comedy", "Horror"};
 
     // Methods
+
+    //Support Methods
+    void quickSort(MovieNode *IDs, int low, int high);
+    int partition(MovieNode *IDs, int low, int high);
+
     //void addMovie(MovieNode newNodes);
     //MovieNode generateNewNodes();
     MovieNode* searchMovie();
@@ -62,6 +67,7 @@ public:
     // List initializer: To initialize list with dummy data
     void initializeList();
 
+    void swapNode(MovieNode *elem1, MovieNode *elem2);
 };
 
 
