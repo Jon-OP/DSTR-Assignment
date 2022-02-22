@@ -407,7 +407,11 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                     std::cout << "\n\tInvalid input entered. Enter 1 to " << maxIndex <<
                               ".\n\tEnter any Key to continue:";
                 }
-                std:: cout<<"\n\tSelected movie:"  ;
+
+                std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(maxIndex) << "\tQuantity:"<<movieList->getMovieName(maxIndex) ;
+                std::cout<<"\n\tHow many tickets to purchase:";
+                userChoice = validateInt();
+                Transaction();
                 break;
             }
             case 2:
