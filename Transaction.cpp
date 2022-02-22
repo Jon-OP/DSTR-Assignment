@@ -7,7 +7,7 @@
 
 int userChoice;
 
-/* --- Transaction: METHODS ------------------------------------------------------------------------------------------*/
+/* --- Transaction: METHODS STARTS------------------------------------------------------------------------------------------*/
 
 // Methods: CONSTRUCTOR
     // Default Constructor
@@ -43,7 +43,7 @@ float Transaction::getTransactionTotalPrice() {
     return this->totalPrice;
 }
 
-/* --- TransactionList: METHODS --------------------------------------------------------------------------------------*/
+/* --- TransactionList: METHODS ENDS --------------------------------------------------------------------------------------*/
 
 
 
