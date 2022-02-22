@@ -132,11 +132,7 @@ void MovieList::deleteMovie() {
     }
 }
 
-MovieList::MovieNode* MovieList::searchMovie() {
-    std::string searchParameter;
-    std::cout << "\n\t>> Enter the movie name:";
-
-    std::getline(std::cin, searchParameter);
+MovieList::MovieNode* MovieList::searchMovie(std::string searchParameter) {
 
 
 

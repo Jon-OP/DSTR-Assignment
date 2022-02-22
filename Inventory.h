@@ -36,7 +36,7 @@ class MovieList { //movieList
     // Methods
     //void addMovie(MovieNode newNodes);
     //MovieNode generateNewNodes();
-    MovieNode* searchMovie();
+    MovieNode* searchMovie(std::string searchParameter);
     void deleteMovie();
     void sortMovie();
     void updateMovie();
