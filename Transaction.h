@@ -29,7 +29,7 @@ public:
     Transaction();
     Transaction(int ID, float totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
     // Transaction Constructor with Param
-    Transaction()
+    //Transaction()
 };
 
 // Transaction: will be the linked list

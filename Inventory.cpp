@@ -835,7 +835,11 @@ std::string MovieList::getMovieCategory(int index)
 {
     return movieList[index].movieCategory;
 }
-int MovieList::getSeatsLeft(int index)
+float MovieList::getMoviePrice(int index)
+{
+    return movieList[index].moviePrice;
+}
+int MovieList::getTicketsLeft(int index)
 {
     return movieList[index].ticketQuantity;
 }
@@ -843,7 +847,7 @@ std::string MovieList::getTime(int index)
 {
     return movieList[index].movieTime;
 }
-void MovieList::deductMovieQuantity(int inputQuantity)
+void MovieList::deductMovieQuantity(int index,int inputQuantity)
 {
 
 }

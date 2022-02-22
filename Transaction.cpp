@@ -43,6 +43,8 @@ float Transaction::getTransactionTotalPrice() {
     return this->totalPrice;
 }
 
+
+
 /* --- TransactionList: METHODS ENDS --------------------------------------------------------------------------------------*/
 
 
@@ -387,40 +389,77 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                      "\t-*-------------------------------*-----------------------\n"
                      "\t-|1. View All Product            |-----------------------\n"
                      "\t-|2. Search Product by Category  |-----------------------\n"
-                     "\t-|3. Checkout cart               |-----------------------\n"
-                     "\t-|4. Return to previous menu     |-----------------------\n"
+                     "\t-|3. Return to previous menu     |-----------------------\n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\n\t>> Enter your choice:";
 
         int userChoice = validateInt();
         switch (userChoice) {
             case 1: {
-                std::cout << "\n\t-----------------------------------------------------------------------------------------------------\n"
-                             "\t                                       Which movie to be purchased?                                   \n"
-                             "\t------------------------------------------------------------------------------------------------------\n";
+                std::cout << "\n\t---------------------------------------------------------------------------------------------------\n"
+                             "\t                                       Which movie to be purchased?                                 \n"
+                             "\t---------------------------------------------------------------------------------------------------\n";
                 movieList->listMovies();
-                std::cout << "\n\t----------------------------------------------------------------------------------------------------\n"
-                             "\tSelect the index of the movie:";
-                userChoice = validateInt();
+                std::cout << "\n\t-------------------------------------------------------------------------------------------------\n"
+                             "\t>>Select the index of the movie [0 to return]:";
+                int userIndex = validateInt();
                 int maxIndex = movieList->getMovieListNodeCount();
-                if (userChoice == -999) {
-                    std::cout << "\n\tInvalid input entered. Enter 1 to " << maxIndex <<
-                              ".\n\tEnter any Key to continue:";
+
+                if(userIndex<1 || userIndex> maxIndex)
+                {
+                    std::cout << "\n\t>>There is no such index. Enter 1 to" << maxIndex <<
+                              ".\n\t>>Enter any Key to retry:";
+                    break;
+                }
+                else if (userIndex == -999) {
+                    std::cout << "\n\t>>Invalid input entered. Enter 1 to " << maxIndex <<
+                              ".\n\t>>Enter any Key to retry:";
+                    break;
+                }else if (userIndex == 0)
+                {
+                    return;
                 }
 
-                std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(maxIndex) << "\tQuantity:"<<movieList->getMovieName(maxIndex) ;
-                std::cout<<"\n\tHow many tickets to purchase:";
+                std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(userIndex-1) << "\tQuantity:"<<movieList->getTicketsLeft(userIndex-1) ;
+                std::cout<<"\n\n\t>>How many tickets to purchase:";
+                int userQuantity = validateInt();
+                if (userQuantity == -999) {
+                    std::cout << "\n\tInvalid input entered. Enter an integer or a float value" <<
+                              ".\n\tEnter any Key to retry:";
+                    break;
+                }
+                if (userQuantity> movieList->getTicketsLeft(userIndex))
+                {
+                    std::cout<<"\n\tInsufficient ticket(s). Try again\n";
+                    break;
+                }
+                std::cout<<"\n\tYour order:\n\t"
+                << "Movie Name: "<< movieList->getMovieName(userIndex-1)
+                << "\n\tQuantity to be purchased: "<< userQuantity
+                << " \n\tPrice to be paid: "<< movieList->getMoviePrice(userIndex-1)*userQuantity;
+
+                std::cout<<"\n\n\t>>Confirming purchase. Do you wish to proceed?"
+                           <<"\n\t>>Enter [1] to proceed; any irrelevant key to abort operation";
                 userChoice = validateInt();
-                Transaction();
+                if (userChoice == 1)
+                {
+                    movieList->deductMovieQuantity(userIndex,userQuantity);
+                    //code to test add transaction
+                    //need contructor
+                    Transaction newTrans = Transaction();
+                    std::cout <<"\n\t>>Purchase created successfully. ";
+                    return;
+                }
+                else {
+                    std::cout << "\n\t>>Purchase operation aborted. ";
+                    return;
+                }
                 break;
             }
             case 2:
                 // placeholder for Search Product by Category
                 break;
             case 3:
-                //placeholder for Checkout cart
-                break;
-            case 4:
                 return;
             case -999:
                 std::cout << "\n\tERROR: Please enter an Index.\n"

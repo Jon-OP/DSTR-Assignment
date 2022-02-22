@@ -77,9 +77,10 @@ public:
     int getMovieListNodeCount();
     std::string getMovieName(int index);
     std::string getMovieCategory(int index);
-    int getSeatsLeft(int index);
+    float getMoviePrice(int index);
+    int getTicketsLeft(int index);
     std::string getTime(int index);
-    void deductMovieQuantity(int inputQuantity);
+    void deductMovieQuantity(int index, int inputQuantity);
 
 };
 
