@@ -53,7 +53,6 @@ int main() {
             case 2:
                 //accept inventory as parameter
                 adminTransaction.transactionMenu(&adminMovie);
-                std::cout << "You entered 2\n";
                 break;
             case 3:
                 std::cout << "\n\t>> Goodbye\n\t>> Enter any key to exit:";

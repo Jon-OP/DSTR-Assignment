@@ -450,9 +450,11 @@ void MovieList::viewMovie() {
     }
 }*/
 
+//Function to display all the movies in the movieList
 // List out the movie, price, and quantity - DONE
 void MovieList::listMovies() {
-    // List is empty
+
+    // Checks if movieList is empty
     if(this->movieList == NULL){
         std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
                      "\n\t>> Enter any key to continue:";
@@ -460,17 +462,32 @@ void MovieList::listMovies() {
         // Wait for user Input and ignore up to 10,000 characters
         std::cin.ignore( 10000, '\n');
     }else{
-        // Atleast one item in the list
-        std::cout << "\n"
-                  << std::setw(5) << "Index"
-                  << std::setw(10) << "Movie ID"
-                  << std::setw(20) << "Movie Name"
-                  << std::setw(15) << "Category"
-                  << std::setw(20) << "Seats Left"
-                  << std::setw(10) << "Time";
+        //Executes if at least one item(movie) is in the movieList
+        std::cout << "\tIndex"
+                  << std::setw(10) << "\tMovie ID"
+                  << std::setw(8) << "\tMovie Name"
+                  << std::setw(20) << "\tCategory"
+                  << "\tSeats Left"
+                  << "\tTime";
 
         for(int i = 0; i < nodeCount; i++){
-            std::cout << "\n" << movieList[i].movieName ;// @PHILIP PRINT ALL DETAILS
+            std::cout   <<"\n\t"<< i
+                    <<"\t" << movieList[i].movieID
+                    <<std::setw(8)<<"\t"<< movieList[i].movieName;
+
+            if (movieList[i].movieName.length()<8)
+            {
+                std::cout <<std::setw(16)<<"\t"<< movieList[i].movieCategory;
+            }else if (movieList[i].movieName.length()>8 && movieList[i].movieName.length()<16){
+                std::cout << std::setw(8) << "\t" << movieList[i].movieCategory;
+            }else
+            {
+                std::cout << std::setw(4) << "\t" << movieList[i].movieCategory;
+            }
+            std::cout
+                    <<"\t\t" << movieList[i].ticketQuantity
+                    <<"\t\t" << movieList[i].movieTime;   // @PHILIP PRINT ALL DETAILS
+
         }
     }
 }
