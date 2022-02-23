@@ -27,6 +27,17 @@ int validateInt() {
     }
 }
 
+//banner displayed upon program shutdown
+void banner()
+{
+    std::cout <<"\n\n\n\n\t  ________                         ._____________.__                 \n\t"
+           " /  _____/___________    ____    __| _/\\______   \\  |   ____ ___  ___\n\t"
+           "/   \\  __\\_  __ \\__  \\  /    \\  / __ |  |     ___/  | _/ __ \\\\  \\/  /\n\t"
+           "\\    \\_\\  \\  | \\// __ \\|   |  \\/ /_/ |  |    |   |  |_\\  ___/ >    < \n\t"
+           " \\______  /__|  (____  /___|  /\\____ |  |____|   |____/\\___  >__/\\_ \\\n\t"
+           "        \\/           \\/     \\/      \\/                     \\/      \\/";
+}
+
 int main() {
     //main program starts here, for testing, call functions directly before this
 
@@ -45,7 +56,7 @@ int main() {
                      "\t-|2. Transaction Management System     |-----------------\n"
                      "\t-|3. Exit Program                      |-----------------\n"
                      "\t-*-------------------------------------*-----------------\n"
-                     "\n\t>> Enter your choice:";
+                     "\t>> Enter your choice:";
         int userChoice = validateInt();
 
         switch (userChoice) {
@@ -62,6 +73,7 @@ int main() {
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
                 flag = false;
+                banner();
                 break;
             case -999:
                 std::cout << "\n\t>> ERROR: Please enter an index."
