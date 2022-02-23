@@ -31,11 +31,12 @@ Transaction::Transaction(int transactionID, std::string movieName, int totalPric
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
 void Transaction::printAllDetails(int index) {
-    std::cout << "\t" << index << ".\t" << transactionID
-              << std::left << std::setw(16) << movieName
-               << std::right<< std::setw(16) << totalPrice
-              << std::right << std::setw(9)<< quantity << "\t"
-                <<"hi\n";
+    std::cout << "\t" << index << ".\t"
+              << std::left << std::setw(14) << transactionID <<"\t"
+              << std::left << std::setw(16) << movieName <<"\t"
+              << std::right << totalPrice
+              << std::right << std::setw(10)<< quantity << "\t"
+              << std::right << std::setw(12)<< movieTime <<"\n";
 }
 // Methods: GETTERS
     // Get the Transaction ID
@@ -157,11 +158,11 @@ int TransactionList::displayAllTransaction() {
     // Print Banner
     std::cout << "\n\t---------------------------------------------------------------------------------------------------\n"
                  "\t\t\t\t\t\tList of Transactions\n"
-                 "\t----------------------------------------------------------------------------------------------------\n\t"
+                 "\t---------------------------------------------------------------------------------------------------\n\t"
                  <<"Index"
                  << "\tTransaction ID"
-                 << std::right<<std::setw(16)  << "\tMovie Name"
-                 << std::left<<"\t       Price"
+                 << "\tMovie Name"
+                 << std::left<<"\t   Price(RM)"
                  <<std::left<<"\tQuantity"
                  <<std::left<<"\tTime\n";
 
@@ -174,7 +175,7 @@ int TransactionList::displayAllTransaction() {
         current = current->nextNode;
         index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
-    std::cout << "\t----------------------------------------------------------------------------------------------------\n";
+    std::cout << "\t---------------------------------------------------------------------------------------------------\n";
     return index;
 }
 
@@ -362,7 +363,7 @@ void TransactionList::transactionMenu(MovieList* movieList){
                 displayAllTransaction();
 
                 // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Enter any key to return to Transaction Menu";
+                std::cout << "\n\t>> Enter any key to return to Transaction Menu: ";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
@@ -443,7 +444,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                               ".\n\tEnter any Key to retry:";
                     break;
                 }
-                if (userQuantity> movieList->getTicketsLeft(userIndex))
+                if (userQuantity> movieList->getTicketsLeft(userIndex-1))
                 {
                     std::cout<<"\n\tInsufficient ticket(s). Try again\n";
                     break;

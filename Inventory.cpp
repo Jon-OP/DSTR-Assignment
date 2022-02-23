@@ -267,9 +267,10 @@ MovieList::MovieNode* MovieList::searchMovie() {
 // Sort will be done by Eugene
 void MovieList::sortMovie(){
 
-    std::cout << "\n\t1. Sort by ID"
-              << "\n\t2. Sort by Price"
-              << "\n\n\t Enter your choice: ";
+    std::cout << "\t-|1. Sort by ID             |-----------------------------"
+              << "\n\t-|2. Sort by Price          |-----------------------------"
+              << "\n\t-*--------------------------*-----------------------------"
+              << "\n\n\t >>Enter your choice: ";
     int userChoice = validateInt();
 
         if (userChoice == 1) {
@@ -436,7 +437,7 @@ MovieList::MovieNode::MovieNode(int movieID, std::string movieName, int moviePri
 
 void MovieList::movieMenu(){
     while(true){
-        std::cout << "\n\t---------------------------------------------------------\n"
+        std::cout << "\n\t----------------------------------------------------------\n"
                      "\t                    Movie Management Menu                 \n"
                      "\t-*--------------------------*-----------------------------\n"
                      "\t-|1. Add New Movie          |-----------------------------\n"
@@ -455,7 +456,6 @@ void MovieList::movieMenu(){
             case 1:
                 // PROMPT MOVIE
                 addMovie_prompt();
-                std::cout << "\n>> We should CALL newMovie Method [Pending]\n";
                 break;
 
             case 2:
@@ -469,20 +469,16 @@ void MovieList::movieMenu(){
                 break;
             case 3:
                 searchMovie();
-                //std::cout << "\n>> We should call searchMovie Method\n";
                 break;
-
             case 4:
                 updateMovie_prompt();
-                //std::cout << "\n>> We should call updateMovie Method\n";
                 break;
-
             case 5:
-                std::cout << "\n>> We should call sortMovie Method\n";
+                std::cout<<"\n\t---------------------------------------------------------\n"
+                           "\t                   Select a sorting method                 \n"
+                           "\t-*--------------------------------------------------------\n";
                 sortMovie();
-                std::cout <<"\n called sort function.";
                 break;
-
             case 6:
                 std::cout << "\n>> We should call deleteMovie Method\n";
                 break;
