@@ -14,7 +14,7 @@ int userChoice;
 Transaction::Transaction() {};
 
     // Primary Constructor
-Transaction::Transaction(int ID, float totalPrice) {
+Transaction::Transaction(int ID, int totalPrice) {
     this->transactionID = ID;
     this->totalPrice = totalPrice;
 };
@@ -39,7 +39,7 @@ int Transaction::getTransactionID() {
 }
 
     // Get the Total Price
-float Transaction::getTransactionTotalPrice() {
+int Transaction::getTransactionTotalPrice() {
     return this->totalPrice;
 }
 
@@ -425,7 +425,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 std::cout<<"\n\n\t>>How many tickets to purchase:";
                 int userQuantity = validateInt();
                 if (userQuantity == -999) {
-                    std::cout << "\n\tInvalid input entered. Enter an integer or a float value" <<
+                    std::cout << "\n\tInvalid input entered. Enter an integer value value." <<
                               ".\n\tEnter any Key to retry:";
                     break;
                 }

@@ -14,7 +14,7 @@ class MovieList { //movieList
         // Attributes
         int movieID;
         std::string movieName;
-        float moviePrice;
+        int moviePrice;
         int ticketQuantity;
 
         std::string movieCategory;
@@ -22,7 +22,7 @@ class MovieList { //movieList
 
         // Methods
         MovieNode();
-        MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
+        MovieNode(int movieID, std::string movieName, int moviePrice, std::string movieCategory,
                   std::string movieTime);
 
     };
@@ -77,7 +77,7 @@ public:
     int getMovieListNodeCount();
     std::string getMovieName(int index);
     std::string getMovieCategory(int index);
-    float getMoviePrice(int index);
+    int getMoviePrice(int index);
     int getTicketsLeft(int index);
     std::string getTime(int index);
     void deductMovieQuantity(int index, int inputQuantity);
