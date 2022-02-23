@@ -146,11 +146,12 @@ void MovieList::deleteMovie() {
         }
         // Delete or return process
         if(toDelete == nullptr){
-            std::cout << "\n\n\t>> Cancelling Deletion."
+            std::cout << "\n\t>> Cancelling Deletion."
                          "\n\t>> Enter any key to continue:";
 
             // Wait for user Input and ignore up to 10,00 characters
             std::cin.ignore(10000, '\n');
+            return;
         }else {
             toDelete->movieName = "";
 
@@ -261,7 +262,7 @@ MovieList::MovieNode* MovieList::searchMovie() {
     }
 };
 
-// Sort will be done by Eugene
+// Sort movies
 void MovieList::sortMovie(){
     while(true){
         std::cout << "\t-|1. Sort by ID             |-----------------------------"
@@ -339,6 +340,33 @@ void MovieList::updateMovie_prompt(){
 // List out the movie, price, and quantity - DONE
 void MovieList::listMovies() {
 
+    // Choose whether user wants to filter by category
+    std::cout << "\n\tPlease select category"
+              << "\n\t1. Action"
+              << "\n\t2. Horror"
+              << "\n\t3. Comedy"
+              << "\n\t4. No filter"
+              << "\n\tEnter your selection: ";
+    int userChoice = validateInt();
+    std::string filter;
+    switch (userChoice) {
+        case 1:
+            filter = "Action";
+            break;
+        case 2:
+            filter = "Horror";
+            break;
+        case 3:
+            filter = "Comedy";
+            break;
+        case 4:
+            filter = "0";
+            break;
+        default:
+            std::cout << "\n\t>> ERROR: Invalid Input.";
+            return;
+    }
+
     // Checks if movieList is empty
     if(this->movieList == NULL){
         std::cout << "\n\t>> ERROR: List is empty. Returning to Movie Menu."
@@ -356,25 +384,24 @@ void MovieList::listMovies() {
                   << std::left<< "\tSeats Left"
                   << std::left<< "\tTime";
 
-        for(int i = 0; i < nodeCount; i++){
-            std::cout   <<"\n\t"<< i+1
-                    << std::left << std::setw(2) <<"\t" << movieList[i].movieID
-                    << std::left <<std::setw(8)<<"\t"<< movieList[i].movieName;
+        for(int i = 0; i < nodeCount; i++) {
+            if (movieList[i].movieCategory == filter || filter == "0") {
+                std::cout << "\n\t" << i + 1
+                          << std::left << std::setw(2) << "\t" << movieList[i].movieID
+                          << std::left << std::setw(8) << "\t" << movieList[i].movieName;
 
-            if (movieList[i].movieName.length()<8)
-            {
-                std::cout  <<std::setw(16)<<"\t "<< movieList[i].moviePrice;
-            }else if (movieList[i].movieName.length()>8 && movieList[i].movieName.length()<16)
-            {
-                std::cout << std::setw(8) << "\t " <<movieList[i].moviePrice;
-            }else
-            {
-                std::cout<< "\t"<<std::left<< movieList[i].moviePrice;
+                if (movieList[i].movieName.length() < 8) {
+                    std::cout << std::setw(16) << "\t " << movieList[i].moviePrice;
+                } else if (movieList[i].movieName.length() > 8 && movieList[i].movieName.length() < 16) {
+                    std::cout << std::setw(8) << "\t " << movieList[i].moviePrice;
+                } else {
+                    std::cout << "\t" << std::left << movieList[i].moviePrice;
+                }
+                std::cout
+                        << std::left << "\t" << movieList[i].movieCategory
+                        << std::left << "\t\t" << movieList[i].ticketQuantity
+                        << std::left << "\t\t" << movieList[i].movieTime;
             }
-            std::cout
-                    << std::left<<"\t" << movieList[i].movieCategory
-                    << std::left<<"\t\t" << movieList[i].ticketQuantity
-                    << std::left<<"\t\t" << movieList[i].movieTime;
         }
     }
 }
@@ -618,7 +645,7 @@ void MovieList::addMovie_prompt(){
     return;
 }
 
-
+// Update the movie
 void MovieList::updateMovie(MovieNode *toUpdate) {
     while (true){
         std::cout << "\n\t---------------------------------------------------------"
@@ -785,6 +812,28 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
         }
     }
 }
+
+// Category Filter Function Eugene
+/*void MovieList::categoryFilter(){
+    std::cout << "\n\tPlease select category"
+              << "\n\t1. Action"
+              << "\n\t2. Horror"
+              << "\n\t3. Comedy";
+    int userChoice = validateInt();
+
+    switch (userChoice) {
+        case 1:
+            for (int i = 0; i < nodeCount; i++){
+
+            }
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+    }
+}
+*/
 //Getters and setters
 int MovieList::getMovieListNodeCount()
 {
