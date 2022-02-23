@@ -155,9 +155,9 @@ int TransactionList::displayAllTransaction() {
     }
 
     // Print Banner
-    std::cout << "\n\t---------------------------------------------------------------------------------------------------\n"
+    std::cout << "\n\t---------------------------------------------------------------------------\n"
                  "\t\t\t\t\t\tList of Transactions\n"
-                 "\t---------------------------------------------------------------------------------------------------\n\t"
+                 "\t----------------------------------------------------------------------------\n\t"
                  <<"Index"
                  << "\tTransaction ID"
                  << "\tMovie Name"
@@ -362,7 +362,7 @@ void TransactionList::transactionMenu(MovieList* movieList){
                 displayAllTransaction();
 
                 // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> Enter any key to return to Transaction Menu: ";
+                std::cout << "\t>> Enter any key to return to Transaction Menu: ";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
@@ -529,11 +529,13 @@ int TransactionList::validateInt() {
 // Sort Transaction caller
 void TransactionList::sortTransaction_prompt() {
     while(true){
-        std::cout << "\n\tSort By:\n"
-                     "\t--------------\n"
-                     "\t1. ID\n"
-                     "\t2. Total Price\n"
-                     "\t3. Cancel Sort\n\n"
+        std::cout <<"\n\t---------------------------------------------------------"
+                    "\n\t            Select a transactions sorting mode\n"
+                     "\t-*---------------------*---------------------------------\n"
+                     "\t-|1. ID                |---------------------------------\n"
+                     "\t-|2. Total Price       |---------------------------------\n"
+                     "\t-|3. Cancel Sort       |---------------------------------\n"
+                     "\t-*---------------------*---------------------------------\n"
                      "\t>> Enter your choice:";
         int userChoice = validateInt();
 

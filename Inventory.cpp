@@ -120,11 +120,15 @@ void MovieList::deleteMovie() {
         int indexToDelete;
 
         while (true){
-            std::cout << "\n0. Search Movie By Name";
+
             listMovies();
-            std::cout << "\n" << nodeCount+1 << "Return to Inventory Menu";
+            std::cout<<"\n\t--------------------------------------------------------------------------------------------";
+            std::cout << "\n\tEnter 0 To search movie by name";
+            std::cout << "\n\tEnter " << nodeCount+1 << " to return to movie management menu";
+            std::cout << "\n\t>>Enter the corresponding index to delete a movie: ";
 
             int userChoice = validateInt();
+
 
             if(userChoice == 0){ // User Chose to search by name to delete
                 toDelete = searchMovie();
@@ -405,11 +409,10 @@ void MovieList::movieMenu(){
                      "\t-*--------------------------*-----------------------------\n"
                      "\t-|1. Add New Movie          |-----------------------------\n"
                      "\t-|2. View Movie Details     |-----------------------------\n"
-                     "\t-|3. Search Movie by Name   |-----------------------------\n"
-                     "\t-|4. Update Movie Details   |-----------------------------\n"
-                     "\t-|5. Sort Movie             |-----------------------------\n"
-                     "\t-|6. Delete Movie Details   |-----------------------------\n"
-                     "\t-|7. Back to Main Menu      |-----------------------------\n"
+                     "\t-|3. Update Movie Details   |-----------------------------\n"
+                     "\t-|4. Sort Movie             |-----------------------------\n"
+                     "\t-|5. Delete Movie Details   |-----------------------------\n"
+                     "\t-|6. Back to Main Menu      |-----------------------------\n"
                      "\t-*--------------------------*-----------------------------\n"
                      "\t>> Enter your choice:";
 
@@ -422,35 +425,31 @@ void MovieList::movieMenu(){
                 break;
 
             case 2:
-                std::cout << "\n\t-----------------------------------------------------------------------------------------------------\n"
-                             "\t                                         Displaying all movies                                        \n"
-                             "\t------------------------------------------------------------------------------------------------------\n";
+                std::cout << "\n\t----------------------------------------------------------------------------------------------\n"
+                             "\t                                         Displaying all movies                               \n"
+                             "\t---------------------------------------------------------------------------------------------\n";
                 listMovies();
-                std::cout<< "\n\t-----------------------------------------------------------------------------------------------------\n"
+                std::cout<< "\n\t--------------------------------------------------------------------------------------------\n"
                             "\t>>Press any key to continue:";
                 std::cin.ignore( 10000, '\n');
                 break;
             case 3:
-                searchMovie();
-                break;
-            case 4:
                 updateMovie_prompt();
                 break;
-            case 5:
+            case 4:
                 std::cout<<"\n\t---------------------------------------------------------\n"
                            "\t                   Select a sorting method                 \n"
                            "\t-*--------------------------*-----------------------------\n";
                 sortMovie();
                 break;
-            case 6:
-                std::cout << "\n>> We should call deleteMovie Method\n";
-                std::cout<<"\n\t---------------------------------------------------------------------------------------------\n"
+            case 5:
+                std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
                            "\t                                  Select a movie to be deleted                             \n"
-                           "\t---------------------------------------------------------------------------------------------\n";
+                           "\t--------------------------------------------------------------------------------------------\n";
                 deleteMovie();
                 break;
 
-            case 7:
+            case 6:
                 std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
 
                 // Wait for user Input and ignore up to 10,00 characters
