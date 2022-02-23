@@ -42,7 +42,6 @@ class MovieList { //movieList
     int partition2(MovieNode *IDs, int low, int high);
 
     //void addMovie(MovieNode newNodes);
-    //MovieNode generateNewNodes();
     MovieNode* searchMovie();
     void deleteMovie();
     void sortMovie();
@@ -52,15 +51,11 @@ class MovieList { //movieList
 
     // Validation
     int validateInt();
-    float validateFloat();
-
 
 public:
     void addMovie(MovieNode newNodes);
     MovieNode generateNewNodes();
     void listMovies();
-    void viewMovie();
-    // void decreaseQuantity();
 
     // User Interface
     void movieMenu();
@@ -76,7 +71,6 @@ public:
     //Getters and setters
     int getMovieListNodeCount();
     std::string getMovieName(int index);
-    std::string getMovieCategory(int index);
     int getMoviePrice(int index);
     int getTicketsLeft(int index);
     std::string getTime(int index);
