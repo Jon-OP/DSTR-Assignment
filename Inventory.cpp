@@ -117,19 +117,14 @@ void MovieList::addMovie(MovieNode newNode) {
 void MovieList::deleteMovie() {
     while(true){
         MovieNode* toDelete = nullptr;
-        int indexToDelete;
-
         while (true){
-
             listMovies();
             std::cout<<"\n\t--------------------------------------------------------------------------------------------";
-            std::cout << "\n\tEnter 0 To search movie by name";
-            std::cout << "\n\tEnter " << nodeCount+1 << " to return to movie management menu";
+            std::cout << "\n\tEnter 0 To search movie by name.";
+            std::cout << "\n\tEnter " << nodeCount+1 << " to return to movie management menu.";
             std::cout << "\n\t>>Enter the corresponding index to delete a movie: ";
 
             int userChoice = validateInt();
-
-
             if(userChoice == 0){ // User Chose to search by name to delete
                 toDelete = searchMovie();
             }else{
@@ -301,9 +296,11 @@ void MovieList::updateMovie_prompt(){
     // This section ask users to choose an item to update
     MovieNode* toUpdate = NULL;
     while(true){
-        std::cout << "\n0. Search Movie By Name";
         listMovies();
-        std::cout << "\n" << nodeCount+1 << " Return to Inventory Menu.";
+        std::cout<<"\n\t--------------------------------------------------------------------------------------------";
+        std::cout << "\n\tEnter 0 To search movie by name.";
+        std::cout << "\n\tEnter " << nodeCount+1 << " to return to movie management menu.";
+        std::cout << "\n\t>>Enter the corresponding index to delete a movie: ";
 
         int userChoice = validateInt();
 
@@ -430,10 +427,13 @@ void MovieList::movieMenu(){
                              "\t---------------------------------------------------------------------------------------------\n";
                 listMovies();
                 std::cout<< "\n\t--------------------------------------------------------------------------------------------\n"
-                            "\t>>Press any key to continue:";
+                            "\t>>Enter any key to continue:";
                 std::cin.ignore( 10000, '\n');
                 break;
             case 3:
+                std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
+                           "\t                                  Select a movie to be updated                             \n"
+                           "\t--------------------------------------------------------------------------------------------\n";
                 updateMovie_prompt();
                 break;
             case 4:

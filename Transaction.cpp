@@ -402,8 +402,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                      "\t                   Creating new purchase                 \n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t-|1. View All Product            |-----------------------\n"
-                     "\t-|2. Search Product by Category  |-----------------------\n"
-                     "\t-|3. Return to previous menu     |-----------------------\n"
+                     "\t-|2. Return to previous menu     |-----------------------\n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t>> Enter your choice:";
 
@@ -470,12 +469,8 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                     std::cout << "\n\t>>Purchase operation aborted. ";
                     return;
                 }
-                break;
             }
             case 2:
-                // placeholder for Search Product by Category
-                break;
-            case 3:
                 return;
             case -999:
                 std::cout << "\n\tERROR: Please enter an Index.\n"
