@@ -299,7 +299,6 @@ void MovieList::sortMovie(){
             std::cout << "Quicksort2 function called \n";
         } else if (userChoice == 3){
             //Sort the array by price
-            quickSort3(movieList, 0, nodeCount - 1);
         }
 }
 
@@ -422,7 +421,7 @@ void MovieList::movieMenu(){
                      "\t-|6. Delete Movie Details   |-----------------------------\n"
                      "\t-|7. Back to Main Menu      |-----------------------------\n"
                      "\t-*--------------------------*-----------------------------\n"
-                     "\n\t>> Enter your choice:";
+                     "\t>> Enter your choice:";
 
         int userChoice = validateInt();
 
@@ -438,7 +437,7 @@ void MovieList::movieMenu(){
                              "\t------------------------------------------------------------------------------------------------------\n";
                 listMovies();
                 std::cout<< "\n\t-----------------------------------------------------------------------------------------------------\n"
-                            "\tPress any key to continue:";
+                            "\t>>Press any key to continue:";
                 std::cin.ignore( 10000, '\n');
                 break;
             case 3:
@@ -642,7 +641,7 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
                      "\n\t-|  4. Time     ->" << std::setw(20) << toUpdate->movieTime << " |------------------"
                      "\n\t-|  5. Finalize updating details       |------------------"
                      "\n\t-*--------------------------------------------------------"
-                     "\n\n\t>> Enter your choice:";
+                     "\n\t>> Enter your choice:";
         int userChoice = validateInt();
         std::string userInput;
         std::string userInputTime;
@@ -852,6 +851,8 @@ int MovieList::validateInt() {
 
 // Initialize List
 void MovieList::initializeList() {
+
+    //Initializing movies by creating new MovieNode(s)
     MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12, "Action", "2300");
     IDGenerator++;
     MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15, "Action", "2330");
@@ -873,7 +874,7 @@ void MovieList::initializeList() {
     MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21, "Horror", "0115");
     IDGenerator++;
 
-
+    //adding each MovieNode into MovieList array
     addMovie(movie_1);
     addMovie(movie_2);
     addMovie(movie_3);

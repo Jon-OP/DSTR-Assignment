@@ -352,7 +352,7 @@ void TransactionList::transactionMenu(MovieList* movieList){
                      "\t-|4. Delete Purchase Record* |---------------------------\n"
                      "\t-|5. Return to Main Menu     |---------------------------\n"
                      "\t-*---------------------------*---------------------------\n"
-                     "\n\t>> Enter your choice:";
+                     "\t>> Enter your choice:";
         int userChoice = validateInt();
         switch (userChoice) {
             case 1:
@@ -405,7 +405,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                      "\t-|2. Search Product by Category  |-----------------------\n"
                      "\t-|3. Return to previous menu     |-----------------------\n"
                      "\t-*-------------------------------*-----------------------\n"
-                     "\n\t>> Enter your choice:";
+                     "\t>> Enter your choice:";
 
         int userChoice = validateInt();
         switch (userChoice) {
