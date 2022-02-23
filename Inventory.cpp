@@ -848,9 +848,9 @@ std::string MovieList::getTime(int index)
 {
     return movieList[index].movieTime;
 }
-void MovieList::deductMovieQuantity(int index,int inputQuantity)
-{
-
+void MovieList::deductMovieQuantity(int index,int inputQuantity){
+    // Deduct Movie Quantity will sanitize user inputs by default
+    this->movieList[index-1].ticketQuantity  = this->movieList[index-1].ticketQuantity - inputQuantity;
 }
 
 
@@ -907,25 +907,25 @@ float MovieList::validateFloat(){
 
 // Initialize List
 void MovieList::initializeList() {
-    MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12.5, "Action", "2300");
+    MovieNode movie_1 = MovieNode(IDGenerator, "John Wick", 12, "Action", "2300");
     IDGenerator++;
-    MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15.5, "Action", "2330");
+    MovieNode movie_2 = MovieNode(IDGenerator, "Spiderman", 15, "Action", "2330");
     IDGenerator++;;
-    MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20.5, "Comedy", "1140");
+    MovieNode movie_3 = MovieNode(IDGenerator, "Human Centipede", 20, "Comedy", "1140");
     IDGenerator++;;
-    MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10.0, "Action", "2100");
+    MovieNode movie_4 = MovieNode(IDGenerator, "Naruto", 10, "Action", "2100");
     IDGenerator++;;
-    MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15.0, "Horror", "1500");
+    MovieNode movie_5 = MovieNode(IDGenerator, "Gordon Ramsay", 15, "Horror", "1500");
     IDGenerator++;;
-    MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32.5, "Action", "1315");
+    MovieNode movie_6 = MovieNode(IDGenerator, "Bronze Man", 32, "Action", "1315");
     IDGenerator++;;
-    MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25.0, "Comedy", "1145");
+    MovieNode movie_7 = MovieNode(IDGenerator, "Pengu: Retribution", 25, "Comedy", "1145");
     IDGenerator++;;
-    MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27.5, "Horror", "1200");
+    MovieNode movie_8 = MovieNode(IDGenerator, "Spiderwoman", 27, "Horror", "1200");
     IDGenerator++;;
-    MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23.5, "Comedy", "0000");
+    MovieNode movie_9 = MovieNode(IDGenerator, "My Dilemma", 23, "Comedy", "0000");
     IDGenerator++;
-    MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21.0, "Horror", "0115");
+    MovieNode movie_10 = MovieNode(IDGenerator, "A+ in DSTR", 21, "Horror", "0115");
     IDGenerator++;
 
 

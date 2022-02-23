@@ -13,7 +13,7 @@ class Transaction{
     std::string movieName;
     int totalPrice;
     int quantity;
-    int seats;
+    std::string movieTime;
     // Date and Time, do we include here ? - Jonathan
 
 public:
@@ -29,6 +29,8 @@ public:
     Transaction();
     Transaction(int ID, int totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
     // Transaction Constructor with Param
+    Transaction(int transactionID, std::string movieName, int totalPrice, int quantity, std::string movieTime);
+
     //Transaction(int transID, std::string movieName, int sum)
 };
 
@@ -95,7 +97,7 @@ public:
     void insertTransactionToList(Transaction* transactionNode);
     //void displayAllTransaction();
     void sortTransaction(std::string sortParameter);
-    void initializeTransactionList();
+    void initializeTransactionList(MovieList movieList);
 };
 
 

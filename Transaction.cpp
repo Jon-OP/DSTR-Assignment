@@ -19,17 +19,19 @@ Transaction::Transaction(int ID, int totalPrice) {
     this->totalPrice = totalPrice;
 };
 
-//testing constructor for soon to be inventory integration
-/*
-Transaction::Transaction(int transID, std::string movName, ) {
-    this->transactionID = transID;
+// Transaction Constructor for new Transactions
+Transaction::Transaction(int transactionID, std::string movieName, int totalPrice, int quantity, std::string movieTime) {
+    this->transactionID = transactionID;
+    this->movieName = movieName;
     this->totalPrice = totalPrice;
-};*/
+    this->quantity = quantity;
+    this->movieTime = movieTime;
+}
 
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
 void Transaction::printAllDetails(int index) {
-    std::cout << "\t" <<index << ".\t" << movieName << transactionID << "\t" << totalPrice << seats<< "\n"; // @PHILIP REFER BEFORE.
+    std::cout << "\t" <<index << ".\t" << movieName << transactionID << "\t" << totalPrice << "\n"; // @PHILIP REFER BEFORE.
 }// PRINT MOVIE NAME ALSO !! @PHILIP // INCLUDE EVERYTHING IN THE ACTUAL IMPLEMENTATION
 
 // Methods: GETTERS
@@ -487,36 +489,6 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
 
 //----------------------------------------// Helper functions starts here //--------------------------------------//
 
-/*
-void TransactionList::newTransaction()
-{
-
-    std::string inputMovieName;
-    std::string inputSeats;
-    Movie movie1 = Movie("spider",10.0,"Action","13:00","15/2/2022");
-    Movie movieArray[]={movie1};
-
-    //print every movie
-
-    std::cout << "\n\tWhat movie name you want boii:"<<std::endl;
-    for (int i=0;i< sizeof(movieArray)/sizeof(movieArray[0]);i++)
-    {
-        //was trying to replicate the array and print the array
-        movieArray[i].inventoryShowDetails();
-    }
-
-    std::cin >> inputMovieName;
-    std::cout << "\n\twhat seats you want boii:";
-    //might need to print the seats that area available
-    std::cin >> inputSeats;
-
-    //can even consider accepting movie as a parameter couz might as well
-    Transaction newTrans = Transaction ();
-
-}*/
-
-
-
 // Error Validation to ensure user accept Int
 int TransactionList::validateInt() {
     // Read userInput
@@ -637,38 +609,45 @@ void TransactionList::deleteTransaction_prompt(){
     }
 }
 
+void TransactionList::initializeTransactionList(MovieList movieList) {
+    movieList.deductMovieQuantity(1, 2);
+    Transaction* transaction_1 = new Transaction(this->transactionIDGenerator++, "John Wick", 24, 2, "2300");
+    insertTransactionToList(transaction_1);
 
+    movieList.deductMovieQuantity(2, 3);
+    Transaction* transaction_2 = new Transaction(this->transactionIDGenerator++, "Spiderman", 45, 3, "2330");
+    insertTransactionToList(transaction_2);
 
+    movieList.deductMovieQuantity(4, 1);
+    Transaction* transaction_3 = new Transaction(this->transactionIDGenerator++, "Naruto", 10 ,1 ,"2100");
+    insertTransactionToList(transaction_3);
 
+    movieList.deductMovieQuantity(10, 3);
+    Transaction* transaction_4 = new Transaction(this->transactionIDGenerator++, "A+ in DSTR", 63, 3, "0115");
+    insertTransactionToList(transaction_4);
 
+    movieList.deductMovieQuantity(6, 2);
+    Transaction* transaction_5 = new Transaction(this->transactionIDGenerator++, "Bronze Man", 64, 2, "1315");
+    insertTransactionToList(transaction_5);
 
-//getter to display all transactions
-//std::string Transaction::getDetails()
-//{
-//    std::string transID = std::to_string(this->transactionID);
-//    std::string totalPrice = std::to_string(this->totalPrice);
-//    std::string quantity = std::to_string(this->quantity);
-//    std::string seats = std::to_string(this->seats);
-//
-//    return transID +"\t"+movieName+ "\t"+ quantity + "\t"+ totalPrice + "\t"+ seats;
-//}
+    movieList.deductMovieQuantity(7, 4);
+    Transaction* transaction_6 = new Transaction(this->transactionIDGenerator++, "Pengu: Retribution", 100, 4, "1145");
+    insertTransactionToList(transaction_6);
 
+    movieList.deductMovieQuantity(8, 1);
+    Transaction* transaction_7 = new Transaction(this->transactionIDGenerator++, "Spiderwoman", 27, 1, "1200");
+    insertTransactionToList(transaction_7);
 
-//functions to add
-    //function to check last transaction ID -> so we can add it into the userTransaction object
-    //
+    movieList.deductMovieQuantity(9, 2);
+    Transaction* transaction_8 = new Transaction(this->transactionIDGenerator++, "My Dilemma", 46, 2, "0000");
+    insertTransactionToList(transaction_8);
 
-void TransactionList::initializeTransactionList() {
-    Transaction* newTrans = new Transaction(this->transactionIDGenerator++, 1.2);
-    //transactionIDGenerator++;
-    Transaction* newTrans2 = new Transaction(this->transactionIDGenerator++, 1.2);
-    //transactionIDGenerator++;
-    Transaction* newTrans3 = new Transaction(this->transactionIDGenerator++, 1.2);
-    //transactionIDGenerator++;
-    Transaction* newTrans4 = new Transaction(this->transactionIDGenerator++, 1.2);
-    //transactionIDGenerator++;
-    insertTransactionToList(newTrans);
-    insertTransactionToList(newTrans2);
-    insertTransactionToList(newTrans3);
-    insertTransactionToList(newTrans4);
+    movieList.deductMovieQuantity(3, 3);
+    Transaction* transaction_9 = new Transaction(this->transactionIDGenerator++, "Human Centipede", 60, 3, "1140");
+    insertTransactionToList(transaction_9);
+
+    movieList.deductMovieQuantity(5, 10);
+    Transaction* transaction_10 = new Transaction(this->transactionIDGenerator++, "Gordon Ramsay", 150, 10, "1500");;
+    insertTransactionToList(transaction_10);
+
 }

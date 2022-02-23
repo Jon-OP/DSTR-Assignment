@@ -31,9 +31,10 @@ int main() {
     //main program starts here, for testing, call functions directly before this
 
     MovieList adminMovie;
-    TransactionList adminTransaction;
-    adminTransaction.initializeTransactionList();
     adminMovie.initializeList();
+
+    TransactionList adminTransaction;
+    adminTransaction.initializeTransactionList(adminMovie);
 
     bool flag = true;
     while (flag == true){
