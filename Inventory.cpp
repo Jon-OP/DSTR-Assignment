@@ -42,11 +42,11 @@ void MovieList::swapNode(MovieNode* elem1, MovieNode* elem2 ){
     *elem2 = temp;
 }
 
-// Partition for quickSort by X (NOT WORKING)
-int MovieList::partition2 (MovieNode* IDs, int low, int high)
+// Partition for quickSort by quantity
+int MovieList::partition2 (MovieNode* Node, int low, int high)
 {
     // pivot
-    MovieNode pivot = IDs[high];
+    MovieNode pivot = Node[high];
     // Index of smaller element and indicates the right position of pivot found so far
     int i = (low - 1);
 
@@ -54,22 +54,22 @@ int MovieList::partition2 (MovieNode* IDs, int low, int high)
     for (int j = low; j <= high - 1; j++)
     {
         // If current element is smaller than the pivot
-        if (static_cast<int>(IDs[j].moviePrice) < static_cast<int>(pivot.moviePrice))
+        if (Node[j].ticketQuantity < pivot.ticketQuantity)
         {
             i++; // increment index of smaller element
-            swapNode(&IDs[i], &IDs[j]);
+            swapNode(&Node[i], &Node[j]);
         }
     }
-    swapNode(&IDs[i + 1], &IDs[high]);
+    swapNode(&Node[i + 1], &Node[high]);
     return (i + 1);
 }
 
 
 // Partition for quickSort by ID
-int MovieList::partition (MovieNode* IDs, int low, int high)
+int MovieList::partition (MovieNode* Node, int low, int high)
 {
     // pivot
-    MovieNode pivot = IDs[high];
+    MovieNode pivot = Node[high];
     // Index of smaller element and indicates the right position of pivot found so far
     int i = (low - 1);
 
@@ -77,44 +77,45 @@ int MovieList::partition (MovieNode* IDs, int low, int high)
     for (int j = low; j <= high - 1; j++)
     {
         // If current element is smaller than the pivot
-        if (IDs[j].movieID < pivot.movieID)
+        if (Node[j].movieID < pivot.movieID)
         {
             i++; // increment index of smaller element
-            swapNode(&IDs[i], &IDs[j]);
+            swapNode(&Node[i], &Node[j]);
         }
     }
-    swapNode(&IDs[i + 1], &IDs[high]);
+    swapNode(&Node[i + 1], &Node[high]);
     return (i + 1);
 }
 //----------------------------------{ Helper Methods Ends }--------------------------------------//
-// Quick Sort method
-void MovieList::quickSort(MovieNode* IDs, int low, int high)
+// Quick Sort method for ID
+void MovieList::quickSort(MovieNode* Node, int low, int high)
 {
     if (low < high)
     {
         /* pi is partitioning index, arr[p] is now
         at right place */
-        int pi = partition(IDs, low, high);
+        int pi = partition(Node, low, high);
 
         // Separately sort elements before
         // partition and after partition
-        quickSort(IDs, low, pi - 1);
-        quickSort(IDs, pi + 1, high);
+        quickSort(Node, low, pi - 1);
+        quickSort(Node, pi + 1, high);
     }
 }
 
-void MovieList::quickSort2(MovieNode* IDs, int low, int high) //NOT WORKING
+// Quick Sort method for Quantity
+void MovieList::quickSort2(MovieNode* Node, int low, int high)
 {
     if (low < high)
     {
         /* pi is partitioning index, arr[p] is now
         at right place */
-        int pi = partition2(IDs, low, high);
+        int pi = partition2(Node, low, high);
 
         // Separately sort elements before
         // partition and after partition
-        quickSort(IDs, low, pi - 1);
-        quickSort(IDs, pi + 1, high);
+        quickSort(Node, low, pi - 1);
+        quickSort(Node, pi + 1, high);
     }
 }
 //----------------------------------{ Functional Methods }--------------------------------------//
@@ -267,7 +268,7 @@ MovieList::MovieNode* MovieList::searchMovie() {
 void MovieList::sortMovie(){
 
     std::cout << "\n\t1. Sort by ID"
-              << "\n\t2. Sort by name"
+              << "\n\t2. Sort by Price"
               << "\n\n\t Enter your choice: ";
     int userChoice = validateInt();
 
@@ -277,9 +278,9 @@ void MovieList::sortMovie(){
             std::cout << "Quicksort function called \n";
 
         } else if (userChoice == 2) {
-            //Sort the array by name
+            //Sort the array by price
             quickSort2(movieList, 0, nodeCount - 1);
-            std::cout << "Quicksort function called \n";
+            std::cout << "Quicksort2 function called \n";
         }
 }
 
