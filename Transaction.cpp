@@ -155,8 +155,8 @@ int TransactionList::displayAllTransaction() {
     }
 
     // Print Banner
-    std::cout << "\n\t---------------------------------------------------------------------------\n"
-                 "\t\t\t\t\t\tList of Transactions\n"
+    std::cout << "\n\t----------------------------------------------------------------------------\n"
+                 "\t\t\t\t\tList of Transactions\n"
                  "\t----------------------------------------------------------------------------\n\t"
                  <<"Index"
                  << "\tTransaction ID"
@@ -174,7 +174,7 @@ int TransactionList::displayAllTransaction() {
         current = current->nextNode;
         index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
-    std::cout << "\t---------------------------------------------------------------------------------------------------\n";
+    std::cout << "\t----------------------------------------------------------------------------\n";
     return index;
 }
 
@@ -349,7 +349,7 @@ void TransactionList::transactionMenu(MovieList* movieList){
                      "\t-|1. Place a new purchase    |---------------------------\n"
                      "\t-|2. View All Purchases      |---------------------------\n"
                      "\t-|3. Sort Purchases          |---------------------------\n"
-                     "\t-|4. Delete Purchase Record* |---------------------------\n"
+                     "\t-|4. Delete Purchase Record  |---------------------------\n"
                      "\t-|5. Return to Main Menu     |---------------------------\n"
                      "\t-*---------------------------*---------------------------\n"
                      "\t>> Enter your choice:";
@@ -438,7 +438,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 std::cout<<"\n\n\t>>How many tickets to purchase:";
                 int userQuantity = validateInt();
                 if (userQuantity == -999) {
-                    std::cout << "\n\tInvalid input entered. Enter an integer value value." <<
+                    std::cout << "\n\tInvalid input entered. Enter an integer value." <<
                               ".\n\tEnter any Key to retry:";
                     break;
                 }
@@ -453,7 +453,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 << " \n\tPrice to be paid: "<< movieList->getMoviePrice(userIndex-1)*userQuantity;
 
                 std::cout<<"\n\n\t>>Confirming purchase. Do you wish to proceed?"
-                           <<"\n\t>>Enter [1] to proceed; any irrelevant key to abort operation";
+                           <<"\n\t>>Enter [1] to proceed; any irrelevant key to abort operation:";
                 userChoice = validateInt();
                 if (userChoice == 1)
                 {
@@ -526,11 +526,11 @@ void TransactionList::sortTransaction_prompt() {
     while(true){
         std::cout <<"\n\t---------------------------------------------------------"
                     "\n\t            Select a transactions sorting mode\n"
-                     "\t-*---------------------*---------------------------------\n"
-                     "\t-|1. ID                |---------------------------------\n"
-                     "\t-|2. Total Price       |---------------------------------\n"
-                     "\t-|3. Cancel Sort       |---------------------------------\n"
-                     "\t-*---------------------*---------------------------------\n"
+                     "\t-*----------------------------*--------------------------\n"
+                     "\t-|1. ID                       |--------------------------\n"
+                     "\t-|2. Total Price              |--------------------------\n"
+                     "\t-|3. Return to previous menu  |--------------------------\n"
+                     "\t-*----------------------------*--------------------------\n"
                      "\t>> Enter your choice:";
         int userChoice = validateInt();
 
