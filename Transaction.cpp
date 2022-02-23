@@ -5,7 +5,7 @@
 #include "Inventory.h"
 #include <iostream>
 
-int userChoice;
+
 
 /* --- Transaction: METHODS STARTS------------------------------------------------------------------------------------------*/
 
@@ -31,9 +31,12 @@ Transaction::Transaction(int transactionID, std::string movieName, int totalPric
 // Methods: FUNCTIONAL
     // Print some basic details regarding one Transaction
 void Transaction::printAllDetails(int index) {
-    std::cout << "\t" <<index << ".\t" << movieName << transactionID << "\t" << totalPrice << "\n"; // @PHILIP REFER BEFORE.
-}// PRINT MOVIE NAME ALSO !! @PHILIP // INCLUDE EVERYTHING IN THE ACTUAL IMPLEMENTATION
-
+    std::cout << "\t" << index << ".\t" << transactionID
+              << std::left << std::setw(16) << movieName
+               << std::right<< std::setw(16) << totalPrice
+              << std::right << std::setw(9)<< quantity << "\t"
+                <<"hi\n";
+}
 // Methods: GETTERS
     // Get the Transaction ID
 int Transaction::getTransactionID() {
@@ -46,14 +49,14 @@ int Transaction::getTransactionTotalPrice() {
 }
 
 
-
-/* --- TransactionList: METHODS ENDS --------------------------------------------------------------------------------------*/
-
+/* --- Transaction: METHODS ENDS --------------------------------------------------------------------------------------*/
 
 
 
+/* --- TransactionList: METHODS START --------------------------------------------------------------------------------------*/
 
-/* --- Linked List Functions ---------------------------------------------------------------------------------------- */
+
+/* --- Linked List Functions ---------------------------------- */
 
 // Methods: CONSTRUCTOR
     // Default Constructor
@@ -152,10 +155,15 @@ int TransactionList::displayAllTransaction() {
     }
 
     // Print Banner
-    std::cout << "\n\t---------------------------------------------------------------------------------\n"
-                 "\t\t\t\t\tList of Transactions\n"
-                 "\t---------------------------------------------------------------------------------\n"
-                 "\tIndex\tID\tMovie Name\tTotal Price\tSeat Count\tTime\n";
+    std::cout << "\n\t---------------------------------------------------------------------------------------------------\n"
+                 "\t\t\t\t\t\tList of Transactions\n"
+                 "\t----------------------------------------------------------------------------------------------------\n\t"
+                 <<"Index"
+                 << "\tTransaction ID"
+                 << std::right<<std::setw(16)  << "\tMovie Name"
+                 << std::left<<"\t       Price"
+                 <<std::left<<"\tQuantity"
+                 <<std::left<<"\tTime\n";
 
     Transaction* current = head;
     do{
@@ -166,7 +174,7 @@ int TransactionList::displayAllTransaction() {
         current = current->nextNode;
         index++; // Index returned is size of list + 1 because of DoWhile
     }while(current != head);
-    std::cout << "\t---------------------------------------------------------------------------------\n";
+    std::cout << "\t----------------------------------------------------------------------------------------------------\n";
     return index;
 }
 
@@ -323,6 +331,9 @@ void TransactionList::sortTransaction(std::string sortParameter) {
         }
     }
 }
+/* --- TransactionList: METHODS ENDS --------------------------------------------------------------------------------------*/
+
+
 
 // METHODS: FUNCTIONAL
 
@@ -408,7 +419,11 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 int userIndex = validateInt();
                 int maxIndex = movieList->getMovieListNodeCount();
 
-                if(userIndex<1 || userIndex> maxIndex)
+                if (userIndex == 0)
+                {
+                    return;
+                }
+                else if(userIndex<1 || userIndex> maxIndex)
                 {
                     std::cout << "\n\t>>There is no such index. Enter 1 to" << maxIndex <<
                               ".\n\t>>Enter any Key to retry:";
@@ -418,9 +433,6 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                     std::cout << "\n\t>>Invalid input entered. Enter 1 to " << maxIndex <<
                               ".\n\t>>Enter any Key to retry:";
                     break;
-                }else if (userIndex == 0)
-                {
-                    return;
                 }
 
                 std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(userIndex-1) << "\tQuantity:"<<movieList->getTicketsLeft(userIndex-1) ;
@@ -447,11 +459,10 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 if (userChoice == 1)
                 {
                     movieList->deductMovieQuantity(userIndex,userQuantity);
-                    //code to test add transaction
-                    //need contructor
-                    Transaction* newTrans = new Transaction(transactionIDGenerator++, 12);
-                    insertTransactionToList(newTrans);
 
+                    //Transaction:: Transaction(int transID, std::string movieName, int sum, int quantityBought)
+                    Transaction* newTrans = new Transaction(transactionIDGenerator++, movieList->getMovieName(userIndex-1),movieList->getMoviePrice(userIndex-1)*userQuantity,userQuantity, movieList->getTime(userIndex-1));
+                    insertTransactionToList(newTrans);
                     std::cout <<"\n\t>>Purchase created successfully. ";
                     return;
                 }

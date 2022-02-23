@@ -388,7 +388,7 @@ void MovieList::listMovies() {
                 std::cout << std::setw(8) << "\t " <<movieList[i].moviePrice;
             }else
             {
-                std::cout<< "\t" << movieList[i].moviePrice;
+                std::cout<< "\t"<<std::left<< movieList[i].moviePrice;
             }
             std::cout
                     << std::left<<"\t" << movieList[i].movieCategory
@@ -848,9 +848,10 @@ std::string MovieList::getTime(int index)
 {
     return movieList[index].movieTime;
 }
-void MovieList::deductMovieQuantity(int index,int inputQuantity){
+
+void MovieList::deductMovieQuantity(int index,int inputQuantity) {
     // Deduct Movie Quantity will sanitize user inputs by default
-    this->movieList[index-1].ticketQuantity  = this->movieList[index-1].ticketQuantity - inputQuantity;
+    this->movieList[index - 1].ticketQuantity = this->movieList[index - 1].ticketQuantity - inputQuantity;
 }
 
 
