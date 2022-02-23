@@ -402,6 +402,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                      "\t                   Creating new purchase                 \n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t-|1. View All Product            |-----------------------\n"
+                     "\t-|2. Filter for Product          |-----------------------\n"
                      "\t-|2. Return to previous menu     |-----------------------\n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t>> Enter your choice:";
@@ -471,6 +472,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 }
             }
             case 2:
+
                 return;
             case -999:
                 std::cout << "\n\tERROR: Please enter an Index.\n"

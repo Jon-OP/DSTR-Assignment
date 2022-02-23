@@ -56,6 +56,7 @@ public:
     void addMovie(MovieNode newNodes);
     MovieNode generateNewNodes();
     void listMovies();
+    int filterMovie(std::string functionType);
 
     // User Interface
     void movieMenu();
