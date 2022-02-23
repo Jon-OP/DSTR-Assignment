@@ -20,45 +20,45 @@ void MovieList::swapNode(MovieNode* elem1, MovieNode* elem2 ){
     *elem2 = temp;
 }
 
-// Partition for quickSort by quantity
-int MovieList::partition2 (MovieNode* Node, int low, int high)
-{
-    // pivot
-    MovieNode pivot = Node[high];
-    // Index of smaller element and indicates the right position of pivot found so far
-    int i = (low - 1);
-
-
-    for (int j = low; j <= high - 1; j++)
-    {
-        // If current element is smaller than the pivot
-        if (Node[j].ticketQuantity < pivot.ticketQuantity)
-        {
-            i++; // increment index of smaller element
-            swapNode(&Node[i], &Node[j]);
-        }
-    }
-    swapNode(&Node[i + 1], &Node[high]);
-    return (i + 1);
-}
-
-
 // Partition for quickSort by ID
-int MovieList::partition (MovieNode* Node, int low, int high)
+int MovieList::partition (MovieNode* Node, int low, int high, int sortParameter)
 {
     // pivot
     MovieNode pivot = Node[high];
     // Index of smaller element and indicates the right position of pivot found so far
     int i = (low - 1);
 
-
-    for (int j = low; j <= high - 1; j++)
-    {
-        // If current element is smaller than the pivot
-        if (Node[j].movieID < pivot.movieID)
+    if(sortParameter == 1){ // Sort by ID
+        for (int j = low; j <= high - 1; j++)
         {
-            i++; // increment index of smaller element
-            swapNode(&Node[i], &Node[j]);
+            // If current element is smaller than the pivot
+            if (Node[j].movieID < pivot.movieID)
+            {
+                i++; // increment index of smaller element
+                swapNode(&Node[i], &Node[j]);
+            }
+        }
+    }else{
+        if(sortParameter == 2){ // Sort by Price
+            for (int j = low; j <= high - 1; j++)
+            {
+                // If current element is smaller than the pivot
+                if (Node[j].moviePrice < pivot.moviePrice)
+                {
+                    i++; // increment index of smaller element
+                    swapNode(&Node[i], &Node[j]);
+                }
+            }
+        }else{ // Sort by Quantity
+            for (int j = low; j <= high - 1; j++)
+            {
+                // If current element is smaller than the pivot
+                if (Node[j].ticketQuantity < pivot.ticketQuantity)
+                {
+                    i++; // increment index of smaller element
+                    swapNode(&Node[i], &Node[j]);
+                }
+            }
         }
     }
     swapNode(&Node[i + 1], &Node[high]);
@@ -66,34 +66,18 @@ int MovieList::partition (MovieNode* Node, int low, int high)
 }
 //----------------------------------{ Helper Methods Ends }--------------------------------------//
 // Quick Sort method for ID
-void MovieList::quickSort(MovieNode* Node, int low, int high)
+void MovieList::quickSort(MovieNode* Node, int low, int high, int sortParameter)
 {
     if (low < high)
     {
         /* pi is partitioning index, arr[p] is now
         at right place */
-        int pi = partition(Node, low, high);
+        int pi = partition(Node, low, high, sortParameter);
 
         // Separately sort elements before
         // partition and after partition
-        quickSort(Node, low, pi - 1);
-        quickSort(Node, pi + 1, high);
-    }
-}
-
-// Quick Sort method for Quantity
-void MovieList::quickSort2(MovieNode* Node, int low, int high)
-{
-    if (low < high)
-    {
-        /* pi is partitioning index, arr[p] is now
-        at right place */
-        int pi = partition2(Node, low, high);
-
-        // Separately sort elements before
-        // partition and after partition
-        quickSort(Node, low, pi - 1);
-        quickSort(Node, pi + 1, high);
+        quickSort(Node, low, pi - 1, sortParameter);
+        quickSort(Node, pi + 1, high, sortParameter);
     }
 }
 
@@ -280,26 +264,32 @@ MovieList::MovieNode* MovieList::searchMovie() {
 
 // Sort will be done by Eugene
 void MovieList::sortMovie(){
+    while(true){
+        std::cout << "\t-|1. Sort by ID             |-----------------------------"
+                  << "\n\t-|2. Sort by Price          |-----------------------------"
+                  << "\n\t-|3. Sort by Quantity       |-----------------------------"
+                  << "\n\t-*--------------------------*-----------------------------"
+                  << "\n\n\t >>Enter your choice: ";
+        int userChoice = validateInt();
 
-    std::cout << "\t-|1. Sort by ID             |-----------------------------"
-              << "\n\t-|2. Sort by Price          |-----------------------------"
-              << "\n\t-|3. Sort by Quantity       |-----------------------------"
-              << "\n\t-*--------------------------*-----------------------------"
-              << "\n\n\t >>Enter your choice: ";
-    int userChoice = validateInt();
+        if(userChoice > 0 && userChoice < 4){
+            quickSort(movieList, 0, nodeCount - 1, userChoice);
 
-        if (userChoice == 1) {
-            //Sort the array by ID
-            quickSort(movieList, 0, nodeCount - 1);
-            std::cout << "Quicksort function called \n";
+            std::cout << "\n\tSuccessfully Sorted."
+                         "\n\tEnter any key to continue:";
 
-        } else if (userChoice == 2) {
-            //Sort the array by price
-            quickSort2(movieList, 0, nodeCount - 1);
-            std::cout << "Quicksort2 function called \n";
-        } else if (userChoice == 3){
-            //Sort the array by price
+            std::cin.ignore(10000,'\n');
+
+            break;
+        }else{
+            std::cout << "\n\t>> ERROR: Invalid Input."
+                         "\n\t>> Please enter an index between 1 and 3"
+                         "\n\t>> Enter any key to continue:";
+
+            std::cin.ignore(10000, '\n');
+
         }
+    }
 }
 
 // Update the Details

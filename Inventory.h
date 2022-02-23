@@ -36,10 +36,8 @@ class MovieList { //movieList
     // Methods
 
     //Support Methods
-    void quickSort(MovieNode *IDs, int low, int high);
-    void quickSort2(MovieNode *IDs, int low, int high);
-    int partition(MovieNode *IDs, int low, int high);
-    int partition2(MovieNode *IDs, int low, int high);
+    void quickSort(MovieNode *IDs, int low, int high, int sortParameter);
+    int partition(MovieNode *IDs, int low, int high, int partitionType);
 
     //void addMovie(MovieNode newNodes);
     MovieNode* searchMovie();
