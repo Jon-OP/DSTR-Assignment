@@ -11,7 +11,7 @@ class Transaction{
     // Transaction Attributes
     int transactionID;
     std::string movieName;
-    float totalPrice;
+    int totalPrice;
     int quantity;
     int seats;
     // Date and Time, do we include here ? - Jonathan
@@ -22,14 +22,14 @@ public:
     Transaction* previousNode = NULL;
 
     int getTransactionID();
-    float getTransactionTotalPrice();
+    int getTransactionTotalPrice();
 
     void printAllDetails(int index);
 
     Transaction();
-    Transaction(int ID, float totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
+    Transaction(int ID, int totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
     // Transaction Constructor with Param
-    //Transaction()
+    //Transaction(int transID, std::string movieName, int sum)
 };
 
 // Transaction: will be the linked list

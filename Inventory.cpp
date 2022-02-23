@@ -417,7 +417,7 @@ MovieList::MovieNode::MovieNode() {
     this->movieName = "";
 };
 
-MovieList::MovieNode::MovieNode(int movieID, std::string movieName, float moviePrice, std::string movieCategory,
+MovieList::MovieNode::MovieNode(int movieID, std::string movieName, int moviePrice, std::string movieCategory,
                             std::string movieTime){
     this->movieID = movieID;
     this->movieName = movieName;
@@ -506,7 +506,7 @@ void MovieList::movieMenu(){
 }
 void MovieList::addMovie_prompt(){
     std::string movieName, movieCategory, movieTime, tempString;
-    float moviePrice;
+    int moviePrice;
     int movieID, tempTime;
     std::cout << "\n\t-*----------------------------------------------*-"
                  "\n\t-|               Adding New Movie               |-"
@@ -530,15 +530,15 @@ void MovieList::addMovie_prompt(){
     std::cout << "\n\n\t>> Movie Price [In Ringgit Malaysia, must be more than RM 0]"
                  "\n\t>> Enter the Movie Price: RM";
     while(true){
-        moviePrice = validateFloat();
+        moviePrice = validateInt();
         // User enters a valid price for movie
         if(moviePrice > 0 && moviePrice < 1000){
             std::cout << "\n\t>> [ Price: RM" << moviePrice << " ] - User input accepted...";
             break;
         }else{
-            // User entered < 0 OR validateFloat returns -999 which is an error code
+            // User entered < 0 OR validateInt returns -999 which is an error code
             std::cout << "\n\t>> ERROR: Invalid Input."
-                         "\n\t>> Price must be a positive number [More than RM 0]."
+                         "\n\t>> Price must be a positive integer [More than RM 0]."
                          "\n\t>> Please re-enter the new movie price:";
         }
     }
@@ -672,7 +672,7 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
         std::string userInput;
         std::string userInputTime;
         int userChoiceInternal;
-        float userPrice;
+        int userPrice;
         switch(userChoice){
             case 1:
                 // Prompt and read user input regarding name
@@ -702,7 +702,7 @@ void MovieList::updateMovie(MovieNode *toUpdate) {
             case 2:
                 // Prompt and read user input regarding price
                 std::cout << "\n\n\t>> Enter the new price: RM";
-                userPrice = validateFloat();
+                userPrice = validateInt();
 
                 // Update the movie price with input
                 if(userPrice > 0){
@@ -835,7 +835,7 @@ std::string MovieList::getMovieCategory(int index)
 {
     return movieList[index].movieCategory;
 }
-float MovieList::getMoviePrice(int index)
+int MovieList::getMoviePrice(int index)
 {
     return movieList[index].moviePrice;
 }
