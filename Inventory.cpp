@@ -387,7 +387,7 @@ void MovieList::listMovies() {
                 std::cout << std::setw(8) << "\t " <<movieList[i].moviePrice;
             }else
             {
-                std::cout<< "\t" << movieList[i].moviePrice;
+                std::cout<< "\t"<<std::left<< movieList[i].moviePrice;
             }
             std::cout
                     << std::left<<"\t" << movieList[i].movieCategory
@@ -849,7 +849,7 @@ std::string MovieList::getTime(int index)
 }
 void MovieList::deductMovieQuantity(int index,int inputQuantity)
 {
-
+    movieList[index].ticketQuantity= movieList[index].ticketQuantity-inputQuantity;
 }
 
 
