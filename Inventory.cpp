@@ -154,8 +154,10 @@ void MovieList::addMovie(MovieNode newNode) {
 void MovieList::deleteMovie() {
     int indexToDelete;
     listMovies();
-    std::cout << "\n\t>> Which movie would you like to delete?"
-                 "\n\t>> Enter your choice:";
+
+    std::cout << "\n\t---------------------------------------------------------------------------------------------\n\t"
+    <<">> Which movie would you like to delete?"
+         "\n\t>> Enter your choice:";
     std::cin >> indexToDelete;
     indexToDelete = indexToDelete - 1;
     nodeCount; // Reduce nodeCount before resizing array
@@ -482,6 +484,10 @@ void MovieList::movieMenu(){
                 break;
             case 6:
                 std::cout << "\n>> We should call deleteMovie Method\n";
+                std::cout<<"\n\t---------------------------------------------------------------------------------------------\n"
+                           "\t                                  Select a movie to be deleted                             \n"
+                           "\t---------------------------------------------------------------------------------------------\n";
+                deleteMovie();
                 break;
 
             case 7:

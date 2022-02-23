@@ -114,7 +114,6 @@ void TransactionList::deleteTransaction(int index) {
     while(index - 1 > 0){
         current = current->nextNode;
         index--;
-        std::cout << "A";
     }
 
     // Deletion
