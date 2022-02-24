@@ -81,7 +81,7 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                     std::cout << "\n\t>>Invalid input entered. Enter 1 to " << maxIndex <<
                               ".\n\t>>Enter any Key to retry:";
                     break;
-                }
+                }break;
             }
             case 2:
                 userIndex = movieList->filterMovie("TRANSACTION");
