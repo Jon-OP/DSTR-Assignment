@@ -48,7 +48,7 @@ class TransactionList {
      *  to the supportive function, insertTransactionToList
      * This method has a Time Complexity of 0(1) as it appends Nodes to the end of Transaction List*/
     void newPurchaseMenu(MovieList* movieList);
-        /* Supportive Function to add Transaction to Transaction List*/
+        /* Supportive Method to add Transaction to Transaction List */
         void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
     /* Method to delete a Transaction Object from the by traversing the until the pointer reaches the desired index.
@@ -62,7 +62,7 @@ class TransactionList {
     /* Prompt user to choose a method to sort Transaction Information. */
     void sortTransaction_prompt();
 
-    // Sort the List of Transaction[TotalPrice]: MergeSort
+    // Sort the List of Transaction[TotalPrice, ID]: MergeSort
     /* Method to Sort the List according to the parameter (sortParameter). Users are able to sort by TransactionID and
      * by totalPrice of each transaction. The sorting algorithm employed is the MergeSort algorithm which has a Time
      * Complexity of 0(n log(n)) */

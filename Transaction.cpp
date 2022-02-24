@@ -275,47 +275,43 @@ void TransactionList::sortTransaction(std::string sortParameter) {
             return secondList;
         }
     }else{
-
         // User sort by TOTALPRICE
-        if(sortParameter == "TOTALPRICE"){
-            // Total Price of firstList is lesser than secondList
 
-            //if(firstList->getTransactionTotalPrice() < secondList->getTransactionTotalPrice()){
-            if(firstList->getTransactionTotalPrice() < secondList->getTransactionTotalPrice()){
+        // Total Price of firstList is lesser than secondList
+        if(firstList->getTransactionTotalPrice() < secondList->getTransactionTotalPrice()){
 
-                // RECURSIVELY call mergeList to find the next value (ASCENDING ORDER)
-                firstList->nextNode = mergeList(firstList->nextNode, secondList, sortParameter);
+            // RECURSIVELY call mergeList to find the next value (ASCENDING ORDER)
+            firstList->nextNode = mergeList(firstList->nextNode, secondList, sortParameter);
 
-                // firstList[nextNode] points to adjacentNode. But adjacentNode[previousNode] is not pointing at firstList
-                firstList->nextNode->previousNode = firstList;
+            // firstList[nextNode] points to adjacentNode. But adjacentNode[previousNode] is not pointing at firstList
+            firstList->nextNode->previousNode = firstList;
 
-                // firstList[currentNode] is the current HEAD in this sub-linked list. Set firstList[previousNode] to NULL
-                firstList->previousNode = NULL;
+            // firstList[currentNode] is the current HEAD in this sub-linked list. Set firstList[previousNode] to NULL
+            firstList->previousNode = NULL;
 
-                // Update the value of TAIL
-                while(tail->nextNode != NULL){
-                    tail = tail->nextNode;
-                }
-                return firstList;
-            }else{
-
-                // Total Price of secondList is lesser than firstList
-                secondList->nextNode = mergeList(firstList, secondList->nextNode, sortParameter);
-
-                // secondList[nextNode] point to adjacentNode
-                // But adjacentNode[previousNode] is not pointing at secondList
-                secondList->nextNode->previousNode = secondList;
-
-                // secondList[currentNode] is the current HEAD if this sub-linked list
-                // Set secondList[previousNode] to NULL
-                secondList->previousNode = NULL;
-
-                // Update the value of TAIL
-                while(tail->nextNode != NULL){
-                    tail = tail->nextNode;
-                }
-                return secondList;
+            // Update the value of TAIL
+            while(tail->nextNode != NULL){
+                tail = tail->nextNode;
             }
+            return firstList;
+        }else{
+
+            // Total Price of secondList is lesser than firstList
+            secondList->nextNode = mergeList(firstList, secondList->nextNode, sortParameter);
+
+            // secondList[nextNode] point to adjacentNode
+            // But adjacentNode[previousNode] is not pointing at secondList
+            secondList->nextNode->previousNode = secondList;
+
+            // secondList[currentNode] is the current HEAD if this sub-linked list
+            // Set secondList[previousNode] to NULL
+            secondList->previousNode = NULL;
+
+            // Update the value of TAIL
+            while(tail->nextNode != NULL){
+                tail = tail->nextNode;
+            }
+            return secondList;
         }
     }
 }
