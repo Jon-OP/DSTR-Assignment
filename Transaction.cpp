@@ -1,23 +1,11 @@
-// Implementation for Transaction Goes Here - Jonathan
-// To enter the implementation, remember to add "Transaction::<methodName>"
-
 #include "Transaction.h"
 #include "Inventory.h"
-#include <iostream>
-
-
 
 /* --- Transaction: METHODS STARTS------------------------------------------------------------------------------------------*/
 
 // Methods: CONSTRUCTOR
     // Default Constructor
 Transaction::Transaction() {};
-
-    // Primary Constructor
-Transaction::Transaction(int ID, int totalPrice) {
-    this->transactionID = ID;
-    this->totalPrice = totalPrice;
-};
 
 // Transaction Constructor for new Transactions
 Transaction::Transaction(int transactionID, std::string movieName, int totalPrice, int quantity, std::string movieTime) {
