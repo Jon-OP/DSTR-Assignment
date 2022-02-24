@@ -51,9 +51,11 @@ class TransactionList {
         /* Supportive Method to add Transaction to Transaction List */
         void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
-    /* Method to delete a Transaction Object from the by traversing the until the pointer reaches the desired index.
-     * This Operation has a Time Complexity of a 0(n) */
-    void deleteTransaction(int index);
+    /* Prompt user to select and delete a Transaction. */
+    void deleteTransaction_prompt();
+        /* Method to delete a Transaction Object from the by traversing the until the pointer reaches the desired index.
+         * This Operation has a Time Complexity of a 0(n) */
+        void deleteTransaction(int index);
 
     /* Method to Display all Transactions stored in the Transaction List and to return the Number of Nodes + 1 */
     int displayAllTransaction();
@@ -77,8 +79,7 @@ class TransactionList {
         // Compare the value of two nodes, arranging the nodes according to ascending value, then return the merged list
         Transaction* mergeList(Transaction* firstList, Transaction* secondList, std::string sortParameter);
 
-    /* Prompt user to select and delete a Transaction. */
-    void deleteTransaction_prompt();
+
 
     /* Method to validate integers by reading user input as a string, then iterate the string while checking for
      * non-digit values. If user input does not consist of only digits, the function returns -999. Else, the

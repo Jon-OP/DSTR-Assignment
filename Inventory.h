@@ -52,19 +52,27 @@ class MovieList { //movieList
      * sortMovie prompt user to choose a sorting method which will be passed as parameter into
      * quickSort, partition, swapNode */
     void sortMovie();
-        // Support Method to swap the position of nodes or element in arrays
+        // Method to recursively call quickSort and to partition the array
         void quickSort(MovieNode *IDs, int low, int high, int sortParameter);
-        //
+        // Support Method to partition the array into two sections
         int partition(MovieNode *IDs, int low, int high, int partitionType);
+        // Support Method to swap the position of nodes or element in arrays
         void swapNode(MovieNode *elem1, MovieNode *elem2);
-    //void addMovie(MovieNode newNodes);
+
+    /* Method to search movie by name and returns the pointer pointing to the desired movie node */
     MovieNode* searchMovie();
+
+    /* Method to prompt user to select a transaction node to delete its details */
     void deleteMovie();
 
+    /* Method to prompt user to choose a transaction node to update */
     void updateMovie_prompt();
-    void updateMovie(MovieNode* toUpdate);
+        /* Support function to display options for users to update the details */
+        void updateMovie(MovieNode* toUpdate);
 
-    // Validation
+    /* Method to validate integers by reading user input as a string, then iterate the string while checking for
+     * non-digit values. If user input does not consist of only digits, the function returns -999. Else, the
+     * method parses the string to integer and returns to the user. */
     int validateInt();
 
 public:
