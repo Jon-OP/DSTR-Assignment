@@ -532,7 +532,7 @@ void MovieList::movieMenu(){
                 updateMovie_prompt();
                 break;
             case 4:
-                std::cout<<"\n\t---------------------------------------------------------\n"
+                std::cout<<"\n\t----------------------------------------------------------\n"
                            "\t                   Select a sorting method                 \n"
                            "\t-*--------------------------*-----------------------------\n";
                 sortMovie();
