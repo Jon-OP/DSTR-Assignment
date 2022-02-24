@@ -46,7 +46,6 @@ class MovieList { //movieList
     void addMovie_prompt();
     void updateMovie_prompt();
     void updateMovie(MovieNode* toUpdate);
-    void categoryFilter();
 
 
     // Validation
