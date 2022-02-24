@@ -48,16 +48,19 @@ class MovieList { //movieList
         /* Supportive Method to add new MovieNodes to the Array, movieList */
         void addMovie(MovieNode newNodes);
 
-    /* Sort the List of Movies */
-
-    //Support Methods
-    void quickSort(MovieNode *IDs, int low, int high, int sortParameter);
-    int partition(MovieNode *IDs, int low, int high, int partitionType);
-    void swapNode(MovieNode *elem1, MovieNode *elem2);
+    /* Sort the List of Movies[Price, ID, Quantity]: QuickSort
+     * sortMovie prompt user to choose a sorting method which will be passed as parameter into
+     * quickSort, partition, swapNode */
+    void sortMovie();
+        // Support Method to swap the position of nodes or element in arrays
+        void quickSort(MovieNode *IDs, int low, int high, int sortParameter);
+        //
+        int partition(MovieNode *IDs, int low, int high, int partitionType);
+        void swapNode(MovieNode *elem1, MovieNode *elem2);
     //void addMovie(MovieNode newNodes);
     MovieNode* searchMovie();
     void deleteMovie();
-    void sortMovie();
+
     void updateMovie_prompt();
     void updateMovie(MovieNode* toUpdate);
 
