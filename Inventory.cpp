@@ -756,7 +756,7 @@ void MovieList::movieMenu(){
             default:
                 //std::cout << "Invalid Input. Try again.\nEnter any key to continue:";
                 // Print error message and prompt user to enter any key to continue
-                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 7.\n\t>> Enter a Key to continue:";
+                std::cout << "\n\t>> ERROR: Invalid Input\n\t>> Please enter from 1 to 6.\n\t>> Enter a Key to continue:";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
