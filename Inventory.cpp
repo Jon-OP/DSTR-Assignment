@@ -295,13 +295,16 @@ void MovieList::sortMovie(){
 // Update the Details
 void MovieList::updateMovie_prompt(){
     // This section ask users to choose an item to update
-    MovieNode* toUpdate = NULL;
+    MovieNode* toUpdate = nullptr;
     while(true){
+        std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
+                   "\t                                  Select a movie to be updated                             \n"
+                   "\t--------------------------------------------------------------------------------------------\n";
         listMovies();
         std::cout<<"\n\t--------------------------------------------------------------------------------------------";
         std::cout << "\n\tEnter 0 To search movie by name.";
         std::cout << "\n\tEnter " << nodeCount+1 << " to return to movie management menu.";
-        std::cout << "\n\t>>Enter the corresponding index to delete a movie: ";
+        std::cout << "\n\t>>Enter the corresponding index to update a movie: ";
 
         int userChoice = validateInt();
 
@@ -320,13 +323,11 @@ void MovieList::updateMovie_prompt(){
             if(userChoice > 0 && userChoice < this->nodeCount){
                 toUpdate = &movieList[userChoice-1];
             }else{
-                if(userChoice == -999){
-                    std::cout << "\n\n\tERROR: Please enter a viable index."
-                                 "\n\t>> Enter any key to continue:";
+                std::cout << "\n\n\tERROR: Please enter a viable index."
+                             "\n\t>> Enter any key to continue:";
 
-                    // Wait for user Input and ignore up to 10,00 characters
-                    std::cin.ignore(10000, '\n');
-                }
+                // Wait for user Input and ignore up to 10,00 characters
+                std::cin.ignore(10000, '\n');
             }
         }
         if(toUpdate != nullptr){
@@ -528,9 +529,6 @@ void MovieList::movieMenu(){
                 std::cin.ignore( 10000, '\n');
                 break;
             case 3:
-                std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
-                           "\t                                  Select a movie to be updated                             \n"
-                           "\t--------------------------------------------------------------------------------------------\n";
                 updateMovie_prompt();
                 break;
             case 4:
