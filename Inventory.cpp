@@ -234,7 +234,7 @@ MovieList::MovieNode* MovieList::searchMovie() {
                 return nullptr;
             }else{
                 if (userChoice > 0 && userChoice <= internalIndex) {
-                    return &movieList[foundIndex[userChoice]];
+                    return &movieList[foundIndex[userChoice-1]];
                 } else {
                     if (userChoice == -999) {
                         std::cout << "\n\n\t>> ERROR: Please enter digits only."
@@ -686,8 +686,8 @@ void MovieList::addMovie_prompt(){
                      "\n\t>> Enter your choice:";
         int userChoice = validateInt();
         if(userChoice == 1){
-            IDGenerator++;
             movieID = this->IDGenerator;
+            IDGenerator++;
             MovieNode newMovie = MovieNode(movieID, movieName, moviePrice, movieCategory, movieTime);
             this->addMovie(newMovie);
             std::cout << "\n\t>> New Movie has been added to the list."
