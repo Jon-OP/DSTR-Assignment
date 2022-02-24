@@ -49,7 +49,7 @@ class TransactionList {
      * This method has a Time Complexity of 0(1) as it appends Nodes to the end of Transaction List*/
     void newPurchaseMenu(MovieList* movieList);
         /* Supportive Method to add Transaction to Transaction List */
-        void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
+        void insertTransactionToList(Transaction* transactionNode);
 
     /* Prompt user to select and delete a Transaction. */
     void deleteTransaction_prompt();
