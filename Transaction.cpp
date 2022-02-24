@@ -1,23 +1,11 @@
-// Implementation for Transaction Goes Here - Jonathan
-// To enter the implementation, remember to add "Transaction::<methodName>"
-
 #include "Transaction.h"
 #include "Inventory.h"
-#include <iostream>
-
-
 
 /* --- Transaction: METHODS STARTS------------------------------------------------------------------------------------------*/
 
 // Methods: CONSTRUCTOR
     // Default Constructor
 Transaction::Transaction() {};
-
-    // Primary Constructor
-Transaction::Transaction(int ID, int totalPrice) {
-    this->transactionID = ID;
-    this->totalPrice = totalPrice;
-};
 
 // Transaction Constructor for new Transactions
 Transaction::Transaction(int transactionID, std::string movieName, int totalPrice, int quantity, std::string movieTime) {
@@ -402,11 +390,14 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                      "\t                   Creating new purchase                 \n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t-|1. View All Product            |-----------------------\n"
-                     "\t-|2. Return to previous menu     |-----------------------\n"
+                     "\t-|2. Filter for Product          |-----------------------\n"
+                     "\t-|3. Return to previous menu     |-----------------------\n"
                      "\t-*-------------------------------*-----------------------\n"
                      "\t>> Enter your choice:";
 
         int userChoice = validateInt();
+        int userIndex = 0;
+
         switch (userChoice) {
             case 1: {
                 std::cout << "\n\t---------------------------------------------------------------------------------------------------\n"
@@ -415,17 +406,20 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 movieList->listMovies();
                 std::cout << "\n\t-------------------------------------------------------------------------------------------------\n"
                              "\t>>Select the index of the movie [0 to return]:";
-                int userIndex = validateInt();
+                userIndex = validateInt();
                 int maxIndex = movieList->getMovieListNodeCount();
 
                 if (userIndex == 0)
                 {
                     return;
                 }
+                else if (userIndex > 0 && userIndex < maxIndex){
+                    break;
+                }
                 else if(userIndex<1 || userIndex> maxIndex)
                 {
-                    std::cout << "\n\t>>There is no such index. Enter 1 to" << maxIndex <<
-                              ".\n\t>>Enter any Key to retry:";
+                    std::cout << "\n\t>> There is no such index. Enter 1 to" << maxIndex <<
+                              ".\n\t>> Enter any Key to retry:";
                     break;
                 }
                 else if (userIndex == -999) {
@@ -433,48 +427,20 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                               ".\n\t>>Enter any Key to retry:";
                     break;
                 }
-
-                std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(userIndex-1) << "\tQuantity:"<<movieList->getTicketsLeft(userIndex-1) ;
-                std::cout<<"\n\n\t>>How many tickets to purchase:";
-                int userQuantity = validateInt();
-                if (userQuantity == -999) {
-                    std::cout << "\n\tInvalid input entered. Enter an integer value." <<
-                              ".\n\tEnter any Key to retry:";
-                    break;
-                }
-                if (userQuantity> movieList->getTicketsLeft(userIndex-1))
-                {
-                    std::cout<<"\n\tInsufficient ticket(s). Try again\n";
-                    break;
-                }
-                std::cout<<"\n\tYour order:\n\t"
-                << "Movie Name: "<< movieList->getMovieName(userIndex-1)
-                << "\n\tQuantity to be purchased: "<< userQuantity
-                << " \n\tPrice to be paid: "<< movieList->getMoviePrice(userIndex-1)*userQuantity;
-
-                std::cout<<"\n\n\t>>Confirming purchase. Do you wish to proceed?"
-                           <<"\n\t>>Enter [1] to proceed; any irrelevant key to abort operation:";
-                userChoice = validateInt();
-                if (userChoice == 1)
-                {
-                    movieList->deductMovieQuantity(userIndex,userQuantity);
-
-                    //Transaction:: Transaction(int transID, std::string movieName, int sum, int quantityBought)
-                    Transaction* newTrans = new Transaction(transactionIDGenerator++, movieList->getMovieName(userIndex-1),movieList->getMoviePrice(userIndex-1)*userQuantity,userQuantity, movieList->getTime(userIndex-1));
-                    insertTransactionToList(newTrans);
-                    std::cout <<"\n\t>>Purchase created successfully. ";
-                    return;
-                }
-                else {
-                    std::cout << "\n\t>>Purchase operation aborted. ";
-                    return;
-                }
             }
             case 2:
+                userIndex = movieList->filterMovie("TRANSACTION");
+                break;
+            case 3:
+                std::cout << "\n\t>> Returning to Transaction Menu."
+                             "\n\t>> Enter any key to continue:";
+
+                std::cin.ignore(10000,'\n');
+
                 return;
             case -999:
-                std::cout << "\n\tERROR: Please enter an Index.\n"
-                             "\tPress any key to continue:";
+                std::cout << "\n\t>> ERROR: Please enter an Index.\n"
+                             "\t>> Press any key to continue:";
 
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
@@ -486,6 +452,44 @@ void TransactionList::newPurchaseMenu(MovieList* movieList)
                 // Wait for user Input and ignore up to 10,00 characters
                 std::cin.ignore( 10000, '\n');
                 break;
+        }
+
+        if(userIndex != 0){
+            std:: cout<<"\n\tSelected movie:" <<movieList->getMovieName(userIndex-1) << "\tQuantity:"<<movieList->getTicketsLeft(userIndex-1) ;
+            std::cout<<"\n\n\t>>How many tickets to purchase:";
+            int userQuantity = validateInt();
+            if (userQuantity == -999) {
+                std::cout << "\n\tInvalid input entered. Enter an integer value." <<
+                          ".\n\tEnter any Key to retry:";
+                break;
+            }
+            if (userQuantity> movieList->getTicketsLeft(userIndex-1))
+            {
+                std::cout<<"\n\tInsufficient ticket(s). Try again\n";
+                break;
+            }
+            std::cout<<"\n\tYour order:\n\t"
+                     << "Movie Name: "<< movieList->getMovieName(userIndex-1)
+                     << "\n\tQuantity to be purchased: "<< userQuantity
+                     << " \n\tPrice to be paid: "<< movieList->getMoviePrice(userIndex-1)*userQuantity;
+
+            std::cout<<"\n\n\t>>Confirming purchase. Do you wish to proceed?"
+                     <<"\n\t>>Enter [1] to proceed; any irrelevant key to abort operation:";
+            userChoice = validateInt();
+            if (userChoice == 1)
+            {
+                movieList->deductMovieQuantity(userIndex,userQuantity);
+
+                //Transaction:: Transaction(int transID, std::string movieName, int sum, int quantityBought)
+                Transaction* newTrans = new Transaction(transactionIDGenerator++, movieList->getMovieName(userIndex-1),movieList->getMoviePrice(userIndex-1)*userQuantity,userQuantity, movieList->getTime(userIndex-1));
+                insertTransactionToList(newTrans);
+                std::cout <<"\n\t>>Purchase created successfully. ";
+                return;
+            }
+            else {
+                std::cout << "\n\t>>Purchase operation aborted. ";
+                return;
+            }
         }
     }
 

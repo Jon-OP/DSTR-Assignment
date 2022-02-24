@@ -336,36 +336,9 @@ void MovieList::updateMovie_prompt(){
     }
 }
 
-//Function to display all the movies in the movieList
+// Function to display all the movies in the movieList
 // List out the movie, price, and quantity - DONE
 void MovieList::listMovies() {
-
-    // Choose whether user wants to filter by category
-    std::cout << "\n\tPlease select category"
-              << "\n\t1. Action"
-              << "\n\t2. Horror"
-              << "\n\t3. Comedy"
-              << "\n\t4. No filter"
-              << "\n\tEnter your selection: ";
-    int userChoice = validateInt();
-    std::string filter;
-    switch (userChoice) {
-        case 1:
-            filter = "Action";
-            break;
-        case 2:
-            filter = "Horror";
-            break;
-        case 3:
-            filter = "Comedy";
-            break;
-        case 4:
-            filter = "0";
-            break;
-        default:
-            std::cout << "\n\t>> ERROR: Invalid Input.";
-            return;
-    }
 
     // Checks if movieList is empty
     if(this->movieList == NULL){
@@ -385,22 +358,119 @@ void MovieList::listMovies() {
                   << std::left<< "\tTime";
 
         for(int i = 0; i < nodeCount; i++) {
-            if (movieList[i].movieCategory == filter || filter == "0") {
-                std::cout << "\n\t" << i + 1
-                          << std::left << std::setw(2) << "\t" << movieList[i].movieID
-                          << std::left << std::setw(8) << "\t" << movieList[i].movieName;
+            std::cout << "\n\t" << i + 1
+                      << std::left << std::setw(2) << "\t" << movieList[i].movieID
+                      << std::left << std::setw(8) << "\t" << movieList[i].movieName;
 
-                if (movieList[i].movieName.length() < 8) {
-                    std::cout << std::setw(16) << "\t " << movieList[i].moviePrice;
-                } else if (movieList[i].movieName.length() > 8 && movieList[i].movieName.length() < 16) {
-                    std::cout << std::setw(8) << "\t " << movieList[i].moviePrice;
-                } else {
-                    std::cout << "\t" << std::left << movieList[i].moviePrice;
+            if (movieList[i].movieName.length() < 8) {
+                std::cout << std::setw(16) << "\t " << movieList[i].moviePrice;
+            } else if (movieList[i].movieName.length() > 8 && movieList[i].movieName.length() < 16) {
+                std::cout << std::setw(8) << "\t " << movieList[i].moviePrice;
+            } else {
+                std::cout << "\t" << std::left << movieList[i].moviePrice;
+            }
+            std::cout
+                    << std::left << "\t" << movieList[i].movieCategory
+                    << std::left << "\t\t" << movieList[i].ticketQuantity
+                    << std::left << "\t\t" << movieList[i].movieTime;
+        }
+    }
+}
+
+// Filter Movie
+int MovieList::filterMovie(std::string filterMode) {
+    while(true){
+        std::cout << "\n\t-*--------------------------*-"
+                     "\n\t-|    Filter by Category    |-"
+                     "\n\t-*--------------------------*-"
+                     "\n\t-|  1. Action Movies        |-"
+                     "\n\t-|  2. Comedy Movies        |-"
+                     "\n\t-|  3. Horror Movies        |-"
+                     "\n\t-|  4. Return               |-"
+                     "\n\t-*--------------------------*-"
+                     "\n\t>> Enter your choice:";
+
+        int userChoice = validateInt();
+
+        if(userChoice > 0 && userChoice < 4){
+
+        }else{
+            if(userChoice == 4){
+                std::cout << "\n\n\t>> Returning to previous interface."
+                             "\n\t>> Enter any key to continue:";
+
+                std::cin.ignore(10000,'\n');
+                return 0;
+            }else{
+                std::cout << "\n\n\t>> ERROR: Invalid Input."
+                             "\n\t>> Please enter the index between 1 to 4."
+                             "\n\t>> Enter any key to continue:";
+                std::cin.ignore(10000,'\n');
+            }
+        }
+
+        int foundIndex[nodeCount];
+        int internalIndex = 0;
+
+        for(int i = 0; i < nodeCount; i++){
+            if(this->movieList[i].movieCategory == categoryList[userChoice-1]){
+                // foundIndex stores the indices of movies with the same category chosen by
+                // user
+                foundIndex[internalIndex] = i;
+                internalIndex++;
+            }
+        }
+
+        if(internalIndex != 0){
+            while(true){
+                std::cout << "\n\t-------------------------------------------------------------------------------------\n"
+                             "\t                        Displaying movies of categories " << categoryList[userChoice-1]
+                          << "\n\t-------------------------------------------------------------------------------------";
+
+                std::cout << "\n\t" << std::left << std::setw(9) << "Index"
+                          << std::left << std::setw(12) << "Movie ID"
+                          <<  std::left << std::setw(20) << "Movie Name"
+                          << std::left << std::setw(11) << "Price"
+                          << std::left << std::setw(14) << "Category"
+                          << std::left << std::setw(15) << "Seats Left"
+                          << std::left << std::setw(7) << "Time";
+                for(int i = 0; i < internalIndex; i++){
+                    std::cout << "\n\t" << std::left << std::setw(9) << i+1
+                              << std::left << std::setw(12) << this->movieList[foundIndex[i]].movieID
+                              << std::left << std::setw(20) << this->movieList[foundIndex[i]].movieName
+                              << std::left << std::setw(11) << this->movieList[foundIndex[i]].moviePrice
+                              << std::left << std::setw(14) << this->movieList[foundIndex[i]].movieCategory
+                              << std::left << std::setw(15) << this->movieList[foundIndex[i]].ticketQuantity
+                              << std::left << std::setw(7) << this->movieList[foundIndex[i]].movieTime;
                 }
-                std::cout
-                        << std::left << "\t" << movieList[i].movieCategory
-                        << std::left << "\t\t" << movieList[i].ticketQuantity
-                        << std::left << "\t\t" << movieList[i].movieTime;
+                std::cout << "\n\t-------------------------------------------------------------------------------------";
+                if(filterMode == "VIEW"){ // Filter method called during view movie
+                    std::cout << "\n\t>> Enter any key to return to Inventory Menu";
+                    std::cin.ignore(10000,'\n');
+                    return 0;
+                }else{
+                    // Filter method called during new transaction
+                    std::cout << "\n\t" << internalIndex+1 << ". Return to previous interface."
+                                 "\n\t>> Enter your choice:";
+
+                    userChoice = validateInt();
+
+                    if(userChoice == internalIndex+1){
+                        std::cout << "\n\t>> Cancelling the filtering process."
+                                     "\n\t>> Enter any key to continue:";
+                        std::cin.ignore(10000,'\n');
+                        return 0;
+                    }else{
+                        if(userChoice > 0 && userChoice <= internalIndex){
+                            return (foundIndex[userChoice-1]+1);
+                        }else{
+                            std::cout << "\n\t>> ERROR: Invalid Input."
+                                         "\n\t>> Enter an index between 1 to " << internalIndex+1
+                                         << "\n\t>> Enter any key to continue:";
+                            std::cin.ignore(10000, '\n');
+                        }
+                    }
+                }
             }
         }
     }
@@ -449,7 +519,7 @@ void MovieList::movieMenu(){
                 break;
 
             case 2:
-                std::cout << "\n\t----------------------------------------------------------------------------------------------\n"
+                std::cout << "\n\t---------------------------------------------------------------------------------------------\n"
                              "\t                                         Displaying all movies                               \n"
                              "\t---------------------------------------------------------------------------------------------\n";
                 listMovies();

@@ -1,102 +1,100 @@
-// Attribute & Method Declaration for Transaction goes here - Jonathan
-// This is the Class Definition containing Method Prototypes/Interfaces
-
 #ifndef G8_TP060491_TP061069_TP055727_TRANSACTION_H
 #define G8_TP060491_TP061069_TP055727_TRANSACTION_H
 
 #include <string>
 #include "Inventory.h"
+#include <iostream>
 
 class Transaction{
-    // Transaction Attributes
+/* --- Transaction: Attributes ---------------------------------------------------------------------------------------*/
     int transactionID;
     std::string movieName;
     int totalPrice;
     int quantity;
     std::string movieTime;
-    // Date and Time, do we include here ? - Jonathan
 
 public:
-    // Linked List implementation
+/* --- Transaction: Linked List Attributes ---------------------------------------------------------------------------*/
     Transaction* nextNode = NULL;
     Transaction* previousNode = NULL;
 
+/* --- Transaction: Functional Methods -------------------------------------------------------------------------------*/
+    void printAllDetails(int index);
+
+/* --- Transaction: Getters ------------------------------------------------------------------------------------------*/
     int getTransactionID();
     int getTransactionTotalPrice();
 
-    void printAllDetails(int index);
-
+/* --- Transaction: Constructor --------------------------------------------------------------------------------------*/
+    // Default Constructor
     Transaction();
-    Transaction(int ID, int totalPrice); // THIS WILL BE INSTANTIATION OF TRANSACTION WITH ALL ATTRIBUTES
-    // Transaction Constructor with Param
+    // Constructor for creating new transactions
     Transaction(int transactionID, std::string movieName, int totalPrice, int quantity, std::string movieTime);
 
-    //Transaction(int transID, std::string movieName, int sum)
 };
 
-// Transaction: will be the linked list
+/* TransactionList is a Circular Doubly Linked List that stores Transactions as nodes of a Linked List  */
 class TransactionList {
-/* --- Linked List Attribute Implementation ------------------------------------------------------------------------- */
+/* --- Transaction List: Private Attributes --------------------------------------------------------------------------*/
+    /* Linked List Attributes utilized locally for each instantiation of Transaction List */
     Transaction* head;
-    Transaction* tail; // Think about it
+    Transaction* tail;
+
+    /* Attribute used to generate ID incrementally for every addition of Transaction to TransactionList */
     int transactionIDGenerator = 1;
-/* --- Private Linked List Implementation Methods ------------------------------------------------------------------- */
 
-    // Inserting new transaction at the end
-    //void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
+/* --- Transaction List: Functional Methods --------------------------------------------------------------------------*/
+    /* Method to prompt users to choose their desired Movie and instantiating a new Transaction object that is passed
+     *  to the supportive function, insertTransactionToList
+     * This method has a Time Complexity of 0(1) as it appends Nodes to the end of Transaction List*/
+    void newPurchaseMenu(MovieList* movieList);
+        /* Supportive Function to add Transaction to Transaction List*/
+        void insertTransactionToList(Transaction* transactionNode); // COMPLETED !!!
 
-    // Return a transaction at the selected index
+    /* Method to delete a Transaction Object from the by traversing the until the pointer reaches the desired index.
+     * This Operation has a Time Complexity of a 0(n) */
     void deleteTransaction(int index);
 
-    // Delete a Transaction Detail
-    Transaction* deleteTransaction();
-
-    // Display the details of all Transaction and return the final index + 1
+    /* Method to Display all Transactions stored in the Transaction List and to return the Number of Nodes + 1 */
     int displayAllTransaction();
 
-    // Sort the List of Transaction[TotalPrice]: MergeSort
-    //void sortTransaction(std::string sortParameter); // COMPLETED !!!
 
-        Transaction* mergeSort(Transaction* headNode, std::string sortParameter);
-
-        // Split the List into Half
-        Transaction* splitList(Transaction* headNode);
-
-        // Merging two list
-        Transaction* mergeList(Transaction* firstList, Transaction* secondList, std::string sortParameter);
-
-/* --- Transaction Functions ---------------------------------------------------------------------------------------- */
-
-    // Placing a new order
-    void newPurchaseMenu(MovieList* movieList); // Prompt user to choose movie, ETC
-
-        // Multiple Sub functions pertaining to newPurchase
-        void newTransaction();
-
-    // Sort all transaction
+    /* Prompt user to choose a method to sort Transaction Information. */
     void sortTransaction_prompt();
 
-    // Prompt to Delete Transaction
+    // Sort the List of Transaction[TotalPrice]: MergeSort
+    /* Method to Sort the List according to the parameter (sortParameter). Users are able to sort by TransactionID and
+     * by totalPrice of each transaction. The sorting algorithm employed is the MergeSort algorithm which has a Time
+     * Complexity of 0(n log(n)) */
+    void sortTransaction(std::string sortParameter);
+
+        //Supporting Method to recursively call splitList and returns a mergeList
+        Transaction* mergeSort(Transaction* headNode, std::string sortParameter);
+
+        // Support Method to split the linked list into half
+        Transaction* splitList(Transaction* headNode);
+
+        // Compare the value of two nodes, arranging the nodes according to ascending value, then return the merged list
+        Transaction* mergeList(Transaction* firstList, Transaction* secondList, std::string sortParameter);
+
+    /* Prompt user to select and delete a Transaction. */
     void deleteTransaction_prompt();
 
-    // Prompt user to choose a transaction to view in detail
-    void promptTransactionDetails();
-
-
-    // Error validation
-    int validateInteger(std::string msg);
-
-    // TEST FUNCTION JONATHAN
+    /* Method to validate integers by reading user input as a string, then iterate the string while checking for
+     * non-digit values. If user input does not consist of only digits, the function returns -999. Else, the
+     * method parses the string to integer and returns to the user. */
     int validateInt();
 
 public:
-    // Constructor
+    /* Default Constructor for TransactionList. */
     TransactionList();
+
+    /* Method to display Transaction Menu to users. This retains the ability to keep internal methods like
+     * sorting and adding private. Additionally, this method requires the list of Movies as an argument.*/
     void transactionMenu(MovieList* movieList);
 
-    void insertTransactionToList(Transaction* transactionNode);
-    //void displayAllTransaction();
-    void sortTransaction(std::string sortParameter);
+    /* Method to initialize the transaction list. Each transaction in this method deducts the quantity from
+     * movieList. */
     void initializeTransactionList(MovieList movieList);
 };
 
