@@ -154,7 +154,7 @@ void MovieList::addMovie_prompt(){
         int userChoice = validateInt();
         if(userChoice == 1){
             movieID = this->IDGenerator;
-            IDGenerator++;
+            this->IDGenerator++;
             MovieNode newMovie = MovieNode(movieID, movieName, moviePrice, movieCategory, movieTime);
             this->addMovie(newMovie);
             std::cout << "\n\t>> New Movie has been added to the list."
@@ -205,7 +205,7 @@ void MovieList::addMovie(MovieNode newNode) {
         }
 
         //movieList = copyList;
-        nodeCount++;
+        this->nodeCount++;
     }
 }
 
@@ -213,11 +213,14 @@ void MovieList::addMovie(MovieNode newNode) {
 /* Method and Supporting Methods to sort movies in movieList by ID, total price, and quantity.*/
 void MovieList::sortMovie(){
     while(true){
-        std::cout << "\t-|1. Sort by ID             |-----------------------------"
-                  << "\n\t-|2. Sort by Price          |-----------------------------"
-                  << "\n\t-|3. Sort by Quantity       |-----------------------------"
-                  << "\n\t-*--------------------------*-----------------------------"
-                  << "\n\n\t >>Enter your choice: ";
+        std::cout << "\n\t---------------------------------------------------------\n"
+                     "\t                   Select a sorting method                 \n"
+                     "\t-*--------------------------*-----------------------------\n"
+                     "\t-|1. Sort by ID             |-----------------------------"
+                     "\n\t-|2. Sort by Price          |-----------------------------"
+                     "\n\t-|3. Sort by Quantity       |-----------------------------"
+                     "\n\t-*--------------------------*-----------------------------"
+                     "\n\n\t >>Enter your choice: ";
         int userChoice = validateInt();
 
         if(userChoice > 0 && userChoice < 4){
@@ -388,6 +391,9 @@ void MovieList::deleteMovie() {
     while(true){
         MovieNode* toDelete = nullptr;
         while (true){
+            std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
+                       "\t                                  Select a movie to be deleted                             \n"
+                       "\t--------------------------------------------------------------------------------------------\n";
             listMovies();
             std::cout<<"\n\t--------------------------------------------------------------------------------------------";
             std::cout << "\n\tEnter 0 To search movie by name.";
@@ -397,6 +403,7 @@ void MovieList::deleteMovie() {
             int userChoice = validateInt();
             if(userChoice == 0){ // User Chose to search by name to delete
                 toDelete = searchMovie();
+                break;
             }else{
                 if(userChoice == nodeCount+1){ // User cancelled deleting
                     break;
@@ -485,7 +492,7 @@ void MovieList::updateMovie_prompt(){
                 return;
             }
 
-            if(userChoice > 0 && userChoice < this->nodeCount){
+            if(userChoice > 0 && userChoice <= this->nodeCount){
                 toUpdate = &movieList[userChoice-1];
             }else{
                 std::cout << "\n\n\tERROR: Please enter a viable index."
@@ -734,18 +741,11 @@ void MovieList::movieMenu(){
                 updateMovie_prompt();
                 break;
             case 4:
-                std::cout<<"\n\t---------------------------------------------------------\n"
-                           "\t                   Select a sorting method                 \n"
-                           "\t-*--------------------------*-----------------------------\n";
                 sortMovie();
                 break;
             case 5:
-                std::cout<<"\n\t--------------------------------------------------------------------------------------------\n"
-                           "\t                                  Select a movie to be deleted                             \n"
-                           "\t--------------------------------------------------------------------------------------------\n";
                 deleteMovie();
                 break;
-
             case 6:
                 std::cout << "\n\t>> Returning to Main Menu.\n\t>> Enter any key to continue:";
 
